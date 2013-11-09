@@ -12,7 +12,6 @@ class freebsd::packages {
       "sysutils/rubygem-facter",
       "devel/rubygem-json_pure",
       "sysutils/rubygem-hiera",
-      "sysutils/rubygem-facter",
       "archivers/rubygem-bzip2",
     ]:
     ensure => latest, provider => 'portupgrade', }
