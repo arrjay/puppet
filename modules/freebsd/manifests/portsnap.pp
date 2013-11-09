@@ -1,5 +1,6 @@
 # Init FreeBSD's portsnap, install syncronization cron job
 class freebsd::portsnap {
+  require freebsd::syncportopts
   # setup portsnap via cron, not puppet schedules
   # NOTE: this command takes a while
   exec { "portsnap extract":
@@ -27,5 +28,6 @@ class freebsd::portsnap {
     command      => "/usr/sbin/portsnap update",
     refreshonly  => true,
     timeout      => 300,
+    require      => Vcsrepo["/var/db/ports"],
   }
 }
