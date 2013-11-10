@@ -9,6 +9,7 @@ class nameserver {
       $pidfile      = "/var/run/named/pid"	# path to pid-keeping file
       $dumpfile     = "/var/dump/named_dump.db" # path to named db dump file
       $statsfile    = "/var/stats/named.stats"	# path to named statistics tracking file
+      $chkconf      = "/usr/sbin/named-checkconf" # path to named.conf checker
       $svc          = "named"			# service hook for named	
       $group        = "bind"			# named ownership group
       $owner        = "bind"			# named ownsership user
@@ -44,6 +45,7 @@ class nameserver {
     refreshonly => true,
     command     => "/usr/sbin/service $svc restart",
     subscribe   => [ File[$cfg], Service[$svc] ],
+    onlyif      => "$chkconf $cfg",
   }
 
   # to be called if the zone data changes
@@ -154,5 +156,5 @@ class nameserver {
   }
 
   # start named
-  service { "$svc": }
+  service { "$svc": enable => true }
 }
