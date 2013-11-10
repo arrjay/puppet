@@ -30,7 +30,10 @@ view "<%= view -%>" { match-clients { <%= view_defs['range'] -%> };
 <% else -%>
       file "<%= @dir -%>/slave/<%= zone -%>.db";
 <% end -%>
-      masters { <%= nsgroup[zone_defs['masters']].join("; ") -%>; };
+      masters { <%= nsgroup[zone_defs['source']].join("; ") -%>; };
+<% end -%>
+<% if zone_defs['type'] == 'static-stub' -%>
+      server-addresses { <%= nsgroup[zone_defs['source']].join("; ") -%>; };
 <% end -%>
     };
 <% end -%>
