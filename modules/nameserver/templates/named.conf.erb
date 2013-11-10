@@ -1,0 +1,43 @@
+<% params = scope.lookupvar('nameserver::params')
+   nsgroup = scope.lookupvar('nameserver::nsgroup') -%>
+options {
+	listen-on-v6 { <%= params['addresses']['ipv6'] -%> };
+	listen-on { <%= params['addresses']['ipv4'] -%> };
+	directory "<%= @wrkdir -%>";
+	pid-file "<%= @pidfile -%>";
+	dump-file "<%= @dumpfile -%>";
+	statistics-file "<%= @statsfile -%>";
+};
+<% views = scope.lookupvar('nameserver::views')
+   views.each do |view|
+   view_defs = params['views'][view] -%>
+view "<%= view -%>" { match-clients { <%= view_defs['range'] -%> };
+    recursion <%= view_defs['recursion'] -%>;
+<% zones = view_defs['zone'].keys
+   zones.each do |zone| -%>
+    zone "<%= zone -%>" {
+<% zone_defs = view_defs['zone'][zone] -%>
+      type <%= zone_defs['type'] -%>;
+<% if zone_defs['type'] == 'master' -%>
+      file "<%= @dir -%>/master/<%= zone_defs['source'] -%>.db";
+<% if zone_defs['also-notify'] -%>
+      also-notify { <%= nsgroup[zone_defs['also-notify']].join("; ") -%>; };
+<% end -%>
+<% end -%>
+<% if zone_defs['type'] == 'slave' -%>
+<% if zone_defs['store'] -%>
+      file "<%= @dir -%>/slave/<%= zone_defs['store'] -%>.db";
+<% else -%>
+      file "<%= @dir -%>/slave/<%= zone -%>.db";
+<% end -%>
+      masters { <%= nsgroup[zone_defs['masters']].join("; ") -%>; };
+<% end -%>
+    };
+<% end -%>
+<% if view_defs['inc']
+view_defs['inc'].each do |include| -%>
+    include "<%= @dir -%>/<%= include -%>";
+<% end -%>
+<% end -%>
+};
+<% end -%>
