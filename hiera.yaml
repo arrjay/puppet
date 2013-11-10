@@ -1,0 +1,20 @@
+:hierarchy:
+    - hosts/%{::hostname}
+    #- sites/%{::_siteabbr}
+    - os/%{::operatingsystem}
+    - module/%{calling_module}
+    - puppetmaster/%{::server}
+    - common
+
+:merge_hahavior: deeper
+
+:backends:
+    - yaml
+    - gpg
+
+:yaml:
+    :datadir: hiera
+
+:gpg:
+    :datadir: hiera
+    :key_dir: /root/puppet-gpgkeyring

@@ -1,1 +1,1 @@
-include freebsd::portsnap
+hiera_include('classes')
