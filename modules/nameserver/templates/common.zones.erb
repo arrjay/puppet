@@ -1,0 +1,55 @@
+<% dir = scope.lookupvar('nameserver::dir') -%>
+zone "." { type hint; file "<%= dir -%>/root.hints"; };
+
+<% localhost_forwards = [ "localhost" ] -%>
+<% localhost_forwards.each do |zone| -%>
+zone "<%= zone -%>" { type master; file "<%= dir -%>/localhost-forward.db"; };
+<% end -%>
+
+<% localhost_reverses = [ "127.in-addr.arpa", "0.ip6.arpa" ] -%>
+<% localhost_reverses.each do |zone| -%>
+zone "<%= zone -%>" { type master; file "<%= dir -%>/localhost-reverse.db"; };
+<% end -%>
+
+<% empty_dbs = [
+  "255.in-addr.arpa", "0.in-addr.arpa", "10.in-addr.arpa",
+  "16.172.in-addr.arpa", "17.172.in-addr.arpa", "18.172.in-addr.arpa", "19.172.in-addr.arpa", "20.172.in-addr.arpa", "21.172.in-addr.arpa",
+  "22.172.in-addr.arpa", "23.172.in-addr.arpa", "24.172.in-addr.arpa", "25.172.in-addr.arpa", "26.172.in-addr.arpa", "27.172.in-addr.arpa",
+  "28.172.in-addr.arpa", "29.172.in-addr.arpa", "30.172.in-addr.arpa",
+  "168.192.in-addr.arpa", "254.169.in-addr.arpa", "0.0.192.in-addr.arpa", "2.0.192.in-addr.arpa",
+  "100.51.198.in-addr.arpa", "113.0.203.in-addr.arpa",
+  "8.b.d.0.1.0.0.2.ip6.arpa",
+  "18.198.in-addr.arpa", "19.198.in-addr.arpa",
+  "240.in-addr.arpa", "241.in-addr.arpa", "242.in-addr.arpa", "243.in-addr.arpa", "244.in-addr.arpa", "245.in-addr.arpa", "246.in-addr.arpa",
+  "247.in-addr.arpa", "248.in-addr.arpa", "249.in-addr.arpa", "250.in-addr.arpa", "251.in-addr.arpa", "252.in-addr.arpa", "253.in-addr.arpa",
+  "254.in-addr.arpa",
+  "1.ip6.arpa", "3.ip6.arpa", "4.ip6.arpa", "5.ip6.arpa", "6.ip6.arpa", "7.ip6.arpa", "8.ip6.arpa", "9.ip6.arpa",
+  "a.ip6.arpa", "b.ip6.arpa", "c.ip6.arpa", "d.ip6.arpa", "e.ip6.arpa",
+  "0.f.ip6.arpa", "1.f.ip6.arpa", "2.f.ip6.arpa", "3.f.ip6.arpa", "4.f.ip6.arpa", "5.f.ip6.arpa", "6.f.ip6.arpa",
+  "7.f.ip6.arpa", "8.f.ip6.arpa", "9.f.ip6.arpa", "a.f.ip6.arpa", "b.f.ip6.arpa",
+  "0.e.f.ip6.arpa", "1.e.f.ip6.arpa", "2.e.f.ip6.arpa", "3.e.f.ip6.arpa", "4.e.f.ip6.arpa", "5.e.f.ip6.arpa", "6.e.f.ip6.arpa", "7.e.f.ip6.arpa",
+  "c.f.ip6.arpa", "d.f.ip6.arpa",
+  "8.e.f.ip6.arpa", "9.e.f.ip6.arpa", "a.e.f.ip6.arpa", "b.e.f.ip6.arpa",
+  "c.e.f.ip6.arpa", "d.e.f.ip6.arpa", "e.e.f.ip6.arpa", "f.e.f.ip6.arpa",
+  "ip6.int",
+  "test", "example", "invalid", "example.com", "example.net", "example.org",
+] -%>
+<% empty_dbs.each do |zone| -%>
+zone "<%= zone -%>" { type master; file "<%= dir -%>/empty.db"; };
+<% end -%>
+
+// ChaosVPN US Ranges
+zone "100.10.in-addr.arpa" { type static-stub; server-addresses { 172.31.0.5; 172.31.2.51; }; };
+zone "101.10.in-addr.arpa" { type static-stub; server-addresses { 172.31.0.5; 172.31.2.51; }; };
+zone "102.10.in-addr.arpa" { type static-stub; server-addresses { 172.31.0.5; 172.31.2.51; }; };
+zone "103.10.in-addr.arpa" { type static-stub; server-addresses { 172.31.0.5; 172.31.2.51; }; };
+
+//In use by ChaosVPN EU
+zone "31.172.in-addr.arpa" { type static-stub; server-addresses { 172.31.0.5; 172.31.2.51; }; };
+
+// j.hack can be defined in all views :)
+zone "j.hack"           { type master; file "/etc/namedb/master/j.hack.db"; };
+
+// ChaosVPN zones
+zone "hack" { type static-stub; server-addresses { 172.31.0.5; 172.31.2.51; }; };
+zone "dn42" { type static-stub; server-addresses { 172.22.228.2; 172.22.136.243; 172.22.131.88; 172.22.53.51; }; };

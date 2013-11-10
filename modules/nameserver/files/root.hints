@@ -1,0 +1,27 @@
+; <<>> DiG 9.8.4-P2 <<>>
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 15622
+;; flags: qr rd ra; QUERY: 1, ANSWER: 13, AUTHORITY: 0, ADDITIONAL: 0
+
+;; QUESTION SECTION:
+;.				IN	NS
+
+;; ANSWER SECTION:
+.			248329	IN	NS	m.root-servers.net.
+.			248329	IN	NS	a.root-servers.net.
+.			248329	IN	NS	g.root-servers.net.
+.			248329	IN	NS	c.root-servers.net.
+.			248329	IN	NS	h.root-servers.net.
+.			248329	IN	NS	k.root-servers.net.
+.			248329	IN	NS	f.root-servers.net.
+.			248329	IN	NS	l.root-servers.net.
+.			248329	IN	NS	e.root-servers.net.
+.			248329	IN	NS	i.root-servers.net.
+.			248329	IN	NS	d.root-servers.net.
+.			248329	IN	NS	j.root-servers.net.
+.			248329	IN	NS	b.root-servers.net.
+
+;; Query time: 1 msec
+;; WHEN: Sat Nov  9 22:00:11 2013
+;; MSG SIZE  rcvd: 228
