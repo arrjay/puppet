@@ -1,0 +1,15 @@
+option domain-name "<%= @params['global']['domain'] -%>";
+option domain-name-servers <%= @params['global']['nameservers'].join(", ") -%>;
+
+default-lease-time <%= @params['global']['default-lease-time'] -%>;
+max-lease-time <%= @params['global']['max-lease-time'] -%>;
+
+ddns-update-style <%= @params['global']['ddns-update-style'] -%>;
+
+<% if @params['global']['authoritative'] == "yes" -%>
+authoritative;
+<% else -%>
+not authoritative;
+<% end -%>
+
+log-facility <%= @params['global']['log-facility'] -%>;

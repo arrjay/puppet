@@ -1,0 +1,34 @@
+<%= scope.function_template(['dhcpd/_header.conf.erb']) -%>
+
+subnet <%= @_network['subnet'] -%> netmask <%= @_network['netmask'] -%> {
+  option broadcast-address <%= @_network['broadcast'] -%>;
+}
+
+group {
+  # routeable
+  option routers <%= @_network['gateway'] -%>;
+<% @_interfaces.each do |name,keys| -%>
+<% if keys['routeable'] != false -%>
+<% if keys['macaddr'] -%>
+  host <%= name -%> {
+    hardware ethernet <%= keys['macaddr'] -%>;
+    fixed-address <%= keys['ip'] -%>;
+  }
+<% end -%>
+<% end -%>
+<% end -%>
+}
+
+group {
+  # non-routeable
+<% @_interfaces.each do |name,keys| -%>
+<% if keys['routeable'] == false -%>
+<% if keys['macaddr'] -%>
+  host <%= name -%> {
+    hardware ethernet <%= keys['macaddr'] -%>;
+    fixed-address <%= keys['ip'] -%>;
+  }
+<% end -%>
+<% end -%>
+<% end -%>
+}
