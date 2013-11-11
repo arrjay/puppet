@@ -1,0 +1,39 @@
+worker_processes <%= @config['options']['worker_processes'] -%>;
+
+error_log <%= @config['options']['error_log'] -%>;
+
+events {
+    worker_connections <%= @config['options']['worker_connections'] -%>;
+}
+
+http {
+<% if @config['options']['top_includes']
+    @config['options']['top_includes'].each do |name| -%>
+    include <%= name -%>;
+<%  end
+  end -%>
+    default_type <%= @config['options']['default_mimetype'] -%>;
+<% if @config['options']['sendfile'] == true -%>
+    sendfile on;
+<% end -%>
+<%  @config['sites'].each do |site,keys| -%>
+  server {
+    listen <%= keys['port'] -%>;
+    server_name <%= site -%>;
+<% keys['error_page'].each do |codes,target| -%>
+    error_page <%= codes -%> <%= target -%>;
+<% end -%>
+<% keys['locations'].each do |location,subkeys| -%>
+    location <%= location -%> {
+      root <%= subkeys['root'] -%>;
+<% if subkeys['index'] -%>
+      index <%= subkeys['index'].join(" ") -%>;
+<% end -%>
+<% if subkeys['autoindex'] == true -%>
+      autoindex on;
+<% end -%>
+    }
+<% end -%>
+  }
+<%  end -%>
+}
