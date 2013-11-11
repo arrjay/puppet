@@ -7,7 +7,7 @@ class puppetmaster {
       }
     }
   }
-  package { 'hiera-gpg':
+  package { ['hiera-gpg', 'deep_merge']:
     ensure   => 'latest',
     provider => 'gem',
   }
