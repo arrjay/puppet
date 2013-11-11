@@ -1,5 +1,10 @@
 class inetd::tftpd {
   require inetd
+  # some day, I'll figure out why calling inetd's restarter directly sucks
+  exec { "restart inetd: tftpd changes":
+    refreshonly => true,
+    command     => "/usr/sbin/service $inetd::svc restart",
+  }
 
   $tftproot = $inetd::inetd_cfg['tftpd']['rootdir']
 
@@ -29,6 +34,7 @@ class inetd::tftpd {
           "set /files/etc/inetd.conf/service[ . = 'tftp' ]/arguments/1 tftpd",
         ],
         onlyif => "match /files/etc/inetd.conf/service[ . = 'tftp' ] size != 0",
+        notify => Exec["restart inetd: tftpd changes"],
       }
       # owwwww. if we fail to match root, delete the -s flag, delete any arguments starting with /
       # 01, 02 are numeric labels - gotta fit the [:digit:] realm, but have no other importance
@@ -43,6 +49,7 @@ class inetd::tftpd {
           ],
           onlyif => "get /files/etc/inetd.conf/service[ . = 'tftp' ]/arguments/*[preceding-sibling::*[1][. = '-s']] != $tftproot",
           require => Augeas["inetd.conf: tftpd basics"],
+          notify => Exec["restart inetd: tftpd changes"],
         }
       }
       # if we need to disable rfc2347 (only possible on *BSD tftp?), do it after we get a successful tftp service to modify.
@@ -55,6 +62,7 @@ class inetd::tftpd {
           ],
           onlyif => "match /files/etc/inetd.conf/service[ . = 'tftp' ]/arguments/*[ . = '-o' ] size == 0",
           require => Augeas["inetd.conf: tftpd basics"],
+          notify => Exec["restart inetd: tftpd changes"],
         }
       } else {
         augeas { "inetd.conf: enable tftpd rfc2347":
@@ -63,12 +71,14 @@ class inetd::tftpd {
           ],
           onlyif => "match /files/etc/inetd.conf/service[ . = 'tftp' ]/arguments/*[ . = '-o' ] size != 0",
           require => Augeas["inetd.conf: tftpd basics"],
+          notify => Exec["restart inetd: tftpd changes"],
         }
       }
       # Handle the case when we don't have tftpd set up at all
       exec { "inetd.conf: add tftpd":
         command => "/bin/echo '${tftpd_string}' >> '/etc/inetd.conf'",
         unless  => "/usr/bin/grep -q '^tftp' /etc/inetd.conf",
+        notify  => Exec["restart inetd: tftpd changes"],
       }
     }
   }
