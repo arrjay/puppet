@@ -11,11 +11,25 @@ class httpd::nginx (
   $sendfile		= hiera('httpd::nginx::sendfile'),
   $keepalive_timeout	= hiera('httpd::nginx::keepalive_timeout'),
   $default_mimetype	= hiera('httpd::nginx::default_mimetype'),
+  $log_format           = hiera('httpd::nginx::log_format'),
   $svccmd		= hiera('service'),
+  $log_file		= undef,
+  $pidfile		= undef,
   $tmpdir		= undef,	# Could be unset as well...
   $top_includes		= undef,	# becuase unset is valid here
   $sites		= undef,
 ) {
+  if ($pidfile) {
+    $_pidfile = $pidfile
+  } else {
+    $_pidfile = hiera('httpd::nginx::pidfile',undef)
+  }
+  if ($log_file) {
+    $_log_file = $log_file
+  } else {
+    $_logfile = hiera('httpd::nginx::log_file',undef)
+  }
+
   if ($sites) {
     $_sites = $sites
   } else {

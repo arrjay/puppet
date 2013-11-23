@@ -1,6 +1,10 @@
+user <%= @user -%>;
 worker_processes <%= @worker_processes -%>;
 
 error_log <%= @error_log -%>;
+<% if @_pidfile -%>
+pid <%= @_pidfile -%>;
+<% end -%>
 
 events {
     worker_connections <%= @worker_connections -%>;
@@ -8,14 +12,19 @@ events {
 
 http {
 <% if @top_includes
-    @top_includes.each do |name| -%>
-    include <%= name -%>;
+  @top_includes.each do |name| -%>
+  include <%= name -%>;
 <%  end
   end -%>
-    default_type <%= @default_mimetype -%>;
-<% if @sendfile == true -%>
-    sendfile on;
+  default_type <%= @default_mimetype -%>;
+  log_format main '<%= @log_format -%>';
+<% if @_log_file -%>
+  access_log <%= @_log_file -%> main;
 <% end -%>
+<% if @sendfile == true -%>
+  sendfile on;
+<% end -%>
+  keepalive_timeout <%= @keepalive_timeout -%>;
 <%  @_sites.each do |site,keys| -%>
   server {
     listen <%= keys['port'] -%>;
