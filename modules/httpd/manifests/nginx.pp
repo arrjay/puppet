@@ -1,27 +1,38 @@
-class httpd::nginx {
-  case $::operatingsystem {
-    'FreeBSD': {
-      $package = "www/nginx"
-      $svc     = "nginx"
-      $cf_file = "/usr/local/etc/nginx/nginx.conf"
-      $tmpdir  = "/var/tmp/nginx"
-      $user    = "www"
-      $group   = "www"
-      $bin     = "/usr/local/sbin/nginx"
-    }
+class httpd::nginx (
+  $package		= hiera('httpd::nginx::package'),
+  $binary		= hiera('httpd::nginx::bin'),
+  $svcname		= hiera('httpd::nginx::svcname'),
+  $cf_file		= hiera('httpd::nginx::configfile'),
+  $user			= hiera('httpd::nginx::user'),
+  $group		= hiera('httpd::nginx::group'),
+  $worker_processes  	= hiera('httpd::nginx::worker_processes'),
+  $worker_connections	= hiera('httpd::nginx::worker_connections'),
+  $error_log		= hiera('httpd::nginx::error_log'),
+  $sendfile		= hiera('httpd::nginx::sendfile'),
+  $keepalive_timeout	= hiera('httpd::nginx::keepalive_timeout'),
+  $default_mimetype	= hiera('httpd::nginx::default_mimetype'),
+  $svccmd		= hiera('service'),
+  $tmpdir		= undef,	# Could be unset as well...
+  $top_includes		= undef,	# becuase unset is valid here
+  $sites		= undef,
+) {
+  if ($sites) {
+    $_sites = $sites
+  } else {
+    $_sites = hiera_hash('httpd::nginx::sites',{ 'localhost' => { port => '80', locations => { '/' => { root => '/srv/www', }, }, }, })
   }
-
-  $config = hiera_hash('httpd::nginx')
 
   package { $package: ensure => installed }
 
-  service { $svc: enable => true }
+  service { $svcname: enable => true }
 
-  file {$tmpdir:
-    ensure => directory,
-    owner  => $user,
-    group  => $group,
-    mode   => '0755',
+  if $tmpdir {
+    file {$tmpdir:
+      ensure => directory,
+      owner  => $user,
+      group  => $group,
+      mode   => '0755',
+    }
   }
 
   file {$cf_file:
@@ -30,8 +41,8 @@ class httpd::nginx {
 
   exec { "restart nginx":
     refreshonly => true,
-    command     => "/usr/sbin/service $svc restart",
+    command     => "$svccmd $svcname restart",
     subscribe   => File[$cf_file],
-    onlyif      => "$bin -t -c $cf_file",
+    onlyif      => "$binary -t -c $cf_file",
   }
 }

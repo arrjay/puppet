@@ -1,0 +1,9 @@
+service: /sbin/service
+
+# nginx module for CentOS
+httpd::nginx::svcname: nginx
+httpd::nginx::package: nginx
+httpd::nginx::bin: /usr/sbin/nginx
+httpd::nginx::configfile: /etc/nginx/nginx.conf.test
+httpd::nginx::user: nginx
+httpd::nginx::group: nginx

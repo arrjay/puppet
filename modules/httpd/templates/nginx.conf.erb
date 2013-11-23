@@ -1,27 +1,29 @@
-worker_processes <%= @config['options']['worker_processes'] -%>;
+worker_processes <%= @worker_processes -%>;
 
-error_log <%= @config['options']['error_log'] -%>;
+error_log <%= @error_log -%>;
 
 events {
-    worker_connections <%= @config['options']['worker_connections'] -%>;
+    worker_connections <%= @worker_connections -%>;
 }
 
 http {
-<% if @config['options']['top_includes']
-    @config['options']['top_includes'].each do |name| -%>
+<% if @top_includes
+    @top_includes.each do |name| -%>
     include <%= name -%>;
 <%  end
   end -%>
-    default_type <%= @config['options']['default_mimetype'] -%>;
-<% if @config['options']['sendfile'] == true -%>
+    default_type <%= @default_mimetype -%>;
+<% if @sendfile == true -%>
     sendfile on;
 <% end -%>
-<%  @config['sites'].each do |site,keys| -%>
+<%  @_sites.each do |site,keys| -%>
   server {
     listen <%= keys['port'] -%>;
     server_name <%= site -%>;
+<% if keys['error_page'] -%>;
 <% keys['error_page'].each do |codes,target| -%>
     error_page <%= codes -%> <%= target -%>;
+<% end -%>
 <% end -%>
 <% keys['locations'].each do |location,subkeys| -%>
     location <%= location -%> {
