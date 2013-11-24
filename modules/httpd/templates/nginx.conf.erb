@@ -25,15 +25,36 @@ http {
   sendfile on;
 <% end -%>
   keepalive_timeout <%= @keepalive_timeout -%>;
+<% if @_additional_http_opts -%>
+<% @_additional_http_opts.each do |value| -%>
+  <%= value %>
+<% end -%>
+<% end -%>
 <%  @_sites.each do |site,keys| -%>
   server {
     listen <%= keys['port'] -%>;
     server_name <%= site -%>;
-<% if keys['error_page'] -%>;
+<% if keys['ssl_cert'] -%>
+    ssl_certificate <%= keys['ssl_cert'] -%>;
+    ssl_certificate_key <%= keys['ssl_key'] -%>;
+<% end -%>
+<% if keys['error_page'] -%>
 <% keys['error_page'].each do |codes,target| -%>
     error_page <%= codes -%> <%= target -%>;
 <% end -%>
 <% end -%>
+<% if keys['access_log'] -%>
+    access_log <%= keys['access_log'] -%>;
+<% end -%>
+<% if keys['error_log'] -%>
+    error_log <%= keys['error_log'] -%>;
+<% end -%>
+<% if keys['additional_site_opts'] -%>
+<% keys['additional_site_opts'].each do |value| -%>
+    <%= value %>
+<% end -%>
+<% end -%>
+<% if keys['locations'] -%>
 <% keys['locations'].each do |location,subkeys| -%>
     location <%= location -%> {
       root <%= subkeys['root'] -%>;
@@ -44,6 +65,7 @@ http {
       autoindex on;
 <% end -%>
     }
+<% end -%>
 <% end -%>
   }
 <%  end -%>

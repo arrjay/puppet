@@ -13,6 +13,7 @@ class httpd::nginx (
   $default_mimetype	= hiera('httpd::nginx::default_mimetype'),
   $log_format           = hiera('httpd::nginx::log_format'),
   $svccmd		= hiera('service'),
+  $additional_http_opts	= undef,
   $log_file		= undef,
   $pidfile		= undef,
   $tmpdir		= undef,	# Could be unset as well...
@@ -29,12 +30,20 @@ class httpd::nginx (
   } else {
     $_logfile = hiera('httpd::nginx::log_file',undef)
   }
+  if ($additional_http_opts) {
+    $_additional_http_opts = $additional_http_opts
+  } else {
+    $_additional_http_opts = hiera('httpd::nginx:additional_http_opts',undef)
+  }
 
   if ($sites) {
     $_sites = $sites
   } else {
     $_sites = hiera_hash('httpd::nginx::sites',{ 'localhost' => { port => '80', locations => { '/' => { root => '/srv/www', }, }, }, })
   }
+
+  # holder of global ciphers, prefer_server_ciphers, session_cache, session_timeout
+  $ssl_opts = hiera('httpd::nginx::ssl_opts',undef)
 
   package { $package: ensure => installed }
 
