@@ -15,6 +15,19 @@ class puppetmaster::nginx {
   #  provider => 'gem',
   #}
 
+  file {['/etc/puppet/rack','/etc/puppet/rack/public']:
+    ensure => directory,
+    owner  => puppet,
+    group  => puppet,
+  }
+
+  file {'/etc/puppet/rack/config.ru':
+    ensure => present,
+    owner  => puppet,
+    group  => puppet,
+    source => "puppet:///modules/puppetmaster/puppet_config.ru",
+  }
+
   class {'httpd::nginx':
     additional_http_opts => [
                             'tcp_nopush on;',
@@ -29,6 +42,7 @@ class puppetmaster::nginx {
                                                     ssl_cert             => "/var/lib/puppet/ssl/certs/$::fqdn.pem",
                                                     ssl_key              => "/var/lib/puppet/ssl/private_keys/$::fqdn.pem",
                                                     ssl_ciphers          => 'SSLv3:-LOW:-EXPORT:RC4+RSA',
+                                                    ssl_protocols        => 'SSLv3 TLSv1',
                                                     ssl_prefer_server_ciphers => true,
                                                     ssl_session_cache    => 'shared:SSL:128m',
                                                     ssl_session_timeout  => '5m',

@@ -37,6 +37,39 @@ http {
 <% if keys['ssl_cert'] -%>
     ssl_certificate <%= keys['ssl_cert'] -%>;
     ssl_certificate_key <%= keys['ssl_key'] -%>;
+<% if keys['ssl_ciphers'] -%>
+    ssl_ciphers <%= keys['ssl_ciphers'] -%>;
+<% else -%>
+    ssl_ciphers <%= @ssl_opts['ciphers'] -%>;
+<% end -%>
+<% if keys['ssl_protocols'] -%>
+    ssl_protocols <%= keys['ssl_protocols'] -%>;
+<% else -%>
+    ssl_protocols <%= @ssl_opts['protocols'] -%>;
+<% end -%>
+<% if defined? keys['ssl_prefer_server_ciphers'] -%>
+<%   if keys['ssl_prefer_server_ciphers'] == true -%>
+    ssl_prefer_server_ciphers on;
+<%   else -%>
+    ssl_prefer_server_ciphers off;
+<%   end -%>
+<% else -%>
+<%   if ssl_opts['prefer_server_ciphers'] == true -%>
+    ssl_prefer_server_ciphers on;
+<%   else -%>
+    ssl_prefer_server_ciphers off;
+<%   end -%>
+<% end -%>
+<% if keys['ssl_session_cache'] -%>
+    ssl_session_cache <%= keys['ssl_session_cache'] -%>;
+<% else -%>
+    ssl_session_cache <%= @ssl_opts['session_cache'] -%>;
+<% end -%>
+<% if keys['ssl_session_timeout'] -%>
+    ssl_session_timeout <%= keys['ssl_session_timeout'] -%>;
+<% else -%>
+    ssl_session_timeout <%= @ssl_opts['session_timeout'] -%>;
+<% end -%>
 <% end -%>
 <% if keys['error_page'] -%>
 <% keys['error_page'].each do |codes,target| -%>

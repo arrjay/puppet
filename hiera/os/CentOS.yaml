@@ -5,7 +5,7 @@ httpd::nginx::svcname: nginx
 httpd::nginx::package: nginx
 httpd::nginx::pidfile: /var/run/nginx.pid
 httpd::nginx::bin: /usr/sbin/nginx
-httpd::nginx::configfile: /etc/nginx/nginx.conf.test
+httpd::nginx::configfile: /etc/nginx/nginx.conf
 httpd::nginx::error_log: /var/log/nginx/error.log
 httpd::nginx::log_file: /var/log/nginx/access.log
 httpd::nginx::user: nginx
