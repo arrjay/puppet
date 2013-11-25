@@ -22,7 +22,6 @@ class httpd::apache2 (
   $pidfile		= hiera('httpd::apache2::pidfile'),
   $prefork_opts		= hiera('httpd::apache2::prefork_opts'),
   $worker_opts		= hiera('httpd::apache2::worker_opts'),
-  $modules		= hiera('httpd::apache2::modules'),
   $serveradmin		= hiera('httpd::apache2::serveradmin'),
   $usecanonicalname	= hiera('httpd::apache2::usecanonicalname'),
   $documentroot		= hiera('httpd::apache2::documentroot'),
@@ -69,6 +68,7 @@ class httpd::apache2 (
   $error_i18n		= hiera('httpd::apache2::error_i18n',false),
   $error_documents	= hiera('httpd::apache2::error_documents',undef),
   $browsermatch		= hiera('httpd::apache2::browserfixups',undef),
+  $additional_http_mods = hiera('httpd::apache2::modules',undef),
   $tmpdir		= undef,	# Could be unset as well...
   $sites		= hiera('httpd::apache2::sites',{ "localhost" => { port => "80", locations => { "/" => { root => "/srv/www", }, }, }, }),
 ) {
@@ -80,6 +80,9 @@ class httpd::apache2 (
   package { $package: ensure => installed }
 
   service { $svcname: enable => true }
+
+  # used in the template to figure out the correct includes
+  $osrel = "$::operatingsystem$::operatingsystemmajrelease"
 
   file {$cf_file:
     content => template("httpd/apache2.conf.erb")

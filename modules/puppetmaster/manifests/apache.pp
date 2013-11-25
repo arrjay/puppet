@@ -24,11 +24,12 @@ class puppetmaster::apache {
   }
 
   class {'httpd::apache2':
+    additional_http_mods => { "passenger_module" => "modules/mod_passenger.so" },
     additional_http_opts => [
                             'PassengerHighPerformance on',
                             'PassengerMaxPoolSize 12',
                             'PassengerPoolIdleTime 1500',
-                            'PassengerStartThrottleRate 120',
+                            'PassengerStatThrottleRate 120',
                             'RackAutoDetect Off',
                             'RailsAutoDetect Off',
                             ],
@@ -48,8 +49,8 @@ class puppetmaster::apache {
                                                       'RequestHeader set X-Client-DN %{SSL_CLIENT_S_DN}e',
                                                       'RequestHeader set X-Client-Verify %{SSL_CLIENT_VERIFY}e',
                                                       '#client_max_body_size 10M;',
-                                                      'SSLCARevocationFile /var/lib/puppet/ssl/ca/ca_crl.pem;',
-                                                      'SSLCACertificateFile /var/lib/puppet/ssl/certs/ca.pem;',
+                                                      'SSLCARevocationFile /var/lib/puppet/ssl/ca/ca_crl.pem',
+                                                      'SSLCACertificateFile /var/lib/puppet/ssl/certs/ca.pem',
                                                       'SSLVerifyClient optional',
                                                       'SSLVerifyDepth 1',
                                                       'SSLOptions +StdEnvVars',

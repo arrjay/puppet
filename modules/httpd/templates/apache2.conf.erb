@@ -32,7 +32,9 @@ KeepAliveTimeout <%= @keepalive_timeout %>
 <% end -%>
 Listen <%= ports.join(' ') %>
 
-<% @modules.each do |key,value| -%>
+<% templatepath = "httpd/apache2.modules.#{@osrel}.erb" -%>
+<%= scope.function_template([templatepath]) %>
+<% @additional_http_mods.each do |key,value| -%>
 LoadModule <%= key -%> <%= value %>
 <% end -%>
 
@@ -44,7 +46,7 @@ ServerAdmin <%= @serveradmin %>
 <% if @usecanonicalname == true -%>
 UseCanonicalName On
 <% else -%>
-Use CanonicalName Off
+UseCanonicalName Off
 <% end -%>
 
 DocumentRoot "<%= @documentroot -%>"
