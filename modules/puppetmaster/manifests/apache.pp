@@ -4,7 +4,7 @@ class puppetmaster::apache {
 
   case $::operatingsystem {
     'CentOS': {
-      package { ['rubygem-rake', 'rubygem-rack', 'rubygem-passenger', 'mod_passenger']:
+      package { ['rubygem-rake', 'rubygem-rack', 'rubygem-passenger', 'mod_passenger', 'rubygem-daemon_controller']:
         ensure => 'installed',
       }
     }
