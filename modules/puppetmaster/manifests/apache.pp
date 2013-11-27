@@ -2,10 +2,16 @@ class puppetmaster::apache {
 
   include puppetmaster
 
+  $passenger_ver = '4.0.25'
+
   case $::operatingsystem {
     'CentOS': {
-      package { ['rubygem-rake', 'rubygem-rack', 'rubygem-passenger', 'mod_passenger', 'rubygem-daemon_controller']:
+      package { ['rubygem-rake', 'rubygem-rack', 'rubygem-daemon_controller', 'httpd-devel', 'libcurl-devel']:
         ensure => 'installed',
+      }
+      package { ['passenger']:
+        ensure   => $passenger_ver,
+        provider => 'gem',
       }
     }
   }
@@ -23,15 +29,23 @@ class puppetmaster::apache {
     source => "puppet:///modules/puppetmaster/puppet_config.ru",
   }
 
+  exec{'passenger-install-apache2-module':
+    command => "/usr/bin/passenger-install-apache2-module -a",
+    require => Package['passenger','httpd-devel', 'libcurl-devel'],
+    timeout => 0,
+    before  => Class['httpd::apache2'],
+    creates => "/usr/lib/ruby/gems/1.8/gems/passenger-${passenger_ver}/buildout/apache2/mod_passenger.so"
+  }
+
   class {'httpd::apache2':
-    additional_http_mods => { "passenger_module" => "modules/mod_passenger.so" },
+    additional_http_mods => { "passenger_module" => "/usr/lib/ruby/gems/1.8/gems/passenger-${passenger_ver}/buildout/apache2/mod_passenger.so" },
     additional_http_opts => [
                             'PassengerHighPerformance on',
                             'PassengerMaxPoolSize 12',
                             'PassengerPoolIdleTime 1500',
                             'PassengerStatThrottleRate 120',
-                            'RackAutoDetect Off',
-                            'RailsAutoDetect Off',
+                            "PassengerRoot /usr/lib/ruby/gems/1.8/gems/passenger-${passenger_ver}",
+                            'PassengerEnabled on',
                             ],
     sites                 => { "*" => {
                                                     port                 => '8140',
