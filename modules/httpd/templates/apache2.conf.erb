@@ -13,19 +13,19 @@ KeepAliveTimeout <%= @keepalive_timeout %>
 
 # MPM Tunables
 <IfModule prefork.c>
-<% @prefork_opts.each do |key,value| -%>
+<% @prefork_opts.sort.each do |key,value| -%>
 <%= key -%> <%= value %>
 <% end -%>
 </IfModule>
 <IfModule worker.c>
-<% @worker_opts.each do |key,value| -%>
+<% @worker_opts.sort.each do |key,value| -%>
 <%= key -%> <%= value %>
 <% end -%>
 </IfModule>
 
 <% # puppet doesn't provide great array primitives. attempt to derive what we need now. -%>
 <% ports = [] -%>
-<% @sites.each do |site,keys| -%>
+<% @sites.sort.each do |site,keys| -%>
 <%   if keys['port'] -%>
 <%     ports << keys['port'] -%>
 <%   end -%>
@@ -34,7 +34,7 @@ Listen <%= ports.join(' ') %>
 
 <% templatepath = "httpd/apache2.modules.#{@osrel}.erb" -%>
 <%= scope.function_template([templatepath]) %>
-<% @additional_http_mods.each do |key,value| -%>
+<% @additional_http_mods.sort.each do |key,value| -%>
 LoadModule <%= key -%> <%= value %>
 <% end -%>
 
@@ -72,7 +72,7 @@ DocumentRoot "<%= @documentroot -%>"
 <% end -%>
 </IfModule>
 <% if @_userdir_enable == true -%>
-<%   @userdir_targetroots.each do |target| -%>
+<%   @userdir_targetroots.sort.each do |target| -%>
 <Directory <%= target -%><%= @userdir_name -%>>
     AllowOverride <%= @userdir_allowoverrides %>
     Options <%= @userdir_options %>
@@ -125,7 +125,7 @@ ErrorLog <%= @error_log %>
 
 LogLevel <%= @error_log_level %>
 
-<% @log_formats.each do |key,value| -%>
+<% @log_formats.sort.each do |key,value| -%>
 LogFormat "<%= value.gsub(/\$/, '%') -%>" <%= key %>
 <% end -%>
 
@@ -148,17 +148,17 @@ Alias <%= @iconalias -%> "<%= @icondir -%>"
 # files or filename extensions. These are only displayed for
 # FancyIndexed directories.
 <% if @icon_byencoding -%>
-<%   @icon_byencoding.each do |key,values| -%>
+<%   @icon_byencoding.sort.each do |key,values| -%>
 AddIconByEncoding (<%= values['tag'] -%>,<%= @iconalias -%><%= key -%>) <%= values['encodings'].join(' ') %>
 <%   end -%>
 <% end -%>
 <% if @icon_bytype -%>
-<%   @icon_bytype.each do |key,values| -%>
+<%   @icon_bytype.sort.each do |key,values| -%>
 AddIconByType (<%= values['tag'] -%>,<%= @iconalias -%><%= key -%>) <%= values['types'].join(' ') %>
 <%   end -%>
 <% end -%>
 <% if @icon_byname -%>
-<%   @icon_byname.each do |key,values| -%>
+<%   @icon_byname.sort.each do |key,values| -%>
 AddIcon <%= @iconalias -%><%= key -%> <%= values['names'].join(' ') %>
 <%   end -%>
 <% end -%>
@@ -169,7 +169,7 @@ DefaultIcon <%= @iconalias -%><%= @defaulticon %>
 <% end -%>
 
 <% if @descriptions -%>
-<%   @descriptions.each do |key,values| -%>
+<%   @descriptions.sort.each do |key,values| -%>
 AddDescription "<%= key -%>" <%= values['extensions'].join(' ') %>
 <% -%>
 <%   end -%>
@@ -177,23 +177,23 @@ AddDescription "<%= key -%>" <%= values['extensions'].join(' ') %>
 
 # The following is *not* related to the indexing options!
 <% unless @encodings == '' -%>
-<%   @encodings.each do |encoding,exts| -%>
+<%   @encodings.sort.each do |encoding,exts| -%>
 AddEncoding <%= type -%> <%= values['extentions'].join(' ') %>
 <% end -%>
 <% end -%>
 <% unless @filetypes == '' -%>
-<%   @filetypes.each do |type,values| -%>
+<%   @filetypes.sort.each do |type,values| -%>
 AddType <%= type -%> <%= values['extensions'].join(' ') %>
 <%   end -%>
 <% end -%>
 
 <% unless @handlers == '' -%>
-<%   @handlers.each do |type,values| -%>
+<%   @handlers.sort.each do |type,values| -%>
 AddHandler <%= type -%> <%= values['extensions'].join(' ') %>
 <%   end -%>
 <% end -%>
 <% unless @outputfilters == '' -%>
-<%   @outputfilters.each do |type,values| -%>
+<%   @outputfilters.sort.each do |type,values| -%>
 AddOutputFilter <%= type -%> <%= values['extensions'].join(' ') %>
 <%   end -%>
 <% end -%>
@@ -205,7 +205,7 @@ AddOutputFilter <%= type -%> <%= values['extensions'].join(' ') %>
 <% end -%>
 
 <% unless @scriptaliases == '' -%>
-<%   @scriptaliases.each do |key,value| -%>
+<%   @scriptaliases.sort.each do |key,value| -%>
 ScriptAlias <%= key -%> "<%= value -%>"
 <Directory "<%= value -%>">
     <%= @scriptdir_acl -%>
@@ -229,7 +229,7 @@ IndexOptions <%= @indexoptions.join(" ") %>
 <% end -%>
 
 <% unless @language_map == '' -%>
-<%   @language_map.each do |key,values| -%>
+<%   @language_map.sort.each do |key,values| -%>
 AddLanguage <%= key -%> <%= values['extensions'].join(' ') %>
 <%   end -%>
 <% end -%>
@@ -238,7 +238,7 @@ LanguagePriority <%= @language_priority.join(' ') %>
 
 ForceLanguagePriority <%= @forcelangresult.join(' ') %>
 
-<% @charsets.each do |charset| -%>
+<% @charsets.sort.each do |charset| -%>
 AddDefaultCharset <%= charset %>
 <% end -%>
 
@@ -263,24 +263,24 @@ Alias <%= @error_alias -%> "<%= @error_root -%>/"
 <% end -%>
 
 <% unless @error_documents == '' -%>
-<%   @error_documents.each do |code,dest| -%>
+<%   @error_documents.sort.each do |code,dest| -%>
 ErrorDocument <%= code -%> <%= dest %>
 <%   end -%>
 <% end -%>
 
 <% unless @browsermatch == '' -%>
-<%   @browsermatch.each do |match,value| -%>
+<%   @browsermatch.sort.each do |match,value| -%>
 BrowserMatch <%= match -%> <%= value['mods'].join(" ") %>
 <%   end -%>
 <% end -%>
 
 <% unless @additional_http_opts == '' -%>
-<%    @additional_http_opts.each do |thing| -%>
+<%    @additional_http_opts.sort.each do |thing| -%>
 <%= thing %>
 <%    end -%>
 <% end -%>
 
-<% @sites.each do |site,keys| -%>
+<% @sites.sort.each do |site,keys| -%>
 <VirtualHost <%= site -%>:<%= keys['port'] -%>>
 <% if keys['ssl_cert'] -%>
     SSLEngine On
@@ -331,7 +331,7 @@ BrowserMatch <%= match -%> <%= value['mods'].join(" ") %>
     ErrorLog <%= keys['error_log'] %>
 <% end -%>
 <% if keys['additional_site_opts'] -%>
-<% keys['additional_site_opts'].each do |value| -%>
+<% keys['additional_site_opts'].sort.each do |value| -%>
     <%= value %>
 <% end -%>
 <% end -%>
@@ -339,7 +339,7 @@ BrowserMatch <%= match -%> <%= value['mods'].join(" ") %>
     DocumentRoot <%= keys['root'] %>
 <% end -%>
 <% if keys['locations'] -%>
-<% keys['locations'].each do |location,subkeys| -%>
+<% keys['locations'].sort.each do |location,subkeys| -%>
     location <%= location -%> {
       root <%= subkeys['root'] -%>;
 <% if subkeys['index'] -%>
@@ -352,10 +352,10 @@ BrowserMatch <%= match -%> <%= value['mods'].join(" ") %>
 <% end -%>
 <% end -%>
 <%   if keys['directory'] -%>
-<%     keys['directory'].each do |dir,opts| -%>
+<%     keys['directory'].sort.each do |dir,opts| -%>
     <Directory "<%= dir -%>">
 <%       if opts['config'] -%>
-<%       opts['config'].each do |line| -%>
+<%       opts['config'].sort.each do |line| -%>
       <%= line %>
 <%       end -%>
 <%       end -%>
