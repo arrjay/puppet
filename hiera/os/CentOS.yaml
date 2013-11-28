@@ -1,4 +1,6 @@
+# You will likely want these for every os you fiddle with :)
 service: /sbin/service
+puppet::configfile: '/etc/puppet/puppet.conf'
 
 # nginx module for CentOS
 httpd::nginx::svcname: nginx
