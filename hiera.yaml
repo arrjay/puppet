@@ -13,8 +13,8 @@
     - gpg
 
 :yaml:
-    :datadir: hiera
+    :datadir: '/etc/puppet/hiera'
 
 :gpg:
-    :datadir: hiera
-    :key_dir: /root/puppet-gpgkeyring
+    :datadir: '/etc/puppet/hiera'
+    :key_dir: '/root/puppet-gpgkeyring'
