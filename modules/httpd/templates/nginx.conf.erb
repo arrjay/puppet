@@ -24,7 +24,22 @@ http {
 <% if @sendfile == true -%>
   sendfile on;
 <% end -%>
+<% if @tcp_nopush == true -%>
+  tcp_nopush on;
+<% end -%>
+<% if @tcp_nodelay == true -%>
+  tcp_nodelay on;
+<% end -%>
   keepalive_timeout <%= @keepalive_timeout -%>;
+<% if @types_hash_max_size != '' -%>
+  types_hash_max_size <%= @types_hash_max_size -%>;
+<% end -%>
+<% if @gzip == true -%>
+  gzip on;
+<%   if @gzip_disable != '' -%>
+  gzip_disable "<%= @gzip_disable -%>";
+<%   end -%>
+<% end -%>
 <% if @_additional_http_opts -%>
 <% @_additional_http_opts.each do |value| -%>
   <%= value %>
