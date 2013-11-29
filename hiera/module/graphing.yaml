@@ -1,0 +1,3 @@
+graphing::packages:
+    - bash
+graphing::webalias: '/stats/'
