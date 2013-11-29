@@ -4,7 +4,7 @@ httpd::nginx::error_log: nginx-error.log
 httpd::nginx::sendfile: on
 httpd::nginx::keepalive_timeout: 65
 httpd::nginx::default_mimetype: application/octet-stream
-httpd::nginx::log_format: '$remote_addr - $remote_user [$time_local]  "$request" $status $body_bytes sent "$http_referer" "$http_user_agent" $request_time'
+httpd::nginx::log_format: '$remote_addr - $remote_user [$time_local]  "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent" $request_time'
 httpd::nginx::gzip_disable: msie6
 # Defaults for all OSs running apache2
 httpd::apache2::servertokens: OS
