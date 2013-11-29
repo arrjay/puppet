@@ -17,4 +17,4 @@
 
 :gpg:
     :datadir: '/etc/puppet/hiera'
-    :key_dir: '/root/puppet-gpgkeyring'
+    :key_dir: '/etc/puppet/gpgkeyring'
