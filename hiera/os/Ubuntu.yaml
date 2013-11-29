@@ -1,2 +1,13 @@
 service: /usr/sbin/service
 puppet::configfile: '/etc/puppet/puppet.conf'
+
+# network ups tools
+nut::user: nut
+nut::group: nut
+nut::svcname: nut
+nut::packages: nut
+nut::ups_conf: '/etc/nut/ups.conf'
+nut::nut_conf: '/etc/nut/nut.conf'
+nut::upsd_users: '/etc/nut/upsd.users'
+nut::upsd_conf: '/etc/nut/upsd.conf'
+nut::upsmon_conf: '/etc/nut/upsmon.conf'

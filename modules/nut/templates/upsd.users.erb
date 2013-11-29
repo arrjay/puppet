@@ -1,0 +1,12 @@
+[upsmon]
+        password = <%= upsmon_pass %>
+        upsmon slave
+<% unless @_mode == 'netclient' -%>
+[upsmast]
+        password = <%= upsmast_pass %>
+        upsmon master
+[root]
+        password = <%= root_pass %>
+        actions = SET
+        instcmds = ALL
+<% end -%>

@@ -1,0 +1,15 @@
+classes:
+    - puppetclient
+upsdefs:
+    AS0942133802:
+        name: 5man
+        desc: 'five man electrical band'
+    5B0715U05565:
+        name: mars
+        desc: 'mars volta'
+    5B0746T51658:
+        name: six
+        desc: 'electric six'
+    JB0803005867:
+        name: beck
+        desc: 'HID UPS'

@@ -1,0 +1,28 @@
+# unwind any auto-detected upsen (sorted by serial)
+<% if @ups -%>
+<%   upslist = @ups.split(',') -%>
+<%   if upslist.length == 1 -%>
+[ups]
+        driver = usbhid-ups
+        port = auto
+        desc = "detected USB HID UPS"
+<%   else -%>
+<%     upslist.sort.each do |serial| -%>
+<%       if @upsdefs[serial] -%>
+<%         # if we have an UPS that matches the computer hostname, that is the 'primary' ups -%>
+<%         if @upsdefs[serial]['name'] == @hostname -%>
+[ups]
+        sdorder = 1
+<%         else -%>
+[<%= @upsdefs[serial]['name'] -%>]
+<%         end -%>
+        desc    = "<%= @upsdefs[serial]['desc'] -%>"
+<%       else -%>
+[ups-<%= serial -%>]
+<%       end -%>
+        serial  = <%= serial %>
+        driver  = usbhid-ups
+        port    = auto
+<%     end -%>
+<%   end -%>
+<% end -%>
