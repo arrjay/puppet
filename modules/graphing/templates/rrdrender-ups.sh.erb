@@ -1,0 +1,68 @@
+#!/bin/bash
+
+# path to ups files
+upsfiles=(<%= @mrtgdir -%>/ups/*)
+
+# graphs we will draw
+declare -A graphs
+graphs[hourly]=-3600
+graphs[daily]=-86400
+graphs[weekly]=-604800
+graphs[monthly]=-2592000
+
+# data plotted on graphs
+gauges="load battchrg"
+voltages="vIn battVolt"
+
+# colors we use
+declare -A color
+color[1]=FF8040
+color[2]=FF0000
+color[3]=00FF00
+color[4]=0000FF
+color[5]=DEDE00
+color[6]=00FFFF
+color[7]=FF90FF
+color[8]=000000
+
+function rrdargs {
+  rrd=$1
+  # build out the defs + lines for rrdgraph
+  defs=""
+  lines=""
+  ln=0
+  for x in ${gauges}; do
+    defs=${defs}"DEF:${x}=${rrd}:${x}:AVERAGE "
+    ln=$((ln+1))
+    lines=${lines}"LINE2:${x}#${color[$ln]}:$x "
+  done
+  for x in ${voltages}; do
+    defs=${defs}"DEF:${x}=${rrd}:${x}:AVERAGE CDEF:${x}_v=${x},10,/ "
+    ln=$((ln+1))
+    lines=${lines}"LINE1:${x}_v#${color[$ln]}:$x "
+  done
+  echo ${defs} ${lines}
+}
+
+# if there is more than one UPS being graphed, switch to rendering each ups in a subdir
+numupsen=${#upsfiles[@]}
+
+if [ $numupsen -eq 1 ]; then
+  rrdargs=$(rrdargs $upsfiles)
+  for graph in "${!graphs[@]}" ; do
+    rrdtool graph <%= @webdir -%>/ups/${graph}.png --start ${graphs[$graph]} --end now --imgformat PNG -o ${rrdargs} > /dev/null
+  done
+else
+  # create directories for each ups if needed under ups target (by name) and write there
+  for file in <%= @mrtgdir -%>/ups/* ; do
+    target=$(basename ${file})
+    target=${target/.rrd//}
+    if [ ! -d "<%= @webdir -%>/ups/${target}" ]; then
+      mkdir "<%= @webdir -%>/ups/${target}"
+    fi
+    rrdargs=$(rrdargs $file)
+    for graph in "${!graphs[@]}" ; do
+      rrdtool graph <%= @webdir -%>/ups/${target}/${graph}.png --start ${graphs[$graph]} --end now --imgformat PNG -o ${rrdargs} > /dev/null
+    done
+  done
+fi
