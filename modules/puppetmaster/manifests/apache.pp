@@ -16,7 +16,7 @@ class puppetmaster::apache {
     }
   }
 
-  file {['/etc/puppet/rack','/etc/puppet/rack/public']:
+  file {['/etc/puppet/rack','/etc/puppet/rack/public','/etc/puppet/rack/tmp']:
     ensure => directory,
     owner  => puppet,
     group  => puppet,
