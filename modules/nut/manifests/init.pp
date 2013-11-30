@@ -34,9 +34,25 @@ class nut (
       # if there is a comma in here, turn on netserver. we have multiple UPSes plugged in...
       if $::ups =~ /,/ {
         $_mode = 'netserver'
+        # allow this guy to listen on everything. sure.
+        # no augeas lens for this file :(
+        exec {"$upsdconf: LISTEN * 3493":
+          command => "/bin/echo 'LISTEN * 3493' >> $upsdconf",
+          unless  => "/bin/grep -qFx 'LISTEN * 3493' $upsdconf",
+          notify  => Exec["restart $svc"],
+        }
       # we should also flip to netserver if we are a virtualization host (though you probably set mode)
       } elsif $::virtual == 'xen0' {
         $_mode = 'netserver'
+        # if we have a vmm interface, add a listening line for it
+        # note that this code doen't run if we satisfied the first if statement (which installed a global!)
+        if $::ipaddress_vmm {
+          exec {"$upsdconf: LISTEN $::ipaddress_vmm 3493":
+            command => "/bin/echo 'LISTEN $::ipaddress_vmm 3493' >> $upsdconf",
+            unless  => "/bin/grep -qFx 'LISTEN $::ipaddress_vmm 3493' $upsdconf",
+            notify  => Exec["restart $svc"],
+          }
+        }
       # we should flip to netclient if we are a VM
       } elsif $::virtual =~ /^kvm$/ {
         $_mode = 'netclient'
