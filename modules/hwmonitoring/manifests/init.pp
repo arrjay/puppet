@@ -5,6 +5,15 @@ class hwmonitoring {
     include mrtg
     include crontask
 
+    $mrtgdir = "$mrtg::dir/temps"
+
+    file {"$mrtgdir":
+      owner  => root,
+      group  => 0,
+      ensure => directory,
+      mode   => 0755,
+    }
+
     $packages = hiera('hwmonitoring::packages',undef)
     if $packages {
       package{$packages: ensure => installed}
@@ -68,11 +77,28 @@ class hwmonitoring {
       }
     }
 
-    # run rrdtool-hw to make RRDs
+    # run rrdtool-temps to make RRDs
     exec {"$crontask::dir/rrdtool-temps.sh":
-      refreshonly => true,
-      command     => "$crontask::dir/rrdtool-temps.sh $mrtg::dir",
-      require     => File["$crontask::dir/rrdtool-temps.sh"],
+      command     => "$crontask::dir/rrdtool-temps.sh $mrtgdir",
+      require     => [ File["$crontask::dir/rrdtool-temps.sh"], File[$mrtgdir], ],
+      creates     => "$mrtgdir/temps.rrd",
+    }
+
+    # rrdgraph-temps to update RRDs
+    case $::operatingsystem {
+      'Ubuntu', 'CentOS': {
+        file {"$crontask::dir/rrdgraph-temps.sh":
+          owner  => root,
+          group  => 0,
+          source => "puppet:///modules/hwmonitoring/rrdgraph-temps.sh",
+          mode   => 0755,
+        }
+        cron {"rrdgraph-temps":
+          command => "$crontask::dir/rrdgraph-temps.sh $mrtgdir",
+          user    => root,
+          minute  => '*/5',
+        }
+      }
     }
   }
 }
