@@ -1,0 +1,12 @@
+## options common to all graph scripts
+# graphs we will draw
+declare -A graphs
+<% @graphs.sort.each do |key,value| -%>
+graphs[<%= key -%>]=<%= value %>
+<% end -%>
+
+# colors we use
+declare -A color
+<% @colors.sort.each do |key,value| -%>
+color[<%= key -%>]=<%= value %>
+<% end -%>

@@ -1,6 +1,8 @@
 class graphing (
   $webdir   = hiera('graphing::dir'),		# OS-specific
   $webalias = hiera('graphing::webalias'),	# preferred global
+  $graphs   = hiera('graphing::graphs'),	# global
+  $colors   = hiera('graphing::colors'),
 ) {
   include mrtg					# pick up rrdtool, eh?
   # base class for graphing - pick up the html dir, and schedule all jobs :)
@@ -58,6 +60,31 @@ class graphing (
         command => "$crontask::dir/rrdrender-ups.sh",
         user    => root,
         minute  => "*/5",
+      }
+    }
+    if "temps" in $graph_targets {
+      $sensors = hiera('graphing::temps::sensors',undef)
+      $fans = hiera('graphing::temps::fans',undef)
+      file {"$webdir/temps":
+        ensure => directory,
+        owner  => root,
+        group  => 0,
+        mode   => 0755,
+      }
+      if ($sensors) {
+        file {"$crontask::dir/rrdrender-temps.sh":
+          owner   => root,
+          group   => 0,
+          content => template("graphing/rrdrender-temps.sh.erb"),
+          mode    => '0755',
+        }
+        cron {"rrdrender-temps":
+          command => "$crontask::dir/rrdrender-temps.sh",
+          user    => root,
+          minute  => '*/5',
+        }
+      } else {
+        notice("no sensors to graph defined for $::hostname - not installing cron job")
       }
     }
   }

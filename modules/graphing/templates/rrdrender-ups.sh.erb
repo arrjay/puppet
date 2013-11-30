@@ -3,27 +3,11 @@
 # path to ups files
 upsfiles=(<%= @mrtgdir -%>/ups/*)
 
-# graphs we will draw
-declare -A graphs
-graphs[hourly]=-3600
-graphs[daily]=-86400
-graphs[weekly]=-604800
-graphs[monthly]=-2592000
+<%= scope.function_template(["graphing/graphdec.sh.erb"]) -%>
 
 # data plotted on graphs
 gauges="load battchrg"
 voltages="vIn battVolt"
-
-# colors we use
-declare -A color
-color[1]=FF8040
-color[2]=FF0000
-color[3]=00FF00
-color[4]=0000FF
-color[5]=DEDE00
-color[6]=00FFFF
-color[7]=FF90FF
-color[8]=000000
 
 function rrdargs {
   rrd=$1

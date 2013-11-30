@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# path to temp file
+rrdfile=<%= @mrtgdir -%>/temps/temps.rrd
+
+<%= scope.function_template(["graphing/graphdec.sh.erb"]) -%>
+
+# data plotted on graphs is pulled out of hiera, actually :)
+sensors="<%= @sensors.keys.sort.join(" ") -%>"
+declare -A name
+<% @sensors.sort.each do |key,value| -%>
+name[<%= key -%>]=<%= value %>
+<% end -%>
+
+function rrdargs {
+  rrd=$1
+  # build out the defs + lines for rrdgraph
+  defs=""
+  lines=""
+  ln=0
+  for x in ${sensors}; do
+    defs=${defs}"DEF:${x}=${rrd}:${x}:AVERAGE CDEF:${x}C=${x},10,/ "
+    ln=$((ln+1))
+    lines=${lines}"LINE:${x}C#${color[$ln]}:${name[$x]} "
+  done
+  echo ${defs} ${lines}
+}
+
+rrdargs=$(rrdargs $rrdfile)
+for graph in "${!graphs[@]}" ; do
+<% if @fans != '' -%>
+  rrdtool graph <%= @webdir -%>/temps/${graph}.png --start ${graphs[$graph]} --end now --imgformat PNG --vertical-label "degC" --right-axis ${fanscale}:0 --right-axis-labbel "RPM" ${rrdargs} > /dev/null
+<% else -%>
+  rrdtool graph <%= @webdir -%>/temps/${graph}.png --start ${graphs[$graph]} --end now --imgformat PNG --vertical-label "degC" ${rrdargs} > /dev/null
+<% end -%>
+done

@@ -1,0 +1,8 @@
+classes:
+    - nut::monitoring
+    - graphing
+graphing::temps::sensors:
+    sda: Disk0
+    sdb: Disk1
+    temp0: CPU
+#    temp1: CPU
