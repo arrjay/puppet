@@ -1,0 +1,31 @@
+<% if @productname =~ /^A68I-350 DELUXE$/ -%>
+# I've only tried this it87 out on the A68I-350. Verified through BIOS. Close-ish.
+chip "it8278-*"
+    label in0 "APU"
+    label in1 "DDR"
+    label in2 "+12V"
+    label in3 "+5V"
+    label in4 "FCH"
+    ignore in5
+    ignore in6
+    compute in2 @ * (514/120), @ / (514/120)
+    compute in3 @ * (213/120), @ / (213/120)
+    ignore fan2
+    ignore fan3
+<% end -%>
+
+
+<% if @cpudrv == 'coretemp' -%>
+chip "coretemp-*"
+    # the default labels on this sensor are *annoying*
+    label temp2 "temp0"
+    label temp3 "temp1"
+    label temp4 "temp2"
+    label temp5 "temp3"
+    label temp6 "temp4"
+    label temp7 "temp5"
+    label temp8 "temp6"
+    label temp9 "temp7"
+<% end -%>
+
+

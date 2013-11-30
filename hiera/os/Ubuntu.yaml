@@ -44,3 +44,8 @@ httpd::nginx::tcp_nopush: on
 httpd::nginx::tcp_nodelay: on
 httpd::nginx::types_hash_max_size: 2048
 httpd::nginx::gzip: on
+
+# hardware monitoring
+hwmonitoring::packages:
+    - lm-sensors
+    - smartmontools

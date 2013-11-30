@@ -1,6 +1,7 @@
 classes:
     - puppetclient
     - nut
+    - hwmonitoring
 upsdefs:
     AS0942133802:
         name: 5man
