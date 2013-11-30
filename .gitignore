@@ -1,0 +1,5 @@
+gpgkeyring/
+rack/
+puppet.conf
+modules/stdlib/
+modules/vcsrepo/
