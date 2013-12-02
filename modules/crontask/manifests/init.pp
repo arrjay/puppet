@@ -6,6 +6,6 @@ class crontask (
     ensure => directory,
     mode   => 0755,
     owner  => root,
-    group  => root,
+    group  => 0,
   }
 }

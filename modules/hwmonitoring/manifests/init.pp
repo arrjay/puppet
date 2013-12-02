@@ -77,11 +77,13 @@ class hwmonitoring {
       }
     }
 
-    # run rrdtool-temps to make RRDs
-    exec {"$crontask::dir/rrdtool-temps.sh":
-      command     => "$crontask::dir/rrdtool-temps.sh $mrtgdir",
-      require     => [ File["$crontask::dir/rrdtool-temps.sh"], File[$mrtgdir], ],
-      creates     => "$mrtgdir/temps.rrd",
+    if defined(File["$crontask::dir/rrdtool-temps.sh"]) {
+      # run rrdtool-temps to make RRDs
+      exec {"$crontask::dir/rrdtool-temps.sh":
+        command     => "$crontask::dir/rrdtool-temps.sh $mrtgdir",
+        require     => [ File["$crontask::dir/rrdtool-temps.sh"], File[$mrtgdir], ],
+        creates     => "$mrtgdir/temps.rrd",
+      }
     }
 
     # rrdgraph-temps to update RRDs

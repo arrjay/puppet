@@ -1,4 +1,9 @@
----
-classes:
-  - freebsd::portsnap
-  - freebsd::packages
+puppet::configfile: '/etc/puppet/puppet.conf'
+
+# MRTG
+mrtg::packages:
+    - net-mgmt/mrtg
+    - databases/rrdtool
+mrtg::datadir: /var/db/mrtg
+
+crontask::dir: /usr/local/libexec/crontasks
