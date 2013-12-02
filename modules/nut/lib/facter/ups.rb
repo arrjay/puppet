@@ -40,6 +40,7 @@ Facter.add("ups") do
         if usbdev =~ /American Power Conversion>/
           ugen = usbdev.scan(/.*:/)
           ugen = ugen[0].chop
+          ugens.push(ugen)
           IO.popen("#{usbconfig} -d #{ugen} dump_device_desc").each do |line|
             if line =~ /iSerialNumber/
               match = line.scan(/<.*>/)
@@ -53,5 +54,13 @@ Facter.add("ups") do
     end
     # flatten the array now.
     usb_serialnrs.join(",")
+  end
+end
+
+Facter.add("nutusbdevs") do
+  setcode do
+  confine :operatingsystem => %{FreeBSD}
+    res = ugens.map{ |ugen| "/dev/#{ugen}" }
+    res.join(",")
   end
 end

@@ -62,6 +62,33 @@ class nut (
       }
     }
 
+    # FreeBSD needs this...
+    if $::operatingsystem == 'FreeBSD' {
+      file{"/var/db/nut":
+        ensure => directory,
+        owner  => uucp,
+        group  => uucp,
+        mode   => '0750',
+      }
+      # Oh wow, FreeBSD devfs is terrible.
+      if $::nutusbdevs {
+        $usbdevs = split($::nutusbdevs, ',')
+        file{$usbdevs:
+          replace => no,
+          owner   => uucp,
+        }
+      }
+    }
+
+    file{"$upsdconf":
+      replace => no,
+      ensure  => present,
+      content => '# Created by Puppet\n',
+      mode    => '0640',
+      owner   => root,
+      group   => $group,
+    }
+
     # load ups definitions from hiera
     $upsdefs = hiera('upsdefs')
 
