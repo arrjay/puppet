@@ -5,6 +5,10 @@
 # if more than 1 ups, return a comma separated list of serials
 
 devfs_usb = '/sys/bus/usb/devices'
+usbconfig = '/usr/sbin/usbconfig'
+
+usblist = []
+ugens   = []
 
 usb_serialnrs = []
 
@@ -22,6 +26,26 @@ Facter.add("ups") do
             if File.read("#{devfs_usb}/#{dent}/idProduct") =~ /^0002|0003$/
               # Great! Get the serial number. Eat all whitespace.
               usb_serialnrs.push(File.read("#{devfs_usb}/#{dent}/serial").gsub(/\s+/,""))
+            end
+          end
+        end
+      end
+    end
+    if FileTest.executable?(usbconfig)
+      IO.popen(usbconfig).each do |line|
+        usblist << line.chomp
+      end
+      usblist.each do |usbdev|
+        # find an ups, get a serial #
+        if usbdev =~ /American Power Conversion>/
+          ugen = usbdev.scan(/.*:/)
+          ugen = ugen[0].chop
+          IO.popen("#{usbconfig} -d #{ugen} dump_device_desc").each do |line|
+            if line =~ /iSerialNumber/
+              match = line.scan(/<.*>/)
+              sr = match[0].chop
+              serial = sr[1, sr.length - 1].strip
+              usb_serialnrs.push(serial)
             end
           end
         end

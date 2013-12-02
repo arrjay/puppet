@@ -65,6 +65,8 @@ class nut (
     # load ups definitions from hiera
     $upsdefs = hiera('upsdefs')
 
+    service { $svc: enable => true }
+
     exec { "restart $svc":
       refreshonly => true,
       command     => "$service $svc restart",
@@ -76,7 +78,7 @@ class nut (
     file {$nutconf:
       content => template("nut/nut.conf.erb"),
       owner   => root,
-      group   => root,
+      group   => 0,
     }
 
     file {$upsconf:
