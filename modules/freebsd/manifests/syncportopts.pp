@@ -1,4 +1,6 @@
 class freebsd::syncportopts {
+  package { "devel/git": ensure => installed }
+
   vcsrepo { "/var/db/ports":
     ensure => latest,
     provider => git,
