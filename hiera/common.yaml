@@ -2,6 +2,7 @@ classes:
     - puppetclient
     - nut
     - hwmonitoring
+    - ntp
 upsdefs:
     AS0942133802:
         name: 5man
@@ -15,3 +16,7 @@ upsdefs:
     JB0803005867:
         name: beck
         desc: 'HID UPS'
+ntp::servers:
+    - ntp-0.produxi.net
+    - ntp-1.produxi.net
+    - ntp-2.produxi.net

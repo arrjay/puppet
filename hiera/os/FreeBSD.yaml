@@ -19,3 +19,7 @@ nut::nut_conf: '/usr/local/etc/nut/nut.conf'
 nut::upsd_users: '/usr/local/etc/nut/upsd.users'
 nut::upsd_conf: '/usr/local/etc/nut/upsd.conf'
 nut::upsmon_conf: '/usr/local/etc/nut/upsmon.conf'
+
+# NTP
+ntp::conf: /etc/ntp.conf
+ntp::svc: ntpd

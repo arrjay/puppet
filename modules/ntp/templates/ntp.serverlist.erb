@@ -1,0 +1,9 @@
+<% z = @random.to_i -%>
+<% y = @upstream.length + z - 1 -%>
+<% for x in z..y -%>
+<%   if x > @upstream.length - 1 -%>
+server <%= @upstream[x % @upstream.length] %>
+<%   else -%>
+server <%= @upstream[x] %>
+<%   end -%>
+<% end -%>
