@@ -2,6 +2,7 @@ classes:
     - puppetclient
     - nut
     - hwmonitoring
+    - monitoring
     - ntp
 upsdefs:
     AS0942133802:
