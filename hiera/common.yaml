@@ -4,6 +4,7 @@ classes:
     - hwmonitoring
     - monitoring
     - ntp
+    - snmp
 upsdefs:
     AS0942133802:
         name: 5man

@@ -1,0 +1,3 @@
+#snmp::rocommunity: public
+#snmp::syslocation: unknown
+#snmp::syscontact: 'unknown <system@>'

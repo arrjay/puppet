@@ -29,3 +29,12 @@ monitoring::packages:
     - sysutils/uptimed
 monitoring::services:
     - uptimed
+
+# SNMP
+snmp::packages:
+    - net-mgmt/net-snmp
+snmp::services:
+    - snmpd
+# whoah...what?
+snmp::config: /usr/local/share/snmp/snmpd.conf
+snmp::factdir: /usr/local/libdata/graphsources
