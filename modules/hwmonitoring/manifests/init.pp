@@ -63,7 +63,7 @@ class hwmonitoring {
           group   => 0,
           mode    => 0755,
           content => template("hwmonitoring/sensors3.conf.erb"),
-          notify => [ Exec["$crontask::dir/rrdtool-temps.sh"] ],
+          notify  => [ Exec["$crontask::dir/rrdtool-temps.sh"] ],
         }
       }
     }
@@ -106,5 +106,4 @@ class hwmonitoring {
         }
       }
     }
-  }
 }
