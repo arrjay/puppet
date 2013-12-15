@@ -2,7 +2,7 @@
 
 # try to figure out what we should be graphing. currently a nasty mess as I guess at rrd graph dirs.
 
-rrd_dirs = ['/var/lib/mrtg']
+rrd_dirs = ['/var/lib/mrtg', '/var/db/mrtg']
 
 graph_targets = []
 
