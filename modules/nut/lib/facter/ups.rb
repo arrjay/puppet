@@ -59,8 +59,8 @@ Facter.add("ups") do
 end
 
 Facter.add("nutusbdevs") do
-  setcode do
   confine :operatingsystem => %{FreeBSD}
+  setcode do
     res = []
     targ = ''
     usbdevs = ugens.map{ |ugen| "/dev/#{ugen}" }
