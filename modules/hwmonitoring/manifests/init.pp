@@ -34,6 +34,14 @@ class hwmonitoring {
           $relax_acpi = true
         }
       }
+      'FreeBSD': {
+        # ick ick ick.
+        if $::processor0 =~ /^AMD A6-6400K.*$/ {
+          package{'sysutils/k8temp':
+            ensure => installed,
+          }
+        }
+      }
     }
 
     # now do something with it
