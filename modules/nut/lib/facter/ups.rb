@@ -9,6 +9,7 @@ usbconfig = '/usr/sbin/usbconfig'
 
 usblist = []
 ugens   = []
+usbdevs = []
 
 usb_serialnrs = []
 
@@ -60,7 +61,14 @@ end
 Facter.add("nutusbdevs") do
   setcode do
   confine :operatingsystem => %{FreeBSD}
-    res = ugens.map{ |ugen| "/dev/#{ugen}" }
+    res = []
+    targ = ''
+    usbdevs = ugens.map{ |ugen| "/dev/#{ugen}" }
+    usbdevs.each do |link|
+      targ = File.readlink(link)
+    end
+    res.push(targ)
+    res = res.map{ |dev| "/dev/#{dev}" }
     res.join(",")
   end
 end
