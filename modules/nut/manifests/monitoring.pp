@@ -34,6 +34,7 @@ class nut::monitoring {
   exec {"$crontask::dir/rrdtool-ups.sh":
     command     => "$crontask::dir/rrdtool-ups.sh $mrtgdir",
     refreshonly => true,
+    require     => File["$mrtgdir"],
     subscribe   => [ Exec["restart $nut::svc"], File["$crontask::dir/rrdtool-ups.sh"], File["$crontask::dir/rrdgraph-ups.sh"], ],
   }
 
