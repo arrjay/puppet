@@ -36,7 +36,6 @@ class hwmonitoring {
       }
       'FreeBSD': {
         # ick ick ick.
-        }
       }
     }
 
@@ -106,4 +105,5 @@ class hwmonitoring {
         }
       }
     }
+  }
 }
