@@ -11,7 +11,7 @@ for ups in $(upsc -l); do
     if [ $? -ne 0 ]; then
       load=100
     fi
-    battVolt=$(upsc $ups battery.voltage | sed -s 's/\.//')
+    battVolt=$(upsc $ups battery.voltage | sed -e 's/\.//')
     # one of the newer APC UPS did not report this...?
     vIn=$(upsc $ups input.voltage 2> /dev/null)
     if [ $? -ne 0 ]; then
