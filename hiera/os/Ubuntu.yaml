@@ -49,3 +49,9 @@ httpd::nginx::gzip: on
 hwmonitoring::packages:
     - lm-sensors
     - smartmontools
+
+# software monitoring
+monitoring::packages:
+    - sysstat
+    - uptimed
+    - bash

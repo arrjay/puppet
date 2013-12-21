@@ -1,6 +1,8 @@
 classes:
     - puppetclient
+    - freebsd
     - nut
+    - monitoring
     - hwmonitoring
     - monitoring
     - ntp

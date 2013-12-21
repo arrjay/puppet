@@ -1,5 +1,5 @@
-graphing::packages:
-    - bash
+#graphing::packages:
+#    - bash
 graphing::webalias: '/stats/'
 # graphs are specifed as time backwards from now in seconds
 graphing::graphs:

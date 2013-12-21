@@ -27,6 +27,7 @@ ntp::svc: ntpd
 # misc. monitoring
 monitoring::packages:
     - sysutils/uptimed
+    - shells/bash
 monitoring::services:
     - uptimed
 
@@ -38,3 +39,8 @@ snmp::services:
 # whoah...what?
 snmp::config: /usr/local/share/snmp/snmpd.conf
 snmp::factdir: /usr/local/libdata/graphsources
+
+# harware monitoring
+hwmonitoring::packages:
+    - sysutils/healthd
+    - sysutils/smartmontools

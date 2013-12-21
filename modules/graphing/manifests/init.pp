@@ -6,13 +6,15 @@ class graphing (
 ) {
   include mrtg					# pick up rrdtool, eh?
   # base class for graphing - pick up the html dir, and schedule all jobs :)
-  $package = hiera('graphing::packages')	# notably, our graph scripts use 'declare -A' and thus require bash 4.x
+  $package = hiera('graphing::packages',undef)	# notably, our graph scripts use 'declare -A' and thus require bash 4.x
 						# however, there is no good way in puppet to specify that! ask for the latest and hope.
 
   include crontask				# we need to lay down monitoring scripts :)
 
   # install packages we desire
-  package {$package: ensure => latest }
+  if $package {
+    package {$package: ensure => latest }
+  }
 
   # fish the mrtg data dir out for templates
   $mrtgdir = $mrtg::dir

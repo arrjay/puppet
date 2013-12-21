@@ -66,6 +66,11 @@ class hwmonitoring {
         }
       }
     }
+    # healthd.conf
+    case $::operatingsystem {
+      'FreeBSD': {
+      }
+    }
 
     # rrdtool-hw.sh
     case $::operatingsystem {
