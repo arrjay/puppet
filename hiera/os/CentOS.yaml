@@ -2,6 +2,9 @@
 service: /sbin/service
 puppet::configfile: '/etc/puppet/puppet.conf'
 
+# cron tasks
+crontask::dir: /usr/local/libexec/crontasks
+
 # nginx module for CentOS
 httpd::nginx::svcname: nginx
 httpd::nginx::package: nginx
@@ -147,3 +150,8 @@ httpd::apache2::icon_byname:
             - '^^BLANKICON^^'
 httpd::apache2::icon_default: unknown.gif
 httpd::apache2::error_root: '/var/www/error'
+
+mrtg::packages:
+    - mrtg
+    - rrdtool
+mrtg::datadir: '/var/lib/mrtg'

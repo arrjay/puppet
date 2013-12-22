@@ -21,10 +21,12 @@ case $platform in
   *linux*)
     # find all the scsi class block devices (yes, IDE is this too)
     disks=
-    for x in /sys/class/scsi_disk/*/device/block/* ; do
-      disk=${x##*/}
-      disks="${disk} ${disks}"
-    done
+    if [ -d /sys/class/scsi_disk ]; then
+      for x in /sys/class/scsi_disk/*/device/block/* ; do
+        disk=${x##*/}
+        disks="${disk} ${disks}"
+      done
+    fi
     ;;
   *)
     exit 255
