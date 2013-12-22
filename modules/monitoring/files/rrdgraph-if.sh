@@ -31,6 +31,7 @@ case $platform in
       fi
     done
     # see if brctl is installed - get bridges
+    which brctl &> /dev/null
     if [ $? -eq 0 ]; then
       # use awk here to filter out bridges by checking a bridge id
       iflist="$(brctl show | awk 'BEGIN {ORS=" "} $2 ~ 8 { print $1 }')${iflist}"
