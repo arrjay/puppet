@@ -2,7 +2,7 @@
 
 outdir=$1
 
-PATH=${PATH}:/sbin:/usr/local/bin
+PATH=${PATH}:/sbin:/usr/sbin:/usr/local/bin:/usr/local/sbin
 
 # theory of operation: first we get a list of drives, then for each drive we maintain an rrd.
 # attempt to use smartctl to get attribute 194 (disk temperature), but if we fail, insert a 0.
