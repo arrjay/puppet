@@ -18,6 +18,10 @@ class hwmonitoring {
     if $packages {
       package{$packages: ensure => installed}
     }
+    $services = hiera('hwmonitoring::services',undef)
+    if $services {
+      service{$services: enable => true, ensure => running}
+    }
 
     # yep, giant OS case. pretty much all of this is OS-specific
     # figure out what we need...
@@ -101,6 +105,19 @@ class hwmonitoring {
           owner  => root,
           group  => 0,
           source => "puppet:///modules/hwmonitoring/rrdgraph-temps.sh",
+          mode   => 0755,
+        }
+        cron {"rrdgraph-temps":
+          command => "$crontask::dir/rrdgraph-temps.sh $mrtgdir",
+          user    => root,
+          minute  => '*/5',
+        }
+      }
+      'FreeBSD': {
+        file {"$crontask::dir/rrdgraph-temps.sh":
+          owner  => root,
+          group  => 0,
+          source => "puppet:///modules/hwmonitoring/healthd-rrdgraph-temps.sh",
           mode   => 0755,
         }
         cron {"rrdgraph-temps":

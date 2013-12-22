@@ -44,3 +44,5 @@ snmp::factdir: /usr/local/libdata/graphsources
 hwmonitoring::packages:
     - sysutils/healthd
     - sysutils/smartmontools
+hwmonitoring::services:
+    - healthd
