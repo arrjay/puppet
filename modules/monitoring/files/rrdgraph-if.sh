@@ -4,7 +4,7 @@ outdir=$1
 
 # theory of operation: first we get a list of interfaces, then for each interface, we maintain an rrd.
 
-PATH=${PATH}:/sbin
+PATH=${PATH}:/sbin:/usr/local/bin
 
 # RRAs to record, if we create an RRD
 rras="RRA:AVERAGE:0.5:1:1200 RRA:MIN:0.5:12:2400 RRA:MAX:0.5:12:2400 RRA:AVERAGE:0.5:12:2400"

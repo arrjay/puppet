@@ -2,6 +2,8 @@
 
 outdir=$1
 
+PATH=${PATH}:/usr/local/bin
+
 rras="RRA:AVERAGE:0.5:1:1200 RRA:MIN:0.5:12:2400 RRA:MAX:0.5:12:2400 RRA:AVERAGE:0.5:12:2400"
 
 datasources="DS:temp0:GAUGE:600:0:212 DS:temp1:GAUGE:600:0:212 DS:temp2:GAUGE:600:0:212 \

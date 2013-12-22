@@ -2,6 +2,8 @@
 
 outdir=$1
 
+PATH=${PATH}:/usr/local/bin
+
 for ups in $(upsc -l); do
   if [ -f ${outdir}/${ups}.rrd ]; then
     runtime=$(upsc $ups battery.runtime)
