@@ -34,4 +34,28 @@ class monitoring (
     user => root,
     minute => '*/5',
   }
+
+  $ifdir = "$mrtg::dir/interfaces"
+
+  file {"$ifdir":
+    owner  => root,
+    group  => 0,
+    ensure => directory,
+    mode   => 0755,
+  }
+
+  # the interface monitoring script works the same
+  file {"$crontask::dir/rrdgraph-if.sh":
+    owner => root,
+    group => 0,
+    source => "puppet:///modules/monitoring/rrdgraph-if.sh",
+    mode => 0755,
+  }
+
+  cron {"rrdgraph-if":
+    command => "$crontask::dir/rrdgraph-if.sh $ifdir",
+    user => root,
+    minute => '*/5',
+  }
+
 }
