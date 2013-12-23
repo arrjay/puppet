@@ -83,6 +83,12 @@ class nut (
         mode   => '0644',
         source => "puppet:///modules/nut/fbsd-devd.conf",
       }
+      file{"/usr/local/etc/rc.d/prenut":
+        owner  => root,
+        group  => 0,
+        mode   => '0755',
+        source => "puppet:///modules/nut/fbsd-prenut.sh",
+      }
       if $::nutusbdevs {
         $usbdevs = split($::nutusbdevs, ',')
         file{$usbdevs:
