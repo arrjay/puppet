@@ -46,3 +46,4 @@ hwmonitoring::packages:
     - sysutils/smartmontools
 hwmonitoring::services:
     - healthd
+    - smartd
