@@ -7,6 +7,7 @@ classes:
     - monitoring
     - ntp
     - snmp
+    - serialconsole
 upsdefs:
     AS0942133802:
         name: 5man
@@ -24,3 +25,4 @@ ntp::servers:
     - ntp-0.produxi.net
     - ntp-1.produxi.net
     - ntp-2.produxi.net
+serialconsole::type: screen
