@@ -1,4 +1,15 @@
 class hwmonitoring {
+  # freebsd is annoyingly deficient, so do this
+  $svccmd  = hiera('service',undef)
+  err ("$svccmd")
+  define startsvc ($obj = $title) {
+    exec{"$hwmonitoring::svccmd $obj restart":
+      refreshonly => true,
+    }
+  }
+  $services = hiera('hwmonitoring::services',undef)
+  startsvc{ $services: }
+
   # everything here only makes sense on real hardware.
   # network adapters, CPU loads are monitored NOT HERE.
   if $::virtual =~ /^xen0|physical$/ {
@@ -18,9 +29,8 @@ class hwmonitoring {
     if $packages {
       package{$packages: ensure => installed}
     }
-    $services = hiera('hwmonitoring::services',undef)
     if $services {
-      service{$services: enable => true, ensure => running}
+      service{$services: enable => true} ~> Startsvc[$services]
     }
 
     # yep, giant OS case. pretty much all of this is OS-specific
