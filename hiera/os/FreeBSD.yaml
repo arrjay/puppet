@@ -47,3 +47,4 @@ hwmonitoring::packages:
 hwmonitoring::services:
     - healthd
     - smartd
+hwmonitoring::smartd_conf: /usr/local/etc/smartd.conf

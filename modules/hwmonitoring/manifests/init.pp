@@ -137,5 +137,19 @@ class hwmonitoring {
         }
       }
     }
+
+    # smartd config
+    $smartd_conf = hiera('hwmonitoring::smartd_conf',undef)
+    if $smartd_conf {
+      file {"$smartd_conf":
+        replace => no,
+        content => "DEVICESCAN\n",
+        owner   =>  root,
+        group   =>  0,
+        mode    =>  0644,
+        before  =>  Service['smartd'],
+      }
+    }
+
   }
 }
