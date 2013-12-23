@@ -71,6 +71,18 @@ class nut (
         mode   => '0750',
       }
       # Oh wow, FreeBSD devfs is terrible.
+      file{"/usr/local/libexec/nut/grab_hidups.sh":
+        owner  => root,
+        group  => 0,
+        mode   => '0755',
+        source => "puppet:///modules/nut/fbsd-grab_hidups.sh",
+      }
+      file{"/etc/devd/nut.conf":
+        owner  => root,
+        group  => 0,
+        mode   => '0644',
+        source => "puppet:///modules/nut/fbsd-devd.conf",
+      }
       if $::nutusbdevs {
         $usbdevs = split($::nutusbdevs, ',')
         file{$usbdevs:
