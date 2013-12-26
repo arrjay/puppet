@@ -8,6 +8,7 @@ classes:
     - ntp
     - snmp
     - serialconsole
+    - intca
 upsdefs:
     AS0942133802:
         name: 5man

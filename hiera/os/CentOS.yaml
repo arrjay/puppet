@@ -155,3 +155,6 @@ mrtg::packages:
     - mrtg
     - rrdtool
 mrtg::datadir: '/var/lib/mrtg'
+
+# intca
+intca::file: '/etc/pki/tls/certs/PRODUXI-CA.crt'

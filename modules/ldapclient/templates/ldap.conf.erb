@@ -1,0 +1,10 @@
+#
+# This file is managed by puppet!
+#
+
+BASE <%= base %>
+URI ldaps://<%= server -%>:636
+
+<% if @cafile != '' -%>
+TLS_CACERT <%= @cafile %>
+<% end -%>

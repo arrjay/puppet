@@ -48,3 +48,13 @@ hwmonitoring::services:
     - healthd
     - smartd
 hwmonitoring::smartd_conf: /usr/local/etc/smartd.conf
+
+# ldapclient
+ldapclient::packages:
+    - net/nss_ldap
+ldapclient::cafile: '/usr/local/share/certs/PRODUXI-CA.crt'
+ldapclient::conffile: '/usr/local/etc/openldap/ldap.conf'
+ldapclient::nss_conf: '/usr/local/etc/nss_ldap.conf'
+
+# intca
+intca::file: '/usr/local/share/certs/PRODUXI-CA.crt'

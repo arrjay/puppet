@@ -1,6 +1,7 @@
 classes:
     - freebsd::portsnap
     - nut::monitoring
+    - ldapclient
 ntp::servers:
     - ntp-2.vt.edu
     - ac-ntp1.net.cmu.edu
