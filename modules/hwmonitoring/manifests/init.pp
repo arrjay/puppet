@@ -11,7 +11,9 @@ class hwmonitoring {
   # network adapters, CPU loads are monitored NOT HERE.
   if $::virtual =~ /^xen0|physical$/ {
     # only realize startsvc here
-    hwmonitoring::startsvc{ $hwmonitoring::services: }
+    if $hwmonitoring::services {
+      hwmonitoring::startsvc{ $hwmonitoring::services: }
+    }
 
     include mrtg
     include crontask
