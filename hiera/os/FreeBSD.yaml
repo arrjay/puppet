@@ -69,3 +69,7 @@ mirror::packages:
 # fileserver
 fileserver::packages:
     - sysutils/fdupes
+
+# sudo
+sudo::packages:
+    - security/sudo

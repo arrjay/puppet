@@ -5,6 +5,7 @@ class mirror (
   $mirrordir = hiera('mirror::storedir'),
   $arcdir    = hiera('mirror::archivedir',undef),
 ) {
+  include sudo
   include crontask
   # template abuse pt. 1
   $taskdir = $crontask::dir
