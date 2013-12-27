@@ -1,0 +1,26 @@
+#!/bin/sh
+
+# abuse path and push the crontask dir in it
+PATH=<%= @taskdir -%>:${PATH}
+
+TOPLEVEL="<%= @mirrordir -%>"
+<% if @arcdir != '' -%>
+ARCHIVEDIR="<%= @arcdir -%>"
+<% end -%>
+
+# OpenBSD
+OBSD_MIRROR="openbsd.mirror.frontiernet.net::OpenBSD"
+OBSD_VERSIONS="5.4"
+OBSD_ARCHITECTURES="i386 amd64 sgi"
+OBSD_PACKAGETREES="5.4/packages/i386"
+
+# Nekoware
+NEKOWARE_MIRROR="nekoware.dustytech.net::nekoware"
+
+# NetBSD
+
+# CentOS
+
+# tgcware
+TGCWARE_DISTS="irix5.3/stable irix6.2/stable"
+TGCWARE_SITE="jupiterrise.com/tgcware"

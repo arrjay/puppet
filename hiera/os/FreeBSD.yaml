@@ -58,3 +58,14 @@ ldapclient::nss_conf: '/usr/local/etc/nss_ldap.conf'
 
 # intca
 intca::file: '/usr/local/share/certs/PRODUXI-CA.crt'
+
+# mirror
+mirror::packages:
+    - net/rsync
+    - ftp/wget
+    - sysutils/coreutils
+    - www/lynx
+
+# fileserver
+fileserver::packages:
+    - sysutils/fdupes
