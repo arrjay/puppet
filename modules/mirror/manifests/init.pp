@@ -75,7 +75,7 @@ class mirror (
   }
 
   cron{"mirror-openbsd":
-    command  => "$crontask::dir/mirror-tgcware.sh $confdir",
+    command  => "$crontask::dir/mirror-openbsd.sh $confdir",
     user     => 'mirror',
     hour     => 8,
     minute   => 3,
