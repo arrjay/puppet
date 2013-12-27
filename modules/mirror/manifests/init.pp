@@ -49,9 +49,21 @@ class mirror (
     source  => "puppet:///modules/mirror/trimtrees.pl",
   }
 
-  #file{"$crontask::dir/mirror-rsync-cygwin.sh":
-  #  
-  #}
+  file{"$crontask::dir/mirror-cygwin.sh":
+    ensure  => present,
+    owner   => root,
+    group   => 0,
+    mode    => 0755,
+    source  => "puppet:///modules/mirror/mirror-cygwin.sh",
+  }
+
+  cron{"mirror-cygwin":
+    command  => "$crontask::dir/mirror-cygwin.sh $confdir",
+    user     => 'mirror',
+    hour     => '12',
+    minute   => '18',
+    weekday  => 'Wed',
+  }
 
   file{"$crontask::dir/mirror-openbsd.sh":
     ensure  => present,
