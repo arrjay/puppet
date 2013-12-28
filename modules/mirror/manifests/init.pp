@@ -124,7 +124,7 @@ class mirror (
   }
 
   cron{"mirror-netbsd":
-    command  => "$crontask::dir/mirror-nerbsd.sh $confdir",
+    command  => "$crontask::dir/mirror-netbsd.sh $confdir",
     user     => 'mirror',
     hour     => 2,
     minute   => 1,
