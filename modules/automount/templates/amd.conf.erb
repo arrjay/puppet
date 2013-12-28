@@ -1,0 +1,27 @@
+[global]
+map_type = file
+search_path = <%= @mapdir %>
+browsable_dirs = no
+auto_dir = /.a
+
+[/site]
+map_name = amd_site
+
+[/nethome]
+<% userbit = @hmapperm.split(//).last(3)[0].to_i -%>
+<% if (userbit & 1) -%>
+map_type = exec
+map_name = <%= @mapdir -%>/amd_nethome
+<% else -%>
+map_name = amd_nethome
+<% end -%>
+
+<% if @maphome -%>
+[/home]
+<% if (userbit & 1) -%>
+map_type = exec
+map_name = <%= @mapdir -%>/amd_nethome
+<% else -%>
+map_name = amd_nethome
+<% end -%>
+<% end -%>

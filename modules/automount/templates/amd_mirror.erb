@@ -1,0 +1,6 @@
+/defaults	type:=nfsl;opts:=ro
+<% moroder_auxpool_mirrors = [ 'FreeBSD', 'NetBSD', 'OpenBSD', 'centos', 'cygwin', 'nekoware', 'pkgsrc', 'tgcware' ] -%>
+<% moroder_auxpool_mirrors.each do |key| -%>
+<%= key -%> rhost:=moroder.produxi.net;rfs:=/auxpool/mirror;sublink:=<%= key %>
+<% end -%>
+

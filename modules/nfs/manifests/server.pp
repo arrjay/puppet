@@ -1,4 +1,6 @@
 class nfs::server {
+  include fileserver
+
   case $::operatingsystem {
     'FreeBSD': {
       $exports = '/etc/exports'

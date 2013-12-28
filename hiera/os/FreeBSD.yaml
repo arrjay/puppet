@@ -74,3 +74,8 @@ fileserver::packages:
 # sudo
 sudo::packages:
     - security/sudo
+
+# automount
+automount::maptype: 'am-utils'
+automount::services:
+    - amd

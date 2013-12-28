@@ -1,9 +1,9 @@
 classes:
+    - nfs::server
     - freebsd::portsnap
     - nut::monitoring
     - ldapclient
     - mirror
-    - fileserver
 ntp::servers:
     - ntp-2.vt.edu
     - ac-ntp1.net.cmu.edu
@@ -11,3 +11,6 @@ ntp::servers:
 mirror::confdir: '/auxpool/localhome/mirror'
 mirror::storedir: '/auxpool/mirror'
 mirror::archivedir: '/datapool/software/archive'
+automount::map_home: yes
+automount::homemap: 'zfs_magic_home.sh'
+automount::perms_auto_home: '744'
