@@ -131,4 +131,20 @@ class mirror (
     weekday  => 'Mon',
   }
 
+  file{"$crontask::dir/mirror-centos.sh":
+    ensure  => present,
+    owner   => root,
+    group   => 0,
+    mode    => 0755,
+    source  => "puppet:///modules/mirror/mirror-centos.sh",
+  }
+
+  cron{"mirror-centos":
+    command  => "$crontask::dir/mirror-netbsd.sh $confdir",
+    user     => 'mirror',
+    hour     => 7,
+    minute   => 28,
+    weekday  => 'Tue',
+  }
+
 }
