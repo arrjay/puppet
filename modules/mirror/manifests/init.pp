@@ -115,4 +115,20 @@ class mirror (
     weekday  => 'Mon',
   }
 
+  file{"$crontask::dir/mirror-netbsd.sh":
+    ensure  => present,
+    owner   => root,
+    group   => 0,
+    mode    => 0755,
+    source  => "puppet:///modules/mirror/mirror-netbsd.sh",
+  }
+
+  cron{"mirror-netbsd":
+    command  => "$crontask::dir/mirror-nerbsd.sh $confdir",
+    user     => 'mirror',
+    hour     => 2,
+    minute   => 1,
+    weekday  => 'Mon',
+  }
+
 }
