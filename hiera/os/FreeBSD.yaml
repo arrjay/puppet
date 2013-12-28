@@ -65,6 +65,7 @@ mirror::packages:
     - ftp/wget
     - sysutils/coreutils
     - www/lynx
+    - ftp/ncftp3
 
 # fileserver
 fileserver::packages:

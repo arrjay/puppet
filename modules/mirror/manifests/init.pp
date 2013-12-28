@@ -25,6 +25,13 @@ class mirror (
     mode   => 0755,
   }
 
+  file {"$confdir/ncftp":
+    ensure => directory,
+    owner  => mirror,
+    group  => mirror,
+    mode   => 0755,
+  }
+
   file {"$mirrordir":
     # whine heartily if you don't have this directory, but don't offer to make it!
     ensure => directory,
@@ -40,6 +47,14 @@ class mirror (
     group   => mirror,
     mode    => 0644,
     content => template("mirror/mirror.conf.erb"),
+  }
+
+  file{"$confdir/ncftp/freebsd.cfg":
+    ensure  => present,
+    owner   => mirror,
+    group   => mirror,
+    mode    => 0644,
+    source  => "puppet:///modules/mirror/ncftp-freebsd.cfg",
   }
 
   file{"$crontask::dir/trimtrees.pl":
@@ -145,6 +160,22 @@ class mirror (
     hour     => 17,
     minute   => 28,
     weekday  => 'Tue',
+  }
+
+  file{"$crontask::dir/mirror-freebsd.sh":
+    ensure   => present,
+    owner    => root,
+    group    => 0,
+    mode     => 0755,
+    source   => "puppet:///modules/mirror/mirror-freebsd.sh",
+  }
+
+  cron{"mirror-freebsd":
+    command  => "$crontask::dir/mirror-freebsd.sh $confdir",
+    user     => 'mirror',
+    hour     => 4,
+    minute   => 7,
+    weekday  => 'Wed'
   }
 
 }
