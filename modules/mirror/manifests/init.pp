@@ -142,7 +142,7 @@ class mirror (
   cron{"mirror-centos":
     command  => "$crontask::dir/mirror-netbsd.sh $confdir",
     user     => 'mirror',
-    hour     => 7,
+    hour     => 17,
     minute   => 28,
     weekday  => 'Tue',
   }
