@@ -3,6 +3,7 @@ classes:
     - freebsd::portsnap
     - nut::monitoring
     - ldapclient
+    - krbclient
     - mirror
 ntp::servers:
     - ntp-2.vt.edu
