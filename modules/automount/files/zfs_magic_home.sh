@@ -13,7 +13,7 @@ case "$1" in
   * )
     # most common case - parent exists.
     if [ -d ${ZFS_PARENT_DIR}/${1} ]; then
-      echo "fs:=${ZFS_PARENT_DIR}/${1}"
+      echo "type:=link;fs:=${ZFS_PARENT_DIR}/${1}"
       exit 0
     fi
     # see if this is a valid user with a shell specified
