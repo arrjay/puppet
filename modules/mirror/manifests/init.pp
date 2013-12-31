@@ -178,4 +178,12 @@ class mirror (
     weekday  => 'Wed'
   }
 
+  file{"$crontask::dir/mirror-opencsw.sh":
+    ensure   => present,
+    owner    => root,
+    group    => 0,
+    mode     => 0755,
+    source   => "puppet:///modules/mirror/mirror-opencsw.sh",
+  }
+
 }
