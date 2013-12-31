@@ -5,6 +5,7 @@ classes:
     - ldapclient
     - krbclient
     - mirror
+    - fileserver::netatalk
 ntp::servers:
     - ntp-2.vt.edu
     - ac-ntp1.net.cmu.edu

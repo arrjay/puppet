@@ -77,8 +77,6 @@ fileserver::packages:
     - sysutils/geteltorito
     - sysutils/hfsutils
     - sysutils/dmg2img
-fileserver::netatalk::packages:
-    - net/netatalk3
 
 # sudo
 sudo::packages:
