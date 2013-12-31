@@ -1,0 +1,14 @@
+;
+; This file is managed by puppet
+;
+; NOTE: using zfs with netatalk? set aclinherit, aclmode to passthrough for your filesystems!
+
+[Global]
+; Global server settings
+
+; skip amd here...
+[Homes]
+basedir regex = /datapool/home
+
+; [My AFP Volume]
+; path = /path/to/volume

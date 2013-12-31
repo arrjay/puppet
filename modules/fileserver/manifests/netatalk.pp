@@ -2,9 +2,11 @@ class fileserver::netatalk(
 ) {
   case $::operatingsystem {
     'FreeBSD': {
+      $atalk_pkg = "net/netatalk3"
+      $afp_conf  = "/usr/local/etc/afp.conf"
       # we need krb5 UAM support, so...
       require freebsd::portupgrade
-      # build prereqs via packages, *then* build it.
+      # install prereqs via packages, *then* build it.
       package{[
         "converters/libiconv",
         "databases/db46",
@@ -16,7 +18,17 @@ class fileserver::netatalk(
         "lang/perl5.14",
         "net/avahi-app",
         "security/libgcrypt",
-      ]: ensure => installed } ~> package{"net/netatalk3": ensure => installed, provider => 'portupgrade' }
+      ]: ensure => installed } ~> package{$atalk_pkg: ensure => installed, provider => 'portupgrade' }
+      # we need avahi for netatalk to properly announce
+      require avahi
     }
+  }
+
+  file{"$afp_conf":
+    owner   => root,
+    group   => 0,
+    mode    => 0644,
+    ensure  => present,
+    content => template("fileserver/afp.conf.erb"),
   }
 }
