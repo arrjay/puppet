@@ -70,6 +70,15 @@ mirror::packages:
 # fileserver
 fileserver::packages:
     - sysutils/fdupes
+    - net-p2p/jigdo
+    - sysutils/cdrkit
+    - sysutils/udfclient
+    - archivers/p7zip
+    - sysutils/geteltorito
+    - sysutils/hfsutils
+    - sysutils/dmg2img
+fileserver::netatalk::packages:
+    - net/netatalk3
 
 # sudo
 sudo::packages:
