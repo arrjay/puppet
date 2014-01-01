@@ -1,5 +1,13 @@
 class fileserver::netatalk(
 ) {
+  # we call ldapclient directly so we can fish binding variables out of it. we need those.
+  require ldapclient
+  $ldapdn     = $ldapclient::binddn
+  $ldappw     = $ldapclient::bindpw
+  $userbase   = $ldapclient::nss_passwd_base
+  $groupbase  = $ldapclient::nss_group_base
+  $ldapserver = $ldapclient::server
+
   case $::operatingsystem {
     'FreeBSD': {
       $atalk_pkg = "net/netatalk3"

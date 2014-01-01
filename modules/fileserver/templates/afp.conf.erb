@@ -4,7 +4,22 @@
 ; NOTE: using zfs with netatalk? set aclinherit, aclmode to passthrough for your filesystems!
 
 [Global]
+mimic model = RackMac
 ; Global server settings
+map acls = mode
+ldap auth method = simple
+ldap auth dn = <%= @ldapdn %>
+ldap auth pw = <%= @ldappw %>
+ldap server = <%= @ldapserver %>
+ldap name attr = sAMAccountName
+ldap group attr = cn
+ldap groupscope = sub
+ldap userscope = sub
+ldap userbase = <%= @userbase %>
+ldap groupbase = <%= @groupbase %>
+ldap uuid attr = objectGUID
+ldap uuid encoding = ms-guid
+uam list = uams_dhx2_pam.so
 
 ; skip amd here...
 [Homes]
