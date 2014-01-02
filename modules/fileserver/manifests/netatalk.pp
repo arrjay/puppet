@@ -4,6 +4,8 @@ class fileserver::netatalk(
 ) {
   # we call ldapclient directly so we can fish binding variables out of it. we need those.
   require ldapclient
+  # we call krbclient because we might just talk that
+  require krbclient
   $ldapdn     = $ldapclient::binddn
   $ldappw     = $ldapclient::bindpw
   $userbase   = $ldapclient::nss_passwd_base
@@ -74,4 +76,14 @@ class fileserver::netatalk(
 
   # configure netatalk to start/start it
   service{"$service": enable => true, ensure => running }
+
+  # install pam config if missing
+  file{"/etc/pam.d/netatalk":
+    replace => no,
+    ensure  => present,
+    mode    => 0644,
+    owner   => root,
+    group   => 0,
+    source  => "puppet:///modules/fileserver/pam_d_netatalk",
+  }
 }
