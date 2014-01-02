@@ -1,0 +1,2 @@
+mediaserver::daap_port: 3689
+mediaserver::rescan_interval: 86400

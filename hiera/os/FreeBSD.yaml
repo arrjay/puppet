@@ -86,3 +86,13 @@ sudo::packages:
 automount::maptype: 'am-utils'
 automount::services:
     - amd
+
+# mediaserver
+mediaserver::packages:
+    - audio/firefly
+mediaserver::mt_daapd_config: /usr/local/etc/mt-daapd.conf
+mediaserver::mt_daapd_webdir: /usr/local/share/mt-daapd/admin-root
+mediaserver::mt_daapd_dbdir: /usr/local/var/db/firefly
+mediaserver::mt_daapd_sscprog: /usr/local/bin/mt-daapd-ssc.sh
+mediaserver::mt_daapd_plugdir: /usr/local/lib/mt-daapd/plugins
+mediaserver::mt_daapd_user: daapd

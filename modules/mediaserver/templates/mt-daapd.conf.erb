@@ -1,0 +1,39 @@
+[general]
+web_root = <%= @mtd_webroot %>
+port = <%= @daap_port %>
+admin_pw = <%= @mtd_adminpw %>
+db_type = sqlite3
+db_parms = <%= @mtd_dbroot %>
+mp3_dir = <%= @music_root %>
+servername = <%= @hostname %>
+runas = <%= @daapd_user %>
+extensions = <%= @daapd_exts %>
+<% if @ssc_codecs != '' -%>
+ssc_codectypes = <%= @ssc_codecs %>
+<% end -%>
+ssc_prog = <%= @mtd_ssc %>
+logfile = /var/log/mt-daapd.log
+debuglevel = <%= @daapd_dblvl %>
+rescan_interval = <%= @rescan %>
+<% if @daapd_scan == true -%>
+always_scan = 1
+<% else -%>
+always_scan = 0
+<% end -%>
+scan_type = <%= @daapd_sctyp %>
+<% if @daapd_comp == true -%>
+compress = 1
+<% else -%>
+compress = 0
+<% end -%>
+
+[plugins]
+plugin_dir = <%= @mtd_plugdir %>
+
+[scanning]
+# process playlists at all?
+process_playlists = 0
+# process itunes xml?
+process_itunes = 0
+# process m3u playlists?
+process_m3u = 0

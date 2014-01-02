@@ -6,6 +6,7 @@ classes:
     - krbclient
     - mirror
     - fileserver::netatalk
+    - mediaserver
 ntp::servers:
     - ntp-2.vt.edu
     - ac-ntp1.net.cmu.edu
@@ -16,3 +17,4 @@ mirror::archivedir: '/datapool/software/archive'
 automount::map_home: yes
 automount::homemap: 'zfs_magic_home.sh'
 automount::perms_auto_home: '744'
+mediaserver::music_root: '/datapool/media/audio'
