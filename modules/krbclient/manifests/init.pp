@@ -1,4 +1,6 @@
-class krbclient {
+class krbclient (
+  $realm = hiera('krbclient::realm')
+) {
   $svccmd = hiera('service')
   define pam_k5_aug($target = $title) {
     case $::operatingsystem {

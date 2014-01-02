@@ -1,0 +1,2 @@
+fileserver::samba_workgroup: PRODUXI
+fileserver::samba_logpath: '/var/log/samba/log.%m'

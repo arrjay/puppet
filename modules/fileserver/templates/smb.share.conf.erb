@@ -1,0 +1,35 @@
+[<%= @share -%>]
+  comment = <%= @comment %>
+<% if @browseable == true -%>
+  browseable = yes
+<% else -%>
+  browseable = no
+<% end -%>
+<% if @writable == true -%>
+  writable = yes
+<% else -%>
+  writable = no
+<% end -%>
+<% if @sharepath -%>
+  path = <%= @sharepath %>
+<% end -%>
+<% if @guest_ok == true -%>
+  guest ok = yes
+<% else -%>
+  guest ok = no
+<% end -%>
+<% if @printable == true -%>
+  printable = yes
+<% else -%>
+  printable = no
+<% end -%>
+<% if @public == true -%>
+  public = yes
+<% else -%>
+  public = no
+<% end -%>
+<% if @read_only == true -%>
+  read only = yes
+<% else -%>
+  read only = no
+<% end -%>

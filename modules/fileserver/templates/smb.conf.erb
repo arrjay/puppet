@@ -1,0 +1,42 @@
+[global]
+  ; basics
+  workgroup = <%= @workgroup %>
+  server string = <%= @comment %>
+
+  ; domain config
+  security = ADS
+  realm = <%= @realm %>
+
+  ; logging
+  log file = <%= @logspec %>
+  max log size = <%= @logsize %>
+
+  ; printing
+<% if @printserver == true -%>
+  load printers = yes
+<% else -%>
+  load printers = no
+<% end -%>
+
+  ; winbind config - I don't think we use this?
+  winbind enum users = Yes
+  winbind enum groups = Yes
+  winbind use default domain = Yes
+  winbind nss info = rfc2037
+
+  ; idmap config (local fallback)
+  idmap config * : range = 1000-1999999
+  idmap config * : backend = tdb
+
+  ; configure idmap for <%= @workgroup %> to rely on AD for anything useful
+  idmap config <%= @workgroup %> : backend = ad
+  idmap config <%= @workgroup %> : schema_mode = rfc2037
+  idmap config <%= @workgroup %> : range = 1000-999999
+  ; default to domain idmapper
+  idmap config <%= @workgroup %> : default = yes
+
+  ; do not become a master browser. just. no.
+  local master = no
+  domain master = no
+  preferred master = no
+

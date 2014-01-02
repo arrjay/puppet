@@ -77,6 +77,7 @@ fileserver::packages:
     - sysutils/geteltorito
     - sysutils/hfsutils
     - sysutils/dmg2img
+fileserver::samba_conf: /usr/local/etc/smb.conf
 
 # sudo
 sudo::packages:
