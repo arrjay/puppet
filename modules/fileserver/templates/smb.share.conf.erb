@@ -33,3 +33,15 @@
 <% else -%>
   read only = no
 <% end -%>
+<% if @create_mask -%>
+  create mask = <%= @create_mask %>
+<% end -%>
+<% if @dir_mask -%>
+  directory mask = <%= @dir_mask %>
+<% end -%>
+<% if @extra -%>
+<%   @extra.each do |line| -%>
+  <%= line -%>
+<%   end -%>
+<% end -%>
+

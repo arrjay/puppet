@@ -42,15 +42,18 @@ class fileserver::samba (
   }
 
   define share(
-    $share      = $title,
+    $share       = $title,
     $sharepath,
-    $comment    = "$title share",
-    $browseable = true,
-    $writable   = false,
-    $guest_ok   = false,
-    $printable  = false,
-    $public     = false,
-    $read_only  = true,
+    $comment     = "$title share",
+    $browseable  = true,
+    $writable    = false,
+    $guest_ok    = false,
+    $printable   = false,
+    $public      = false,
+    $read_only   = true,
+    $create_mask = undef,
+    $dir_mask    = undef,
+    $extra       = undef,
   ) {
     concat::fragment{"samba share: $share":
       target  => $fileserver::samba::config,

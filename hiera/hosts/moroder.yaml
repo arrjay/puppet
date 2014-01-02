@@ -19,6 +19,7 @@ automount::map_home: yes
 automount::homemap: 'zfs_magic_home.sh'
 automount::perms_auto_home: '744'
 mediaserver::music_root: '/datapool/media/audio'
+mediaserver::music_upload_dir: '/datapool/media/INCOMING/music'
 fileserver::samba_homeserver: yes
 fileserver::netatalk_homeserver: yes
 fileserver::netatalk_homepath: '/datapool/home'
