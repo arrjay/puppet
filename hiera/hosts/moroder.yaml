@@ -18,8 +18,10 @@ mirror::archivedir: '/datapool/software/archive'
 automount::map_home: yes
 automount::homemap: 'zfs_magic_home.sh'
 automount::perms_auto_home: '744'
+mediaserver::confdir: '/auxpool/localhome/mediaserver'
 mediaserver::music_root: '/datapool/media/audio'
 mediaserver::music_upload_dir: '/datapool/media/INCOMING/music'
+mediaserver::music_staging_dir: '/datapool/media/INCOMING/music-staging'
 fileserver::samba_homeserver: yes
 fileserver::netatalk_homeserver: yes
 fileserver::netatalk_homepath: '/datapool/home'
