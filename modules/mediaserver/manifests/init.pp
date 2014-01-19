@@ -30,6 +30,19 @@ class mediaserver (
 
   package{$packages: ensure => installed }
 
+  # LAME on FreeBSD is a restricted port :x
+  case $::operatingsystem {
+    'FreeBSD': {
+      require freebsd::portupgrade
+      #package{[
+      #  "converters/libiconv",
+      #  "devel/gmake",
+      #  "devel/libtool",
+      #]: ensure => installed } ~> 
+      package {'audio/lame': ensure => installed, provider => 'portupgrade' }
+    }
+  }
+
   file{$mtd_config:
     owner   => root,
     group   => 0,
