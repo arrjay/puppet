@@ -22,6 +22,7 @@ mediaserver::confdir: '/auxpool/localhome/mediaserver'
 mediaserver::music_root: '/datapool/media/audio'
 mediaserver::music_upload_dir: '/datapool/media/INCOMING/music'
 mediaserver::music_staging_dir: '/datapool/media/INCOMING/music-staging'
+mediaserver::music_meta_dir: '/datapool/media/META/music'
 fileserver::samba_homeserver: yes
 fileserver::netatalk_homeserver: yes
 fileserver::netatalk_homepath: '/datapool/home'

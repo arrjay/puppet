@@ -63,6 +63,7 @@ class mediaserver (
     # look up the staging, config dirs now (or fail to compile)
     $music_stage = hiera('mediaserver::music_staging_dir')
     $confdir     = hiera('mediaserver::confdir')
+    $music_meta  = hiera('mediaserver::music_meta_dir')
     # create a world writeable directory (hope you backed it with a quota!)
     file{$music_upload:
       ensure => directory,
@@ -72,6 +73,12 @@ class mediaserver (
       group  => $music_group,
     }
     file{$music_stage:
+      ensure => directory,
+      mode   => 0755,
+      owner  => $music_user,
+      group  => $music_group,
+    }
+    file{$music_meta:
       ensure => directory,
       mode   => 0755,
       owner  => $music_user,
@@ -113,13 +120,13 @@ class mediaserver (
       source => "puppet:///modules/mediaserver/music-filer.sh",
       mode   => 0755,
     }
-    file{"$crontask::dir/music-mime-typer.sh":
+    file{"$confdir/bin/music-mime-typer.sh":
       owner  => root,
       group  => 0,
       source => "puppet:///modules/mediaserver/music-mime-typer.sh",
       mode   => 0755,
     }
-    file{"$crontask::dir/music-flac-handler.sh":
+    file{"$confdir/bin/music-flac-handler.sh":
       owner  => root,
       group  => 0,
       source => "puppet:///modules/mediaserver/music-flac-handler.sh",
