@@ -1,5 +1,7 @@
 #!/bin/sh
 
+PATH="<%= @confdir -%>/bin:${PATH}"
+
 # pull some data out of puppet for use in our shell scripts :)
 MUSIC_USER="<%= @music_user -%>"
 MUSIC_GROUP="<%= @music_group -%>"

@@ -77,6 +77,20 @@ class mediaserver (
       group   => 0,
       content => template("mediaserver/music.conf.erb"),
     }
+    vcsrepo{"$confdir/misc-scripts":
+      ensure   => present,
+      provider => git,
+      source   => "https://github.com/arrjay/misc-scripts.git",
+    }
+    file{"$confdir/bin":
+      ensure   => directory,
+      owner    => root,
+      group    => 0,
+    }
+    file{"$confdir/bin/flac2mp3":
+      ensure   => link,
+      target   => "../misc-scripts/noarch/flac2mp3",
+    }
 
     fileserver::samba::share{"upload_music": sharepath => $music_upload, read_only => false, writable => yes, comment => "Music uploads", guest_ok => yes, public => yes, create_mask => 0333, dir_mask => 0333, extra => ['hide unreadable = yes']}
 
