@@ -113,6 +113,7 @@ class mediaserver (
     }
 
     fileserver::samba::share{"upload_music": sharepath => $music_upload, read_only => false, writable => yes, comment => "Music uploads", guest_ok => yes, public => yes, create_mask => 0333, dir_mask => 0333, extra => ['hide unreadable = yes']}
+    fileserver::samba::share{"music-staging": sharepath => $music_stage, read_only => true, writable => no, comment => "Music staging area", guest_ok => yes, public => yes }
 
     file{"$crontask::dir/music-filer.sh":
       owner  => root,
