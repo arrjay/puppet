@@ -1,11 +1,11 @@
 [<%= @share -%>]
   comment = <%= @comment %>
-<% if @browseable == true -%>
+<% if @browseable -%>
   browseable = yes
 <% else -%>
   browseable = no
 <% end -%>
-<% if @writable == true -%>
+<% if @writable -%>
   writable = yes
 <% else -%>
   writable = no
@@ -13,22 +13,22 @@
 <% if @sharepath -%>
   path = <%= @sharepath %>
 <% end -%>
-<% if @guest_ok == true -%>
+<% if @guest_ok -%>
   guest ok = yes
 <% else -%>
   guest ok = no
 <% end -%>
-<% if @printable == true -%>
+<% if @printable -%>
   printable = yes
 <% else -%>
   printable = no
 <% end -%>
-<% if @public == true -%>
+<% if @public -%>
   public = yes
 <% else -%>
   public = no
 <% end -%>
-<% if @read_only == true -%>
+<% if @read_only -%>
   read only = yes
 <% else -%>
   read only = no
