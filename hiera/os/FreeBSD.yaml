@@ -92,6 +92,7 @@ automount::services:
 mediaserver::packages:
     - audio/firefly
     - audio/py-eyed3
+    - multimedia/ffmpeg
 mediaserver::mt_daapd_config: /usr/local/etc/mt-daapd.conf
 mediaserver::mt_daapd_webdir: /usr/local/share/mt-daapd/admin-root
 mediaserver::mt_daapd_dbdir: /usr/local/var/db/firefly

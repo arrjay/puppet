@@ -132,5 +132,11 @@ class mediaserver (
       source => "puppet:///modules/mediaserver/music-flac-handler.sh",
       mode   => 0755,
     }
+    file{"$confdir/bin/music-m4a-handler.sh":
+      owner  => root,
+      group  => 0,
+      source => "puppet:///modules/mediaserver/music-m4a-handler.sh",
+      mode   => 0755,
+    }
   }
 }
