@@ -1,7 +1,7 @@
 # Base Server Tuneables
 ServerTokens <%= @servertokens %>
 ServerRoot <%= @serverroot %>
-<% if @pidfile -%>
+<% if @pidfile != '' -%>
 PidFile <%= @pidfile %>
 <% end -%>
 Timeout <%= @timeout %>
@@ -236,9 +236,13 @@ AddLanguage <%= key -%> <%= values['extensions'].join(' ') %>
 <%   end -%>
 <% end -%>
 
+<% unless @language_priority == '' -%>
 LanguagePriority <%= @language_priority.join(' ') %>
+<% end -%>
 
+<% unless @forcelangresult == '' -%>
 ForceLanguagePriority <%= @forcelangresult.join(' ') %>
+<% end -%>
 
 <% @charsets.sort.each do |charset| -%>
 AddDefaultCharset <%= charset %>

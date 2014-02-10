@@ -57,6 +57,9 @@ httpd::apache2::mime_magicfile: etc/apache24/magic
 httpd::apache2::documentroot: /usr/local/www/apache24/data
 httpd::apache2::scriptaliases:
     '/cgi-bin/': '/usr/local/www/apache24/cgi-bin/'
+httpd::apache2::language_map: ''
+httpd::apache2::language_priority: ''
+httpd::apache2::forcelanguagepriority: ''
 
 # harware monitoring
 hwmonitoring::packages:
