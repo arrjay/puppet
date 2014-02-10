@@ -55,6 +55,8 @@ httpd::apache2::serverroot: /usr/local
 httpd::apache2::mimetypes: etc/apache24/mime.types
 httpd::apache2::mime_magicfile: etc/apache24/magic
 httpd::apache2::documentroot: /usr/local/www/apache24/data
+httpd::apache2::scriptaliases:
+    '/cgi-bin/': '/usr/local/www/apache24/cgi-bin/'
 
 # harware monitoring
 hwmonitoring::packages:

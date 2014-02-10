@@ -1,7 +1,9 @@
 # Base Server Tuneables
 ServerTokens <%= @servertokens %>
 ServerRoot <%= @serverroot %>
+<% if @pidfile -%>
 PidFile <%= @pidfile %>
+<% end -%>
 Timeout <%= @timeout %>
 <% if @keepalive == true -%>
 KeepAlive On
