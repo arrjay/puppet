@@ -40,6 +40,22 @@ snmp::services:
 snmp::config: /usr/local/share/snmp/snmpd.conf
 snmp::factdir: /usr/local/libdata/graphsources
 
+# apache2
+httpd::apache2::user: www
+httpd::apache2::group: www
+httpd::apache2::package: www/apache24
+httpd::apache2::svcname: apache24
+httpd::apache2::apachectl: /usr/local/sbin/apachectl
+httpd::apache2::configfile: /usr/local/etc/apache24/httpd.conf
+httpd::apache2::mmap: on
+httpd::apache2::sendfile: off
+httpd::apache2::error_log: /var/log/httpd-error.log
+httpd::apache2::log_file: /var/log/httpd-access.log
+httpd::apache2::serverroot: /usr/local
+httpd::apache2::mimetypes: etc/apache24/mime.types
+httpd::apache2::mime_magicfile: etc/apache24/magic
+httpd::apache2::documentroot: /usr/local/www/apache24/data
+
 # harware monitoring
 hwmonitoring::packages:
     - sysutils/healthd

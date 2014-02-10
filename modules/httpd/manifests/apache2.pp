@@ -19,7 +19,7 @@ class httpd::apache2 (
   $default_mimetype	= hiera('httpd::apache2::default_mimetype'),
   $mimemagic		= hiera('httpd::apache2::mime_magicfile'),
   $log_formats		= hiera('httpd::apache2::log_formats'),
-  $pidfile		= hiera('httpd::apache2::pidfile'),
+  $pidfile		= hiera('httpd::apache2::pidfile',undef),
   $prefork_opts		= hiera('httpd::apache2::prefork_opts'),
   $worker_opts		= hiera('httpd::apache2::worker_opts'),
   $serveradmin		= hiera('httpd::apache2::serveradmin'),
