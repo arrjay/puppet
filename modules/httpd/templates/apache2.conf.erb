@@ -346,15 +346,15 @@ BrowserMatch <%= match -%> <%= value['mods'].join(" ") %>
 <% end -%>
 <% if keys['locations'] -%>
 <% keys['locations'].sort.each do |location,subkeys| -%>
-    location <%= location -%> {
-      root <%= subkeys['root'] -%>;
+    <Location <%= location -%>>
+      DocumentRoot <%= subkeys['root'] -%>;
 <% if subkeys['index'] -%>
-      index <%= subkeys['index'].join(" ") -%>;
+      DirectoryIndex <%= subkeys['index'].join(" ") -%>;
 <% end -%>
 <% if subkeys['autoindex'] == true -%>
-      autoindex on;
+      Options +Indexes
 <% end -%>
-    }
+    </Location>
 <% end -%>
 <% end -%>
 <%   if keys['directory'] -%>

@@ -70,7 +70,7 @@ class httpd::apache2 (
   $browsermatch		= hiera('httpd::apache2::browserfixups',undef),
   $additional_http_mods = hiera('httpd::apache2::modules',undef),
   $tmpdir		= undef,	# Could be unset as well...
-  $sites		= hiera('httpd::apache2::sites',{ "localhost" => { port => "80", locations => { "/" => { root => "/srv/www", }, }, }, }),
+  $sites		= hiera('httpd::apache2::sites',{ "localhost" => { port => "80", root => "/srv/www", }, }),
 ) {
   # unwind sites into VirtualHost blocks. NOTE: this is not...*quite* equivalent to nginx config stanzas.
 
