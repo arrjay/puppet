@@ -25,6 +25,13 @@ mediaserver::music_upload_dir: '/datapool/media/INCOMING/music'
 mediaserver::music_staging_dir: '/datapool/media/INCOMING/music-staging'
 mediaserver::music_meta_dir: '/datapool/media/META/music'
 fileserver::samba_homeserver: yes
+fileserver::samba_shares:
+    sw-archive:
+        comment: 'Software Archive'
+        sharepath: /datapool/software/archive
+        read_only: true
+        guest_ok: true
+        writable: false
 fileserver::netatalk_homeserver: yes
 fileserver::netatalk_homepath: '/datapool/home'
 httpd::apache2::sites:

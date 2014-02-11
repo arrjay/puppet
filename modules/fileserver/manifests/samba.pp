@@ -88,6 +88,11 @@ class fileserver::samba (
     share{"homes": sharepath => undef, browseable => false, read_only => false, }
   }
 
+  if $shares {
+    # MAGIC.
+    create_resources( share, $shares )
+  }
+
   # configure samba to start/start it
   service {$samba_svc: enable => true, ensure => running}
 }
