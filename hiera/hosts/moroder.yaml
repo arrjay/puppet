@@ -34,8 +34,16 @@ httpd::apache2::sites:
         locations:
             /mirror:
                 root: /auxpool/mirror
+            /software-archive:
+                root: /datapool/software/archive
         directory:
             /auxpool/mirror:
+                config:
+                    - Options Indexes
+                    - AllowOverride None
+                    - Order allow,deny
+                    - Allow from all
+            /datapool/software/archive:
                 config:
                     - Options Indexes
                     - AllowOverride None
