@@ -27,3 +27,17 @@ mediaserver::music_meta_dir: '/datapool/media/META/music'
 fileserver::samba_homeserver: yes
 fileserver::netatalk_homeserver: yes
 fileserver::netatalk_homepath: '/datapool/home'
+httpd::apache2::sites:
+    *:
+        port: 80
+        root: /srv/www
+        locations:
+            /mirror:
+                root: /auxpool/mirror
+        directory:
+            /auxpool/mirror:
+                config:
+                    - Options Indexes
+                    - AllowOverride None
+                    - Order allow,deny
+                    - Allow from all
