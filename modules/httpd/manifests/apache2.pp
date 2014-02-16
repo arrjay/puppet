@@ -62,6 +62,7 @@ class httpd::apache2 (
   $encodings		= hiera('httpd::apache2::encodings',undef),
   $filetypes		= hiera('httpd::apache2::filetypes',undef),
   $handlers		= hiera('httpd::apache2::handlers',undef),
+  $actions		= hiera('httpd::apache2::actions',undef),
   $outputfilters	= hiera('httpd::apache2::outputfilters',undef),
   $error_alias		= hiera('httpd::apache2::error_alias','/error/'),
   $error_root		= hiera('httpd::apache2::error_root',undef),
@@ -83,6 +84,43 @@ class httpd::apache2 (
 
   # used in the template to figure out the correct includes
   $osrel = "$::operatingsystem$::operatingsystemmajrelease"
+
+  # call before we go to template, so we can set up handlers for php :)
+  if defined("phpstack") {
+    # complete the phpstack class before executing this code.
+    include phpstack
+    case $::operatingsystem {
+      # on FreeBSD we are using php5 via cgi!
+      'FreeBSD': {
+        # this is the hash map used from hiera to set handlers. it's kinda brittle.
+        $php_cgi_handler = { 'application/x-httpd-php5' => { extensions => ['php'] } }
+        $php_cgi_action  = { 'application/x-httpd-php5' => '/cgi-bin/php-cgi' }
+        # this must be a hardlink.
+        exec{"/bin/ln /usr/local/bin/php-cgi /usr/local/www/apache24/cgi-bin/php-cgi":
+          creates => "/usr/local/www/apache24/cgi-bin/php-cgi",
+        }
+        if $handlers {
+          $_handlers = merge($php_cgi_handler, $handlers)
+        } else {
+          $_handlers = $php_cgi_handler
+        }
+        if $actions {
+          $_actions = merge($php_cgi_action, $actions)
+        } else {
+          $_actions = $php_cgi_action
+        }
+      }
+      default: {
+        # copy _handler to handler - *shrug*
+        $_handlers             = $handlers
+        $_actions              = $actions
+      }
+    }
+  } else {
+    # still need that copy
+    $_handlers             = $handlers
+    $_actions              = $actions
+  }
 
   file {$cf_file:
     content => template("httpd/apache2.conf.erb")

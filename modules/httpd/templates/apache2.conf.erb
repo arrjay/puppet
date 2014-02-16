@@ -189,8 +189,8 @@ AddType <%= type -%> <%= values['extensions'].join(' ') %>
 <%   end -%>
 <% end -%>
 
-<% unless @handlers == '' -%>
-<%   @handlers.sort.each do |type,values| -%>
+<% unless @_handlers == '' -%>
+<%   @_handlers.sort.each do |type,values| -%>
 AddHandler <%= type -%> <%= values['extensions'].join(' ') %>
 <%   end -%>
 <% end -%>
@@ -198,6 +198,12 @@ AddHandler <%= type -%> <%= values['extensions'].join(' ') %>
 <%   @outputfilters.sort.each do |type,values| -%>
 AddOutputFilter <%= type -%> <%= values['extensions'].join(' ') %>
 <%   end -%>
+<% end -%>
+
+<% unless @_actions == '' -%>
+<%  @_actions.sort.each do |type,handler| -%>
+Action <%= type -%> <%= handler %>
+<%  end -%>
 <% end -%>
 
 <% unless @davlockdb == '' -%>
