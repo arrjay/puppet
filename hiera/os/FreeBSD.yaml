@@ -120,3 +120,7 @@ mediaserver::mt_daapd_dbdir: /usr/local/var/db/firefly
 mediaserver::mt_daapd_sscprog: /usr/local/bin/mt-daapd-ssc.sh
 mediaserver::mt_daapd_plugdir: /usr/local/lib/mt-daapd/plugins
 mediaserver::mt_daapd_user: daapd
+
+# piwigo
+piwigo::packages:
+    - www/piwigo

@@ -9,6 +9,7 @@ classes:
     - fileserver::samba
     - mediaserver
     - httpd::apache2
+    - piwigo
 ntp::servers:
     - ntp-2.vt.edu
     - ac-ntp1.net.cmu.edu
