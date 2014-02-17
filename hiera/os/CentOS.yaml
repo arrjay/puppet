@@ -158,3 +158,4 @@ mrtg::datadir: '/var/lib/mrtg'
 
 # intca
 intca::file: '/etc/pki/tls/certs/PRODUXI-CA.crt'
+intca::certdir: '/etc/pki/tls/certs'

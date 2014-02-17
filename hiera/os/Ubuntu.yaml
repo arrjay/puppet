@@ -58,3 +58,4 @@ monitoring::packages:
 
 # intca
 intca::file: '/etc/ssl/certs/PRODUXI-CA.pem'
+intca::certdir: '/etc/ssl/certs'

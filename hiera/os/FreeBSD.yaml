@@ -79,6 +79,7 @@ ldapclient::nss_conf: '/usr/local/etc/nss_ldap.conf'
 
 # intca
 intca::file: '/usr/local/share/certs/PRODUXI-CA.crt'
+intca::certdir: '/usr/local/share/certs'
 
 # mirror
 mirror::packages:

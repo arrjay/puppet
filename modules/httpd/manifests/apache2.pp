@@ -73,6 +73,8 @@ class httpd::apache2 (
   $tmpdir		= undef,	# Could be unset as well...
   $sites		= hiera('httpd::apache2::sites',{ "*" => { port => "80", root => "/srv/www", }, }),
 ) {
+  include httpd
+
   # unwind sites into VirtualHost blocks. NOTE: this is not...*quite* equivalent to nginx config stanzas.
 
   # holder of global ciphers, prefer_server_ciphers, session_cache, session_timeout
