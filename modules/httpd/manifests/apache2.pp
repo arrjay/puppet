@@ -102,6 +102,9 @@ class httpd::apache2 (
         exec{"/bin/ln /usr/local/bin/php-cgi /usr/local/www/apache24/cgi-bin/php-cgi":
           creates => "/usr/local/www/apache24/cgi-bin/php-cgi",
         }
+        # register needed modules
+        module{"cgi_module":}
+        module{"actions_module":}
         if $handlers {
           $_handlers = merge($php_cgi_handler, $handlers)
         } else {
@@ -148,8 +151,15 @@ class httpd::apache2 (
     $modpath = undef,
     $order   = 1,
   ) {
+    if $modpath == undef {
+      # well, go ask hiera then.
+      $modlist = hiera_hash('httpd::apache2::modlist')
+      $_modpath = $modlist[$modname]
+    } else {
+      $_modpath = $modpath
+    }
     $fragorder = 10 + $order
-    concat::fragment{'http_module: $modname':
+    concat::fragment{"http_module: $modname":
       target  => $httpd::apache2::cf_file,
       content => template("httpd/apache2.addlmod.conf.erb"),
       order   => $fragorder,
