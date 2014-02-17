@@ -71,7 +71,7 @@ class httpd::apache2 (
   $browsermatch		= hiera('httpd::apache2::browserfixups',undef),
   $additional_http_mods = hiera('httpd::apache2::modules',undef),
   $tmpdir		= undef,	# Could be unset as well...
-  $sites		= hiera('httpd::apache2::sites',{ "*" => { port => "80", root => "/srv/www", }, }),
+  $sites		= hiera('httpd::apache2::sites',undef),
 ) {
   # pick up SSL if needed
   include httpd
@@ -140,6 +140,16 @@ class httpd::apache2 (
     order   => 00,
   }
 
+  define apacheport(
+    $portno = $title
+  ) {
+    concat::fragment{'http listener port $portno':
+      target  => $httpd::apache2::cf_file,
+      content => "$portno",
+      order   => 09,
+    }
+  }
+
   concat::fragment{'base http module config':
     target  => $cf_file,
     content => template("httpd/apache2.modules.${osrel}.erb"),
@@ -196,6 +206,7 @@ class httpd::apache2 (
     $additional_site_opts      = undef,
     $order                     = 1,
   ) {
+    ensure_resource('apacheport', $port, {} )
     $fragorder = 40 + $order
     concat::fragment{"site: $servername":
       target  => $httpd::apache2::cf_file,

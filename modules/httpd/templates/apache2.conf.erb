@@ -25,11 +25,5 @@ KeepAliveTimeout <%= @keepalive_timeout %>
 <% end -%>
 </IfModule>
 
-<% # puppet doesn't provide great array primitives. attempt to derive what we need now. -%>
-<% ports = [] -%>
-<% @sites.sort.each do |site,keys| -%>
-<%   if keys['port'] -%>
-<%     ports << keys['port'] -%>
-<%   end -%>
-<% end -%>
-Listen <%= ports.join(' ') %>
+<%# look, that 'no-op' down there is IMPORTANT. -%>
+Listen <%= '' -%>
