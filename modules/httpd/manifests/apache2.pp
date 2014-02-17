@@ -137,6 +137,35 @@ class httpd::apache2 (
     order   => 00,
   }
 
+  concat::fragment{'base http module config':
+    target  => $cf_file,
+    content => template("httpd/apache2.modules.${osrel}.erb"),
+    order   => 10,
+  }
+
+  define module(
+    $modname = $title,
+    $modpath = undef,
+    $order   = 1,
+  ) {
+    $fragorder = 10 + $order
+    concat::fragment{'http_module: $modname':
+      target  => $httpd::apache2::cf_file,
+      content => template("httpd/apache2.addlmod.conf.erb"),
+      order   => $fragorder,
+    }
+  }
+
+  if $additional_http_mods {
+    create_resources( module, $additional_http_mods )
+  }
+
+  concat::fragment{'non-vhost http site config':
+    target  => $cf_file,
+    content => template("httpd/apache2.base.conf.erb"),
+    order   => 30,
+  }
+
   define site(
     $port                      = '80',
     $binding                   = '*',
@@ -155,11 +184,13 @@ class httpd::apache2 (
     $locations                 = undef,
     $directory                 = undef,
     $additional_site_opts      = undef,
+    $order                     = 1,
   ) {
-    concat::fragment{'site: $servername':
+    $fragorder = 40 + $order
+    concat::fragment{"site: $servername":
       target  => $httpd::apache2::cf_file,
       content => template("httpd/apache2.site.erb"),
-      order   => 10,
+      order   => $fragorder,
     }
   }
 

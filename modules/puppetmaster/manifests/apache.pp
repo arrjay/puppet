@@ -38,7 +38,7 @@ class puppetmaster::apache {
   }
 
   class {'httpd::apache2':
-    additional_http_mods => { "passenger_module" => "/usr/lib/ruby/gems/1.8/gems/passenger-${passenger_ver}/buildout/apache2/mod_passenger.so" },
+    additional_http_mods => { "passenger_module" => { modpath => "/usr/lib/ruby/gems/1.8/gems/passenger-${passenger_ver}/buildout/apache2/mod_passenger.so" } },
     additional_http_opts => [
                             'PassengerHighPerformance on',
                             'PassengerMaxPoolSize 12',

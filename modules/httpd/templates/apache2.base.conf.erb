@@ -1,0 +1,252 @@
+# Non-vhost site config
+User <%= @user %>
+Group <%= @group %>
+
+ServerAdmin <%= @serveradmin %>
+
+<% if @usecanonicalname == true -%>
+UseCanonicalName On
+<% else -%>
+UseCanonicalName Off
+<% end -%>
+
+DocumentRoot "<%= @documentroot -%>"
+
+# / and DocumentRoot are hardcoded in the template.
+<Directory />
+    Options FollowSymLinks
+    AllowOverride None
+</Directory>
+<Directory "<%= @documentroot -%>">
+    Options <%= @documentrootopts %>
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+</Directory>
+
+# enabling user directories requires userdir_enable set to true in hiera.
+<IfModule mod_userdir.c>
+<% if @userdir_enable == true -%>
+    UserDir <%= @userdir_name %>
+<% else -%>
+    UserDir disabled
+<% end -%>
+</IfModule>
+<% if @_userdir_enable == true -%>
+<%   @userdir_targetroots.sort.each do |target| -%>
+<Directory <%= target -%><%= @userdir_name -%>>
+    AllowOverride <%= @userdir_allowoverrides %>
+    Options <%= @userdir_options %>
+    <%= @userdir_acl -%>
+</Directory>
+<%   end -%>
+<% end -%>
+
+DirectoryIndex <%= @directoryindices %>
+
+AccessFileName <%= @accessfile %>
+
+<% if @blockhtfiles == true -%>
+<Files ~ "^\.ht">
+  Order allow,deny
+  Deny from all
+  Satisfy All
+</Files>
+<% end -%>
+
+TypesConfig <%= @mimetypes %>
+
+DefaultType <%= @default_mimetype %>
+
+<% if @mimemagic -%>
+<IfModule mod_mime_magic.c>
+  MimeMagicFile <%= @mimemagic %>
+</IfModule>
+<% end -%>
+
+<% if @loghostnames == true -%>
+HostnameLookups On
+<% else -%>
+HostnameLookups Off
+<% end -%>
+
+<% if @mmap == true -%>
+EnableMMAP on
+<% else -%>
+EnableMMAP off
+<% end -%>
+
+<% if @sendfile == true -%>
+EnableSendfile on
+<% else -%>
+EnableSendfile off
+<% end -%>
+
+ErrorLog <%= @error_log %>
+
+LogLevel <%= @error_log_level %>
+
+<% @log_formats.sort.each do |key,value| -%>
+LogFormat "<%= value.gsub(/\$/, '%') -%>" <%= key %>
+<% end -%>
+
+CustomLog <%= @log_file -%> <%= @access_log_format %>
+
+ServerSignature <%= @serversignature %>
+
+<% unless @icondir == '' -%>
+# This section relies on httpd::apache2::iconpath being set up ;)
+Alias <%= @iconalias -%> "<%= @icondir -%>"
+
+<Directory "<%= @icondir -%>">
+    Options Indexes MultiViews FollowSymLinks
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+</Directory>
+
+# AddIcon* directives tell the server which icon to show for different
+# files or filename extensions. These are only displayed for
+# FancyIndexed directories.
+<% if @icon_byencoding -%>
+<%   @icon_byencoding.sort.each do |key,values| -%>
+AddIconByEncoding (<%= values['tag'] -%>,<%= @iconalias -%><%= key -%>) <%= values['encodings'].join(' ') %>
+<%   end -%>
+<% end -%>
+<% if @icon_bytype -%>
+<%   @icon_bytype.sort.each do |key,values| -%>
+AddIconByType (<%= values['tag'] -%>,<%= @iconalias -%><%= key -%>) <%= values['types'].join(' ') %>
+<%   end -%>
+<% end -%>
+<% if @icon_byname -%>
+<%   @icon_byname.sort.each do |key,values| -%>
+AddIcon <%= @iconalias -%><%= key -%> <%= values['names'].join(' ') %>
+<%   end -%>
+<% end -%>
+<% if @defaulticon -%>
+DefaultIcon <%= @iconalias -%><%= @defaulticon %>
+<% end -%>
+<% # end icondir switch -%>
+<% end -%>
+
+<% if @descriptions -%>
+<%   @descriptions.sort.each do |key,values| -%>
+AddDescription "<%= key -%>" <%= values['extensions'].join(' ') %>
+<% -%>
+<%   end -%>
+<% end -%>
+
+# The following is *not* related to the indexing options!
+<% unless @encodings == '' -%>
+<%   @encodings.sort.each do |encoding,exts| -%>
+AddEncoding <%= type -%> <%= values['extentions'].join(' ') %>
+<% end -%>
+<% end -%>
+<% unless @filetypes == '' -%>
+<%   @filetypes.sort.each do |type,values| -%>
+AddType <%= type -%> <%= values['extensions'].join(' ') %>
+<%   end -%>
+<% end -%>
+
+<% unless @_handlers == '' -%>
+<%   @_handlers.sort.each do |type,values| -%>
+AddHandler <%= type -%> <%= values['extensions'].join(' ') %>
+<%   end -%>
+<% end -%>
+<% unless @outputfilters == '' -%>
+<%   @outputfilters.sort.each do |type,values| -%>
+AddOutputFilter <%= type -%> <%= values['extensions'].join(' ') %>
+<%   end -%>
+<% end -%>
+
+<% unless @_actions == '' -%>
+<%  @_actions.sort.each do |type,handler| -%>
+Action <%= type -%> <%= handler %>
+<%  end -%>
+<% end -%>
+
+<% unless @davlockdb == '' -%>
+<IfModule mod_dav_fs.c>
+    DAVLockDB <%= @davlockdb %>
+</IfModule>
+<% end -%>
+
+<% unless @scriptaliases == '' -%>
+<%   @scriptaliases.sort.each do |key,value| -%>
+ScriptAlias <%= key -%> "<%= value -%>"
+<Directory "<%= value -%>">
+    <%= @scriptdir_acl -%>
+</Directory>
+<%   end -%>
+<% end -%>
+
+<% unless @readmename == '' -%>
+ReadmeName <%= @readmename %>
+<% end -%>
+<% unless @headername == '' -%>
+HeaderName <%= @headername %>
+<% end -%>
+
+<% unless @indexignore == '' -%>
+IndexIgnore <%= @indexignore.join(" ") %>
+<% end -%>
+
+<% unless @indexoptions == '' -%>
+IndexOptions <%= @indexoptions.join(" ") %>
+<% end -%>
+
+<% unless @language_map == '' -%>
+<%   @language_map.sort.each do |key,values| -%>
+AddLanguage <%= key -%> <%= values['extensions'].join(' ') %>
+<%   end -%>
+<% end -%>
+
+<% unless @language_priority == '' -%>
+LanguagePriority <%= @language_priority.join(' ') %>
+<% end -%>
+
+<% unless @forcelangresult == '' -%>
+ForceLanguagePriority <%= @forcelangresult.join(' ') %>
+<% end -%>
+
+<% @charsets.sort.each do |charset| -%>
+AddDefaultCharset <%= charset %>
+<% end -%>
+
+<% unless @error_root == '' -%>
+Alias <%= @error_alias -%> "<%= @error_root -%>/"
+<Directory "<%= @error_root -%>">
+  AllowOverride None
+  Order allow,deny
+  Allow from all
+<%   unless @error_i18n == false -%>
+  <IfModule mod_negotiation.c>
+  AddHandler type-map var
+  LanguageProroty en es de fe
+  ForceLanguagePriority Prefer Fallback
+  </IfModule>
+  <IfModule mod_include.c>
+  Options IncludesNoExec
+  AddOutputFilter Includes html
+  </IfModule>
+<%   end -%>
+</Directory>
+<% end -%>
+
+<% unless @error_documents == '' -%>
+<%   @error_documents.sort.each do |code,dest| -%>
+ErrorDocument <%= code -%> <%= dest %>
+<%   end -%>
+<% end -%>
+
+<% unless @browsermatch == '' -%>
+<%   @browsermatch.sort.each do |match,value| -%>
+BrowserMatch <%= match -%> <%= value['mods'].join(" ") %>
+<%   end -%>
+<% end -%>
+
+<% unless @additional_http_opts == '' -%>
+<%    @additional_http_opts.sort.each do |thing| -%>
+<%= thing %>
+<%    end -%>
+<% end -%>
