@@ -73,6 +73,7 @@ class httpd::apache2 (
   $tmpdir		= undef,	# Could be unset as well...
   $sites		= hiera('httpd::apache2::sites',{ "*" => { port => "80", root => "/srv/www", }, }),
 ) {
+  # pick up SSL if needed
   include httpd
 
   # unwind sites into VirtualHost blocks. NOTE: this is not...*quite* equivalent to nginx config stanzas.
@@ -124,8 +125,46 @@ class httpd::apache2 (
     $_actions              = $actions
   }
 
-  file {$cf_file:
-    content => template("httpd/apache2.conf.erb")
+  concat{$cf_file:
+    owner => root,
+    group => 0,
+    mode  => 0644,
+  }
+
+  concat::fragment{'base httpd config':
+    target  => $cf_file,
+    content => template("httpd/apache2.conf.erb"),
+    order   => 00,
+  }
+
+  define site(
+    $port                      = '80',
+    $binding                   = '*',
+    $servername                = $title,
+    $ssl_cert                  = undef,
+    $ssl_key                   = undef,
+    $ssl_ciphers               = undef,
+    $ssl_protocols             = undef,
+    $ssl_session_timeout       = undef,
+    $ssl_session_cache         = undef,
+    $ssl_prefer_server_ciphers = undef,
+    $access_log                = undef,
+    $access_log_fmt            = 'combined', 
+    $error_log                 = undef,
+    $root                      = undef,
+    $locations                 = undef,
+    $directory                 = undef,
+    $additional_site_opts      = undef,
+  ) {
+    concat::fragment{'site: $servername':
+      target  => $httpd::apache2::cf_file,
+      content => template("httpd/apache2.site.erb"),
+      order   => 10,
+    }
+  }
+
+  if $sites {
+    create_resources( site, $sites )
   }
 
   exec { "restart apache2":

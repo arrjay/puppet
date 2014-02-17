@@ -1,0 +1,43 @@
+<VirtualHost <%= @binding -%>:<%= @port -%>>
+<% if @ssl_cert -%>
+  SSLEngine On
+  SSLCertificateFile <%= @ssl_cert %>
+  SSLCertificateKeyFile <%= @ssl_key %>
+<%   if @ssl_ciphers -%>
+  SSLCipherSuite <%= @ssl_ciphers %>
+<%   end -%>
+<%  if @ssl_protocols -%>
+  SSLProtocol <%= @ssl_protocols %>
+<%   end -%>
+<% end -%>
+<% if @access_log -%>
+  CustomLog <%= @access_log -%> <%= @access_log_fmt %>
+<% end -%>
+<% if @error_log -%>
+  ErrorLog <%= @error_log %>
+<% end -%>
+<% if @additional_site_opts -%>
+<%   @additional_site_opts.sort.each do |value| -%>
+  <%= value %>
+<%   end -%>
+<% end -%>
+<% if @root -%>
+  DocumentRoot <%= @root %>
+<% end -%>
+<% if @locations -%>
+<%   @locations.sort.each do |location,subkeys| -%>
+  Alias <%= location -%> <%= subkeys['root'] %>
+<%   end -%>
+<% end -%>
+<% if @directory -%>
+<%   @directory.sort.each do |dir,opts| -%>
+  <Directory <%= dir -%>>
+<%     if opts['config'] -%>
+<%       opts['config'].each do |line| -%>
+    <%= line %>
+<%       end -%>
+<%     end -%>
+  </Directory>
+<%   end -%>
+<% end -%>
+</VirtualHost>
