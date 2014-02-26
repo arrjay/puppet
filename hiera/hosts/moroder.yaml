@@ -36,9 +36,7 @@ fileserver::samba_shares:
 fileserver::netatalk_homeserver: yes
 fileserver::netatalk_homepath: '/datapool/home'
 httpd::apache2::sites:
-    *:
-        port: 80
-        root: /srv/www
+    _default_:
         locations:
             /mirror:
                 root: /auxpool/mirror
