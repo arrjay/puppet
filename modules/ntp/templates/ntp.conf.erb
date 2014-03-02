@@ -1,9 +1,15 @@
 # This file is managed by puppet
 
-<%= scope.function_template(["ntp/ntp.serverlist.erb"]) -%>
-<% if @virtualserver -%>
+<% if @vmm -%>
+# VMM network found! Wiring to your local NTP server.
+server 192.168.169.254
+broadcastclient
+<% else -%>
+<%=  scope.function_template(["ntp/ntp.serverlist.erb"]) -%>
+<%   if @virtualserver -%>
 broadcast 192.168.169.255 autokey
-<% end -%>
+<%   end -%>
 
 server 127.127.1.0
 fudge 127.127.1.0 stratum 10
+<% end -%>
