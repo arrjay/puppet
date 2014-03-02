@@ -12,6 +12,10 @@ class ntp (
   # randomize ntp server selection
   $random = fqdn_rand($servcount,169291)
   # only do things if we defined the NTP service for this platform
+  # figure out if we're on a VM *host*
+  if $::virtual =~ /^xen0$/ {
+    $virtualserver = true
+  }
   if $svc {
     service{$svc: enable => true}
     file{$conf:

@@ -1,6 +1,9 @@
 # This file is managed by puppet
 
 <%= scope.function_template(["ntp/ntp.serverlist.erb"]) -%>
+<% if @virtualserver -%>
+broadcast 192.168.169.255 autokey
+<% end -%>
 
 server 127.127.1.0
 fudge 127.127.1.0 stratum 10
