@@ -19,9 +19,9 @@ class ntp (
       group   => 0,
       mode    => 0644,
       content => template("ntp/ntp.conf.erb"),
-      notify  => Exec["$svccmd $svcname restart"], 
+      notify  => Exec["$svccmd $svc restart"], 
     }
-    exec{"$svccmd $svcname restart":
+    exec{"$svccmd $svc restart":
       refreshonly => true,
     }
   }

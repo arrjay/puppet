@@ -6,3 +6,7 @@ graphing::temps::sensors:
     sdb: Disk1
     temp0: CPU
 #    temp1: CPU
+ntp::servers:
+    - ntp-1.vt.edu
+    - jasper.skywolf.net
+    - bonehead.moronica.org

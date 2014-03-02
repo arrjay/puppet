@@ -59,3 +59,8 @@ monitoring::packages:
 # intca
 intca::file: '/etc/ssl/certs/PRODUXI-CA.pem'
 intca::certdir: '/etc/ssl/certs'
+
+# ntp
+ntp::packages: ntp
+ntp::service: ntp
+ntp::configfile: /etc/ntp.conf
