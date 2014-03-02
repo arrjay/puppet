@@ -28,6 +28,7 @@ ntp::svc: ntpd
 monitoring::packages:
     - sysutils/uptimed
     - shells/bash
+    - sysutils/smartmontools
 monitoring::services:
     - uptimed
 
@@ -67,7 +68,6 @@ httpd::apache2::modlist:
 # harware monitoring
 hwmonitoring::packages:
     - sysutils/healthd
-    - sysutils/smartmontools
 hwmonitoring::services:
     - healthd
     - smartd

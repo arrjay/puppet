@@ -48,13 +48,13 @@ httpd::nginx::gzip: on
 # hardware monitoring
 hwmonitoring::packages:
     - lm-sensors
-    - smartmontools
 
 # software monitoring
 monitoring::packages:
     - sysstat
     - uptimed
     - bash
+    - smartmontools
 
 # intca
 intca::file: '/etc/ssl/certs/PRODUXI-CA.pem'
