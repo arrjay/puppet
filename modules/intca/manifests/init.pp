@@ -3,7 +3,12 @@ class intca (
   $cafile = hiera('intca::file'),
   $cabundles = hiera('intca::systembundles',undef),
   $certdir = hiera('intca::certdir'),
+  $packages = hiera('intca::packages',undef),
 ) {
+  if $packages {
+    package {$packages: ensure => installed}
+  }
+
   file { "$cafile":
     ensure => present,
     path   => "$cafile",

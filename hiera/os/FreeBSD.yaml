@@ -1,5 +1,5 @@
 service: /usr/sbin/service
-puppet::configfile: '/etc/puppet/puppet.conf'
+puppet::configfile: '/usr/local/etc/puppet/puppet.conf'
 
 # MRTG
 mrtg::packages:
@@ -83,6 +83,8 @@ ldapclient::nss_conf: '/usr/local/etc/nss_ldap.conf'
 # intca
 intca::file: '/usr/local/share/certs/PRODUXI-CA.crt'
 intca::certdir: '/usr/local/share/certs'
+intca::packages:
+    - security/ca_root_nss
 
 # mirror
 mirror::packages:
