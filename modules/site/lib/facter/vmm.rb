@@ -2,8 +2,8 @@ require 'facter'
 require 'ipaddr'
 
 Facter.add("vmm") do
+  confine :is_virtual => "true"
   setcode do
-    if Facter.is_virtual
       begin
       vmm = nil
       vmm_net = IPAddr.new('192.168.169.0/24')
@@ -14,6 +14,5 @@ Facter.add("vmm") do
         end
       end
       vmm
-    end
   end
 end
