@@ -1,6 +1,6 @@
 :hierarchy:
     - hosts/%{::hostname}
-    #- sites/%{::_siteabbr}
+    - sites/%{::site}
     - os/%{::operatingsystem}
     - module/%{calling_module}
     - puppetmaster/%{::server}
