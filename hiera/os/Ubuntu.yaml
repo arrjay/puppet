@@ -70,6 +70,8 @@ vmserver::packages:
     - dnsmasq
     - libvirt0
     - libvirt-bin
+dnsmasq::configfile: /etc/dnsmasq.conf
+dnsmasq::svcname: dnsmasq
 
 # resolver configuration
 resolvconf::file: '/etc/resolv.conf'
