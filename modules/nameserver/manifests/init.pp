@@ -1,8 +1,12 @@
-class nameserver {
+class nameserver (
+) {
   # creates an authoritative/caching nameserver using BIND.
   case $::operatingsystem {
     'FreeBSD': {
-      #$pkg          = "net/bind9"		# package name for named
+      $_osrel = split($::operatingsystemrelease,'-')	# 9.0
+      if ($_osrel[0] > 9) {
+        $pkg        = "net/bind9"		# package name for named
+      }
       $cfg          = "/etc/namedb/named.conf"	# path to named config
       $dir          = "/etc/namedb"		# path for auxiliary named files	
       $wrkdir       = "/etc/namedb/working"	# path for transient named data
@@ -24,6 +28,10 @@ class nameserver {
         "/etc/namedb/master",			# actually the directory to pull master zone files from
       ]
     }
+  }
+
+  if $pkg {
+    package{$pkg: ensure => installed}
   }
 
   # create the dynamic data directories
