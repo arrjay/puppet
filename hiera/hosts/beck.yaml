@@ -1,6 +1,7 @@
 classes:
     - nut::monitoring
     - graphing
+    - vmserver::xen
 graphing::temps::sensors:
     sda: Disk0
     sdb: Disk1

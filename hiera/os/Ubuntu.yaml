@@ -64,3 +64,12 @@ intca::certdir: '/etc/ssl/certs'
 ntp::packages: ntp
 ntp::service: ntp
 ntp::configfile: /etc/ntp.conf
+
+# VM server - common
+vmserver::packages:
+    - dnsmasq
+    - libvirt0
+    - libvirt-bin
+
+# resolver configuration
+resolvconf::file: '/etc/resolv.conf'
