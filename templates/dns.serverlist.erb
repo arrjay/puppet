@@ -1,0 +1,9 @@
+<% z = @random.to_i -%>
+<% y = @nameservers.length + z - 1 -%>
+<% for x in z..y -%>
+<%   if x > @nameservers.length - 1 -%>
+nameserver <%= @nameservers[x % @nameservers.length] %>
+<%   else -%>
+nameserver <%= @nameservers[x] %>
+<%   end -%>
+<% end -%>
