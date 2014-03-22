@@ -111,6 +111,10 @@ class mediaserver (
       ensure   => link,
       target   => "../misc-scripts/noarch/flac2mp3",
     }
+    file{"$confdir/bin/mp3getcomp":
+      ensure   => link,
+      target   => "../misc-scripts/noarch/mp3getcomp",
+    }
 
     fileserver::samba::share{"upload_music": sharepath => $music_upload, read_only => false, writable => yes, comment => "Music uploads", guest_ok => yes, public => yes, create_mask => 0333, dir_mask => 0333, extra => ['hide unreadable = yes']}
     fileserver::samba::share{"music-staging": sharepath => $music_stage, read_only => true, writable => no, comment => "Music staging area", guest_ok => yes, public => yes }
@@ -137,6 +141,12 @@ class mediaserver (
       owner  => root,
       group  => 0,
       source => "puppet:///modules/mediaserver/music-m4a-handler.sh",
+      mode   => 0755,
+    }
+    file{"$confdir/bin/music-mp3-handler.sh":
+      owner  => root,
+      group  => 0,
+      source => "puppet:///modules/mediaserver/music-mp3-handler.sh",
       mode   => 0755,
     }
   }
