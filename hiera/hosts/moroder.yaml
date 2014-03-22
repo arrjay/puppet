@@ -33,6 +33,12 @@ fileserver::samba_shares:
         read_only: true
         guest_ok: true
         writable: false
+    video:
+        comment: 'Video'
+        sharepath: /datapool/media/video
+        read_only: true
+        guest_ok: true
+        writable: false
 fileserver::netatalk_homeserver: yes
 fileserver::netatalk_homepath: '/datapool/home'
 httpd::apache2::sites:
