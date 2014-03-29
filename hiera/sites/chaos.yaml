@@ -26,6 +26,28 @@ nameserver::zone_params:
         type: slave
         masters:
             - 172.16.255.254
+    produxi.net:
+        type: slave
+        masters:
+            - 172.16.255.254
+    dyn.produxi.net:
+        type: slave
+        masters:
+            - 172.16.255.254
+    int.j.hack:
+        type: slave
+        masters:
+            - 10.100.252.4
+    _msdcs.int.j.hack:
+        type: slave
+        masters:
+            - 10.100.252.4
+    chaos.produxi.net:
+        type: master
+        source: j.hack
+    252.100.10.in-addr.arpa:
+         type: master
+         source: j.hack.rev
 nameserver::groupdef:
     standard:
         ipv4_listener: 'any'
@@ -40,26 +62,50 @@ nameserver::groupdef:
                 nameservers: localhost.
             localhost-reverse.zone:
                 nameservers: localhost.
+        files:
+            common.zones:
+                template: common.zones.erb
         views:
-#            produxi:
+            produxi:
+               services:
+                   - 172.16.128.0/17
+               recursion: true
+               zones:
+                   - 252.100.10.in-addr.arpa:
+                       type: master
+                       source: chaos.produxi.net.rev
+                   - chaos.produxi.net
             self:
                 services:
                     - 127.0.0.1
-                    - ::1
+                    - '::1'
                 recursion: true
                 zones:
                     - 128.16.172.in-addr.arpa
                     - 64/26.128.16.172.in-addr.arpa
                     - 255.16.172.in-addr.arpa
-#            j.hack:
+                    - 252.100.10.in-addr.arpa
+                    - produxi.net
+                    - dyn.produxi.net
+                    - int.j.hack
+                    - _msdcs.int.j.hack
+            j.hack:
+                services:
+                    - 10.100.252.0/24
+                recursion: true
+                zones:
+                    - 128.16.172.in-addr.arpa
+                    - 64/26.128.16.172.in-addr.arpa
+                    - 255.16.172.in-addr.arpa
+                    - 252.100.10.in-addr.arpa
+                    - int.j.hack
+                    - _msdcs.int.j.hack
             chaos:
                 services:
                     - any
                 recursion: false
                 zones:
-                    252.100.10.in-addr.arpa:
-                        type: master
-                        source: j.hack.rev
+                    - 252.100.10.in-addr.arpa
 interface:
     sodium:
         ip: 10.100.252.1

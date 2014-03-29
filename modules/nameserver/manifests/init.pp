@@ -6,13 +6,13 @@ class nameserver (
   $views = hiera('nameserver::views',{ self => 
 						{ services => ['127.0.0.1', '::1'],
 						  recursion => yes,
-						  zones => { localhost => { type => 'master',
+						  zones => [ { localhost => { type => 'master',
 									    source => 'localhost-forward.zone',
-									  },
-							     '127.in-addr.arpa' => { type => 'master',
+									  }, },
+							     { '127.in-addr.arpa' => { type => 'master',
 										source => 'localhost-reverse.zone',
 									},
-							},
+							}, ],
 						}
 				      }),
   $miscopts = hiera('nameserver::miscopts',undef),
