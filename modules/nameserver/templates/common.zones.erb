@@ -1,14 +1,13 @@
-<% dir = scope.lookupvar('nameserver::dir') -%>
-zone "." { type hint; file "<%= dir -%>/root.hints"; };
+zone "." { type hint; file "<%= @_chrootref -%>/root.hints"; };
 
 <% localhost_forwards = [ "localhost" ] -%>
 <% localhost_forwards.each do |zone| -%>
-zone "<%= zone -%>" { type master; file "<%= dir -%>/localhost-forward.db"; };
+zone "<%= zone -%>" { type master; file "<%= @_chrootref -%>/localhost-forward.db"; };
 <% end -%>
 
 <% localhost_reverses = [ "127.in-addr.arpa", "0.ip6.arpa" ] -%>
 <% localhost_reverses.each do |zone| -%>
-zone "<%= zone -%>" { type master; file "<%= dir -%>/localhost-reverse.db"; };
+zone "<%= zone -%>" { type master; file "<%= @_chrootref -%>/localhost-reverse.db"; };
 <% end -%>
 
 <% empty_dbs = [
@@ -35,5 +34,5 @@ zone "<%= zone -%>" { type master; file "<%= dir -%>/localhost-reverse.db"; };
   "test", "example", "invalid", "example.com", "example.net", "example.org",
 ] -%>
 <% empty_dbs.each do |zone| -%>
-zone "<%= zone -%>" { type master; file "<%= dir -%>/empty.db"; };
+zone "<%= zone -%>" { type master; file "<%= @_chrootref -%>/empty.db"; };
 <% end -%>

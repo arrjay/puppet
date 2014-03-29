@@ -1,0 +1,63 @@
+nameserver::zonedata:
+    j.hack:
+        serial: 2014032900
+        nameservers:
+            - sulfur
+            - potassium
+    chaos.produxi.net.rev:
+        copy: j.hack
+        domain: chaos.produxi.net.
+nameserver::zonedefaults:
+    admin: rbergero.gmail.com.
+interface:
+    sodium:
+        ip: 10.100.252.1
+        desc: VM
+    selenium:
+        ip: 10.100.252.2
+        desc: VM
+    tungsten:
+        ip: 10.100.252.3
+        desc: VM
+    potassium:
+        ip: 10.100.252.4
+        desc: VM
+    sulfur:
+        ip: 10.100.252.5
+        desc: VM
+    selenium-alt:
+        ip: 10.100.252.12
+        desc: VIP
+    krypton-bootif:
+        ip: 10.100.252.14
+        desc: VIP
+    manganese-bootif:
+        ip: 10.100.252.15
+        desc: VIP
+    cobalt-bootif:
+        ip: 10.100.252.16
+        desc: VIP
+    neon:
+        ip: 10.100.252.30
+        desc: "AlphaPC 164LX"
+    fluorine:
+        ip: 10.100.252.31
+        desc: "SGI IP22"
+    hafnium:
+        ip: 10.100.252.32
+        desc: "Apple MacMini2,1"
+    boron:
+        ip: 10.100.252.33
+        desc: "SUNW,SPARCstation-LX"
+    krypton:
+        ip: 10.100.252.34
+        desc: "API Networks UP2000+"
+    manganese:
+        ip: 10.100.252.35
+        desc: "SUNW,Sun-Blade-150"
+    cobalt:
+        ip: 10.100.252.36
+        desc: "Cobalt Qube 2700"
+    drip:
+        ip: 10.100.252.254
+        desc: "Linksys WRT54GL"

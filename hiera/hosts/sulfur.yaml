@@ -1,2 +1,110 @@
 classes:
     - nameserver
+nameserver::miscopts:
+    - 'disable-empty-zone "255.255.255.255.IN-ADDR.ARPA"'
+    - 'disable-empty-zone "0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.IP6.ARPA"'
+    - 'disable-empty-zone "1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.IP6.ARPA"'
+nameserver::ipv4_listener: 'any'
+nameserver::views:
+    produxi:
+        services:
+            - 172.16.128.0/17
+        recursion: true
+        zones:
+            252.100.10.in-addr.arpa:
+                type: master
+                source: chaos.produxi.net.rev
+            chaos.produxi.net:
+                type: master
+                source: j.hack
+        includes:
+            - common.zones
+    self:
+        services:
+            - '::1'
+            - 127.0.0.1
+        recursion: true
+        zones:
+            128.16.172.in-addr.arpa:
+                type: slave
+                masters:
+                    - 172.16.255.254
+            64/26.128.16.172.in-addr.arpa:
+                type: slave
+                masters:
+                    - 172.16.255.254
+            255.16.172.in-addr.arpa:
+                type: slave
+                masters:
+                    - 172.16.255.254
+            252.100.10.in-addr.arpa:
+                type: master
+                source: j.hack.rev
+            produxi.net:
+                type: slave
+                masters:
+                    - 172.16.255.254
+            dyn.produxi.net:
+                type: slave
+                masters:
+                    - 172.16.255.254
+            int.j.hack:
+                type: slave
+                masters:
+                    - 10.100.252.4
+            _msdcs.int.j.hack:
+                type: slave
+                masters:
+                    - 10.100.252.4
+        includes:
+            - common.zones
+    j.hack:
+        services:
+            - 10.100.252.0/24
+        recursion: true
+        zones:
+            128.16.172.in-addr.arpa:
+                type: slave
+                masters:
+                    - 172.16.255.254
+            64/26.128.16.172.in-addr.arpa:
+                type: slave
+                masters:
+                    - 172.16.255.254
+            255.16.172.in-addr.arpa:
+                type: slave
+                masters:
+                    - 172.16.255.254
+            252.100.10.in-addr.arpa:
+                type: master
+                source: j.hack.rev
+            int.j.hack:
+                type: slave
+                masters:
+                    - 10.100.252.4
+            _msdcs.j.hack:
+                type: slave
+                masters:
+                    - 10.100.252.4
+        includes:
+            - common.zones
+    chaos:
+        services:
+            - any
+        recursion: false
+        zones:
+            252.100.10.in-addr.arpa:
+                type: master
+                source: j.hack.rev
+        includes:
+            - common.zones
+nameserver::zonefiles:
+    chaos.produxi.net.rev:
+        hierasrc: true
+    j.hack:
+        hierasrc: true
+    j.hack.rev:
+        hierasrc: true
+nameserver::files:
+    common.zones:
+        template: common.zones.erb

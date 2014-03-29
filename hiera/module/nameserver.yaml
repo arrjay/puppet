@@ -1,0 +1,14 @@
+nameserver::zonedefaults:
+    admin: dns.produxi.net.
+    ttl: 1d
+    refresh: 2d
+    retry: 1d
+    expiry: 1w
+    nxttl: 12h
+nameserver::zonefiles:
+    localhost-forward.zone:
+        nameservers:
+            - localhost.
+    localhost-reverse.zone:
+        nameservers:
+            - localhost.
