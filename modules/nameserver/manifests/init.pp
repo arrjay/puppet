@@ -17,8 +17,50 @@ class nameserver (
 				      }),
   $miscopts = hiera('nameserver::miscopts',undef),
   $files = hiera('nameserver::files',undef),
+  $nsgroup = hiera('nameserver::group',undef),
 ) {
-  #fail($zonefiles['localhost-forward.zone'])
+  $nsgroups = hiera('nameserver::groupdef',undef)
+  $_zone_params = hiera('nameserver::zone_params',undef)
+  # *if* nsgroup is defined, go fish the appropriate params from that. override module params with ones found.
+  if $nsgroups[$nsgroup] {
+    if $nsgroups[$nsgroup]['ipv4_listener'] {
+      $_ipv4_listen = $nsgroups[$nsgroup]['ipv4_listener']
+    } else {
+      $_ipv4_listen = $ipv4_listen
+    }
+    if $nsgroups[$nsgroup]['ipv6_listener'] {
+      $_ipv6_listen = $nsgroups[$nsgroup]['ipv6_listener']
+    } else {
+      $_ipv6_listen = $ipv6_listen
+    }
+    if $nsgroups[$nsgroup]['miscopts'] {
+      $_miscoupts = $nsgroups[$nsgroup]['miscopts']
+    } else {
+      $_miscopts = $miscopts
+    }
+    if $nsgroups[$nsgroup]['zonefiles'] {
+      $_zonefiles = $nsgroups[$nsgroup]['zonefiles']
+    } else {
+      $_zonefiles = $zonefiles
+    }
+    if $nsgroups[$nsgroup]['files'] {
+      $_files = $nsgroups[$nsgroup]['files']
+    } else {
+      $_files = $files
+    }
+    if $nsgroups[$nsgroup]['views'] {
+      $_views = $nsgroups[$nsgroup]['views']
+    } else {
+      $_views = $views
+    }
+  } else {
+    # copy all parameters
+    $_ipv4_listen = $ipv4_listen
+    $_ipv6_listen = $ipv6_listen
+    $_miscopts = $miscopts
+    $_zonefiles = $zonefiles
+    $_files = $files
+  }
   # creates an authoritative/caching nameserver using BIND.
   case $::operatingsystem {
     'FreeBSD': {
@@ -138,7 +180,7 @@ class nameserver (
   $zonedata = hiera_hash('nameserver::zonedata')
 
   # Fetch zones from server params if we can
-  create_resources( zonefile, $zonefiles )
+  create_resources( zonefile, $_zonefiles )
 
   # inc is a subset of the nameserver config file, restart named if these change
   define inc (
@@ -155,8 +197,8 @@ class nameserver (
     }
   }
 
-  if $files {
-    create_resources( inc, $files )
+  if $_files {
+    create_resources( inc, $_files )
   }
 
   # Oh hey...write the named config.

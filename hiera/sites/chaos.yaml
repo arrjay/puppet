@@ -1,3 +1,9 @@
+nameserver::miscopts:
+    - 'disable-empty-zone "255.255.255.255.IN-ADDR.ARPA"'
+    - 'disable-empty-zone "0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.IP6.ARPA"'
+    - 'disable-empty-zone "1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.IP6.ARPA"'
+nameserver::zonedefaults:
+    admin: rbergero.gmail.com.
 nameserver::zonedata:
     j.hack:
         serial: 2014032900
@@ -7,8 +13,53 @@ nameserver::zonedata:
     chaos.produxi.net.rev:
         copy: j.hack
         domain: chaos.produxi.net.
-nameserver::zonedefaults:
-    admin: rbergero.gmail.com.
+nameserver::zone_params:
+    128.16.172.in-addr.arpa:
+        type: slave
+        masters:
+            - 172.16.255.254
+    64/26.128.16.172.in-addr.arpa:
+        type: slave
+        masters:
+            - 172.16.255.254
+    255.16.172.in-addr.arpa:
+        type: slave
+        masters:
+            - 172.16.255.254
+nameserver::groupdef:
+    standard:
+        ipv4_listener: 'any'
+        zonefiles:
+            chaos.produxi.net.rev:
+                hierasrc: true
+            j.hack:
+                hierasrc: true
+            j.hack.rev:
+                hierasrc: true
+            localhost-forward.zone:
+                nameservers: localhost.
+            localhost-reverse.zone:
+                nameservers: localhost.
+        views:
+#            produxi:
+            self:
+                services:
+                    - 127.0.0.1
+                    - ::1
+                recursion: true
+                zones:
+                    - 128.16.172.in-addr.arpa
+                    - 64/26.128.16.172.in-addr.arpa
+                    - 255.16.172.in-addr.arpa
+#            j.hack:
+            chaos:
+                services:
+                    - any
+                recursion: false
+                zones:
+                    252.100.10.in-addr.arpa:
+                        type: master
+                        source: j.hack.rev
 interface:
     sodium:
         ip: 10.100.252.1

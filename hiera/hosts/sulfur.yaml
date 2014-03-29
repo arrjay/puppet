@@ -1,10 +1,6 @@
 classes:
     - nameserver
-nameserver::miscopts:
-    - 'disable-empty-zone "255.255.255.255.IN-ADDR.ARPA"'
-    - 'disable-empty-zone "0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.IP6.ARPA"'
-    - 'disable-empty-zone "1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.IP6.ARPA"'
-nameserver::ipv4_listener: 'any'
+nameserver::group: 'standard'
 nameserver::views:
     produxi:
         services:
@@ -20,10 +16,6 @@ nameserver::views:
         includes:
             - common.zones
     self:
-        services:
-            - '::1'
-            - 127.0.0.1
-        recursion: true
         zones:
             128.16.172.in-addr.arpa:
                 type: slave
@@ -98,13 +90,6 @@ nameserver::views:
                 source: j.hack.rev
         includes:
             - common.zones
-nameserver::zonefiles:
-    chaos.produxi.net.rev:
-        hierasrc: true
-    j.hack:
-        hierasrc: true
-    j.hack.rev:
-        hierasrc: true
 nameserver::files:
     common.zones:
         template: common.zones.erb

@@ -1,26 +1,24 @@
-<% params = scope.lookupvar('nameserver::params')
-   nsgroup = scope.lookupvar('nameserver::nsgroup') -%>
 options {
-	listen-on-v6 { <%= @ipv6_listen -%>; };
-	listen-on { <%= @ipv4_listen -%>; };
+	listen-on-v6 { <%= @_ipv6_listen -%>; };
+	listen-on { <%= @_ipv4_listen -%>; };
 	directory "<%= @wrkdir -%>";
 	pid-file "<%= @pidfile -%>";
 	dump-file "<%= @dumpfile -%>";
 	statistics-file "<%= @statsfile -%>";
-<% if @miscopts -%>
-<%   @miscopts.each do |line| -%>
+<% if @_miscopts -%>
+<%   @_miscopts.each do |line| -%>
 	<%= line -%>;
 <%   end -%>
 <% end -%>
 };
-<% @views.each do |name,params| -%>
+<% @_views.each do |name,params| -%>
 view "<%= name -%>" { match-clients { <%= params['services'].join("; ") -%>; };
 <%   if params['recursion'] then -%>
 	recursion yes;
 <%   else -%>
 	recursion no;
 <%   end -%>
-<%   if params['zones']
+<%   if params['zones'].is_a?(Hash)
        params['zones'].each do |zone_name,zone_params| -%>
 	zone "<%= zone_name -%>" {
 		type <%= zone_params['type'] -%>;
@@ -36,7 +34,19 @@ view "<%= name -%>" { match-clients { <%= params['services'].join("; ") -%>; };
 <%       end -%>
 	};
 <%     end
-     end -%>
+     else	# assume array now - I'd rather get an error if we fucked up hieradata
+       params['zones'].each do |zone_name| -%>
+	zone "<%= zone_name -%>" {
+		type <%= @_zone_params[zone_name]['type'] -%>;
+<%       if @_zone_params[zone_name]['type'] == 'master' -%>
+		file "<%= @_chrootref -%>/master/<%= @_zone_params[zone_name]['source'] -%>.db";
+<%       elsif @_zone_params[zone_name]['type'] == 'slave' -%>
+		file "<%= @_chrootref -%>/slave/<%= zone_name.gsub("/","_") -%>.db<%= name -%>";
+		masters { <%= @_zone_params[zone_name]['masters'].join("; ") -%>; };
+<%       end -%>
+        }
+<%     end -%>
+<% end -%>
 <%   if params['includes']
        params['includes'].each do |name| -%>
 	include "<%= @_chrootref -%>/<%= name -%>";
