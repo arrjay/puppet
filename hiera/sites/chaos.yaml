@@ -65,6 +65,8 @@ nameserver::groupdef:
         files:
             common.zones:
                 template: common.zones.erb
+            chaos.common.zones:
+                template: chaos.common.zones.erb
         views:
             produxi:
                services:
@@ -75,6 +77,9 @@ nameserver::groupdef:
                        type: master
                        source: chaos.produxi.net.rev
                    - chaos.produxi.net
+               includes:
+                   - common.zones
+                   - chaos.common.zones
             self:
                 services:
                     - 127.0.0.1
@@ -89,6 +94,9 @@ nameserver::groupdef:
                     - dyn.produxi.net
                     - int.j.hack
                     - _msdcs.int.j.hack
+                includes:
+                    - common.zones
+                    - chaos.common.zones
             j.hack:
                 services:
                     - 10.100.252.0/24
@@ -100,12 +108,20 @@ nameserver::groupdef:
                     - 252.100.10.in-addr.arpa
                     - int.j.hack
                     - _msdcs.int.j.hack
+                includes:
+                    - common.zones
+                    - chaos.common.zones
             chaos:
                 services:
                     - any
                 recursion: false
                 zones:
                     - 252.100.10.in-addr.arpa
+                    - j.hack:
+                        type: master
+                        source: j.hack
+                includes:
+                    - common.zones
 interface:
     sodium:
         ip: 10.100.252.1
