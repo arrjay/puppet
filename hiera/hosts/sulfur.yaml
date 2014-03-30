@@ -2,9 +2,8 @@ classes:
     - nameserver
     - nfs::server
     - zpool
-    - dhcpd
     - mirror::chaos
-    - inetd::tftpd
+    - netboot::obsd-ip22
 nameserver::group: 'standard'
 dhcpd:
     template: ifgen
