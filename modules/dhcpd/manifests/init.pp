@@ -1,7 +1,11 @@
 class dhcpd {
-  case $::operatingsystem {
+  case $::osfamily {
     'FreeBSD' : {
-      $package = 'net/isc-dhcp42-server'
+      if $::kernelmajversion > 9 {
+        $package = 'isc-dhcp42-server'
+      } else {
+        $package = 'net/isc-dhcp42-server'
+      }
       $cfg     = '/usr/local/etc/dhcpd.conf'
       $svc     = 'isc-dhcpd'
       $bin     = '/usr/local/sbin/dhcpd'
@@ -10,6 +14,7 @@ class dhcpd {
   }
 
   $params = hiera_hash("dhcpd")
+  $dnsdomain = hiera("dnsdomain")
 
   # calling these for ifgen to work
   $_network = hiera_hash("network")

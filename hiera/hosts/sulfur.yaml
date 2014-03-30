@@ -2,7 +2,11 @@ classes:
     - nameserver
     - nfs::server
     - zpool
+    - dhcpd
 nameserver::group: 'standard'
+dhcpd:
+    template: ifgen
+    authoritative: true
 zpools:
     minipool:
         disk: da0
