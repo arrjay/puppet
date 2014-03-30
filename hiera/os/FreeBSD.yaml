@@ -132,3 +132,6 @@ mediaserver::mt_daapd_user: daapd
 # piwigo
 piwigo::packages:
     - www/piwigo
+
+# resolvconf
+resolvconf::file: /etc/resolv.conf

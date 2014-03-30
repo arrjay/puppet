@@ -61,6 +61,10 @@ class nameserver (
     $_zonefiles = $zonefiles
     $_files = $files
   }
+
+  # scramble local systems resolv to use the nameserver
+  class{resolvconf: nameservers => [ '127.0.0.1', ]}
+
   # creates an authoritative/caching nameserver using BIND.
   case $::operatingsystem {
     'FreeBSD': {
