@@ -122,6 +122,7 @@ class nameserver (
                        "set /files/etc/fstab/00/opt[1] rw",
                        "set /files/etc/fstab/00/opt[2] ruleset",
                        "set /files/etc/fstab/00/opt[2]/value 4",
+                       "set /files/etc/fstab/00/opt[3] late",
                        "set /files/etc/fstab/00/dump 0",
                        "set /files/etc/fstab/00/passno 0",
                      ],
