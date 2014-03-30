@@ -10,12 +10,12 @@ $TTL <%= @_minttl -%>
 
 ; Build a zonefile out of...hiera data!
 <% @ifdata = scope.function_hiera_hash(['interface']) -%>
-<% @ifdata.each do |name,keys| -%>
-<% if keys['ip'] -%>
-<%= name -%> A <%= keys['ip'] -%>
+<% @ifdata.keys.sort.each do |name| -%>
+<% if @ifdata[name]['ip'] -%>
+<%= name -%> A <%= @ifdata[name]['ip'] -%>
 
 <% end -%>
-<% if keys['desc'] -%>
-<%= name -%> TXT "<%= keys['desc'] -%>"
+<% if @ifdata[name]['desc'] -%>
+<%= name -%> TXT "<%= @ifdata[name]['desc'] -%>"
 <% end -%>
 <% end -%>
