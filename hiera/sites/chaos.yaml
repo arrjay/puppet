@@ -162,33 +162,49 @@ interface:
     krypton-bootif:
         ip: 10.100.252.14
         desc: VIP
+        macaddr: '00:d0:b7:8e:50:19'
+        routeable: no
     manganese-bootif:
         ip: 10.100.252.15
         desc: VIP
+        macaddr: '00:03:ba:a2:71:dc'
+        routeable: no
     cobalt-bootif:
         ip: 10.100.252.16
         desc: VIP
+        macaddr: '00:10:e0:00:05:9b'
+        routeable: no
     neon:
         ip: 10.100.252.30
         desc: "AlphaPC 164LX"
+        macaddr: '00:00:f8:10:2a:b9'
     fluorine:
         ip: 10.100.252.31
         desc: "SGI IP22"
+        macaddr: '08:00:69:07:d6:2c'
     hafnium:
         ip: 10.100.252.32
         desc: "Apple MacMini2,1"
+        macaddr: '00:16:cb:ab:bc:a4'
     boron:
         ip: 10.100.252.33
         desc: "SUNW,SPARCstation-LX"
     krypton:
         ip: 10.100.252.34
         desc: "API Networks UP2000+"
+        macaddr: '00:10:18:02:32:d1'
     manganese:
         ip: 10.100.252.35
         desc: "SUNW,Sun-Blade-150"
+        macaddr: '00:0e:0c:aa:7a:e5'
     cobalt:
         ip: 10.100.252.36
         desc: "Cobalt Qube 2700"
     drip:
         ip: 10.100.252.254
         desc: "Linksys WRT54GL"
+    nessus:
+        ip: 10.100.252.252
+        desc: VIP
+        macaddr: '00:16:3e:2d:4d:5f'
+        routeable: no
