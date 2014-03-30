@@ -1,0 +1,8 @@
+<% cvpn_stubs = [ "100.10.in-addr.arpa", "101.10.in-addr.arpa", "102.10.in-addr.arpa", "103.10.in-addr.arpa", "31.172.in-addr.arpa", "hack" ] -%>
+<% cvpn_stubs.each do |zone| -%>
+zone "<%= zone -%>" { type static-stub; server-addresses { 172.31.0.5; 172.31.2.51; }; };
+<% end -%>
+
+zone "j.hack" { type master; file "<%= @_chrootref -%>/master/j.hack.db"; };
+
+zone "dn42" { type static-stub; server-addresses { 172.22.228.84; 172.22.177.8; 172.22.222.1; }; };
