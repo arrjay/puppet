@@ -1,0 +1,5 @@
+dhcpd:
+    default-lease-time: 604800
+    max-lease-time: 1209600
+    ddns-update-style: none
+    log-facility: local7
