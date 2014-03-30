@@ -3,6 +3,7 @@ classes:
     - nfs::server
     - zpool
     - dhcpd
+    - mirror::chaos
 nameserver::group: 'standard'
 dhcpd:
     template: ifgen
@@ -10,3 +11,8 @@ dhcpd:
 zpools:
     minipool:
         disk: da0
+mirror::storedir: /m
+mirror::storefs: mirrors
+mirror::storepool: minipool
+mirror::uid: 2000
+mirror::confdir: /minipool/private/mirror

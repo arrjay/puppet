@@ -1,0 +1,46 @@
+#!/bin/sh
+
+# abuse path and push the crontask dir in it
+PATH=<%= @taskdir -%>:${PATH}
+
+TOPLEVEL="<%= @mirrordir -%>"
+<% if @arcdir != '' -%>
+ARCHIVEDIR="<%= @arcdir -%>"
+<% end -%>
+
+# OpenBSD
+OBSD_MIRROR="moroder.produxi.net::mirror/OpenBSD"
+OBSD_VERSIONS="5.4"
+OBSD_ARCHITECTURES="sgi"
+#OBSD_PACKAGETREES="5.4/packages/i386"
+
+# Nekoware
+#NEKOWARE_MIRROR="nekoware.dustytech.net::nekoware"
+
+# NetBSD
+#NETBSD_MIRROR="mirror.planetunix.net::NetBSD"
+#NETBSD_VERSIONS="5.2.1"
+#NETBSD_ARCHITECTURES="source amd64 cobalt next68k alpha sgimips sparc mac68k macppc prep shared/ALL shared/m68k shared/powerpc shared/mipseb shared/mipsel"
+#NETBSD_PACKAGETREES="cobalt/5.1_2012Q1"
+#PKGSRC_MIRROR="rsync.netbsd.org::pkgsrc"
+
+# CentOS
+#CENTOS_VERSIONS="5 6"
+#CENTOS_REPOS="os updates"
+#CENTOS_ARCHITECTURES="i386 x86_64"
+#CENTOS_MIRROR="mirrors.kernel.org::centos"
+#EPEL_MIRROR="mirrors.kernel.org::fedora-epel"
+
+# tgcware
+#TGCWARE_DISTS="irix5.3/stable irix6.2/stable"
+#TGCWARE_SITE="jupiterrise.com/tgcware"
+
+# cygwin
+#CYGWIN_MIRROR="mirror.team-cymru.org::cygwin"
+
+# FreeBSD
+#FREEBSD_VERSIONS="9.2-RELEASE 10.0-RELEASE"
+#FREEBSD_ARCHITECTURES="amd64"
+
+# openCSW
+#OPENCSW_MIRROR="mirrors.dotsrc.org::opencsw"
