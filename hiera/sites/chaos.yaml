@@ -17,7 +17,7 @@ nameserver::zonedefaults:
     admin: rbergero.gmail.com.
 nameserver::zonedata:
     j.hack:
-        serial: 2014032900
+        serial: 2014033000
         nameservers:
             - sulfur
             - potassium
@@ -201,6 +201,10 @@ interface:
         ip: 10.100.252.37
         desc: "IBM Thinkpad 860 (via 3c589CS)"
         macaddr: '00:60:08:eb:68:6c'
+    cerium:
+        ip: 10.100.252.38
+        desc: "Apple PowerMac5,1"
+        macaddr: '00:30:65:b3:27:2a'
     drip:
         ip: 10.100.252.254
         desc: "Linksys WRT54GL"
