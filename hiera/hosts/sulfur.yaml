@@ -4,6 +4,7 @@ classes:
     - zpool
     - mirror::chaos
     - netboot::obsd-ip22
+    - ftpserver
 nameserver::group: 'standard'
 dhcpd:
     template: ifgen
@@ -19,3 +20,7 @@ mirror::confdir: /minipool/private/mirror
 inetd::tftpd::rfc2347: false
 inetd::tftpd::rootdir: /t
 inetd::tftpd::zfs_parent: minipool
+ftpserver::anonroot: /minipool/private/ftproot
+ftpserver::anonshares:
+    OpenBSD:
+        dest: /m/OpenBSD
