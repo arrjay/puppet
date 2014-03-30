@@ -11,7 +11,9 @@ options {
 <%   end -%>
 <% end -%>
 };
-<% @_views.each do |name,params| -%>
+<% @_views.each do |view|
+   name = view.keys[0] 
+   params = view[view.keys[0]] -%>
 view "<%= name -%>" { match-clients { <%= params['services'].join("; ") -%>; };
 <%   if params['recursion'] then -%>
 	recursion yes;

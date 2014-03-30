@@ -3,7 +3,7 @@ class nameserver (
   $ipv6_listen = hiera('nameserver::ipv6_listener','::1'),
   $zonefiles = hiera('nameserver::zonefiles',{ 'localhost-forward.zone' => { 'nameservers' => ['localhost.'] },
                                                'localhost-reverse.zone' => { 'nameservers' => ['localhost.'] } }),
-  $views = hiera('nameserver::views',{ self => 
+  $views = hiera('nameserver::views',[ { self => 
 						{ services => ['127.0.0.1', '::1'],
 						  recursion => yes,
 						  zones => [ { localhost => { type => 'master',
@@ -14,7 +14,7 @@ class nameserver (
 									},
 							}, ],
 						}
-				      }),
+				      } ] ),
   $miscopts = hiera('nameserver::miscopts',undef),
   $files = hiera('nameserver::files',undef),
   $nsgroup = hiera('nameserver::group',undef),
