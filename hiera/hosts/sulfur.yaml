@@ -4,6 +4,7 @@ classes:
     - zpool
     - dhcpd
     - mirror::chaos
+    - inetd::tftpd
 nameserver::group: 'standard'
 dhcpd:
     template: ifgen
@@ -16,3 +17,6 @@ mirror::storefs: mirrors
 mirror::storepool: minipool
 mirror::uid: 2000
 mirror::confdir: /minipool/private/mirror
+inetd::tftpd::rfc2347: false
+inetd::tftpd::rootdir: /t
+inetd::tftpd::zfs_parent: minipool

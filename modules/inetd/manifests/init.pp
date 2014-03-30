@@ -1,4 +1,9 @@
-class inetd {
+class inetd (
+  $wrap_external	= hiera('inetd::wrap_external',true),
+  $wrap_internal	= hiera('inetd::wrap_internal',true),
+  $maxconn_min		= hiera('inetd::conns_per_min','60'),
+  $bind_ip		= hiera('inetd::bind_ip',undef),
+) {
   # this class turns on inetd itself and manages 'global' options
   case $::operatingsystem {
     'FreeBSD': {
@@ -8,24 +13,21 @@ class inetd {
   }
 
   # Create a string or edit a bunch of files?
-  $inetd_cfg = hiera(inetd)
   case $::operatingsystem {
     'FreeBSD': {
-      if $inetd_cfg['options']['wrap_external'] {
-        $wrap_external=" -w"
+      if $wrap_external {
+        $wrap_ext_flags=" -w"
       }
-      if $inetd_cfg['options']['wrap_internal'] {
-        $wrap_internal=" -W"
+      if $wrap_internal {
+        $wrap_int_flags=" -W"
       }
-      if $inetd_cfg['options']['maxconn_min'] {
-        $connlim = $inetd_cfg['options']['maxconn_min']
-        $connflags=" -C $connlim"
+      if $maxconn_min {
+        $connflags=" -C $maxconn_min"
       }
-      if $inetd_cfg['options']['bind_ip'] {
-        $bind_ip = $inetd_cfg['options']['bind_ip']
+      if $bind_ip {
         $bindflags=" -a $bind_ip"
       }
-      $inetd_flags="${wrap_external}${wrap_internal}${connflags}${bindflags}"
+      $inetd_flags="${wrap_ext_flags}${wrap_int_flags}${connflags}${bindflags}"
     }
   }
   

@@ -1,4 +1,9 @@
-class inetd::tftpd {
+class inetd::tftpd (
+  $tftproot	= hiera('inetd::tftpd::rootdir','/tftpboot'),
+  $logging	= hiera('inetd::tftpd::logging',true),
+  $rfc2347	= hiera('inetd::tftpd::rfc2347',true),
+  $zpool	= hiera('inetd::tftpd::zfs_parent',undef),
+) {
   require inetd
   # some day, I'll figure out why calling inetd's restarter directly sucks
   exec { "restart inetd: tftpd changes":
@@ -6,17 +11,28 @@ class inetd::tftpd {
     command     => "/usr/sbin/service $inetd::svc restart",
   }
 
-  $tftproot = $inetd::inetd_cfg['tftpd']['rootdir']
-
   # build up the tftp string for inetd regardless of OS. Only tested on FreeBSD, though :)
   $basic_tftpd = 'tftp dgram udp wait root /usr/libexec/tftpd tftpd'
-  if $inetd::inetd_cfg['tftpd']['rootdir'] {
-    $root_flags = " -s $inetd::inetd_cfg['tftpd']['rootdir']"
+  if $tftproot {
+    $root_flags = " -s $tftproot"
+    if $zpool {
+      zfs {"$zpool/tftproot":
+        ensure  => present,
+        devices => on,
+        mountpoint => $tftproot,
+        sharenfs => ro,
+      }
+    }
+    file {$tftproot:
+      ensure => directory,
+      owner  => root,
+      group  => 0,
+    }
   }
-  if $inetd::inetd_cfg['tftpd']['logging'] == 'yes' {
+  if $logging {
     $log_flags = " -l"
   }
-  if $inetd::inetd_cfg['tftpd']['rfc2347'] == 'no' {
+  if $rfc2347 == false {
     $old_flags = " -o"
   }
   $tftpd_string = "${basic_tftpd}${old_flags}${log_flags}${root_flags}"
@@ -39,7 +55,7 @@ class inetd::tftpd {
       # owwwww. if we fail to match root, delete the -s flag, delete any arguments starting with /
       # 01, 02 are numeric labels - gotta fit the [:digit:] realm, but have no other importance
       #  (in fact, the next run will have them discarded)
-      if $inetd::inetd_cfg['tftpd']['rootdir'] {
+      if $tftproot {
         augeas { "inetd.conf: tftpd root":
           changes => [
             "rm /files/etc/inetd.conf/service[ . = 'tftp' ]/arguments/*[ . = '-s' ]",
@@ -54,7 +70,7 @@ class inetd::tftpd {
       }
       # if we need to disable rfc2347 (only possible on *BSD tftp?), do it after we get a successful tftp service to modify.
       # we provide cases for off->on, and on->off.
-      if $inetd::inetd_cfg['tftpd']['rfc2347'] == false {
+      if $rfc2347 == false {
         augeas { "inetd.conf: disable tftpd rfc2347":
           changes => [
             "ins 03 after /files/etc/inetd.conf/service[ . = 'tftp' ]/arguments/*[ . = 'tftpd' ]",
