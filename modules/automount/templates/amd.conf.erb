@@ -9,7 +9,7 @@ map_name = amd_site
 
 [/nethome]
 <% userbit = @hmapperm.split(//).last(3)[0].to_i -%>
-<% if (userbit & 1) -%>
+<% if userbit & 1 == 1 -%>
 map_type = exec
 map_name = <%= @mapdir -%>/amd_nethome
 <% else -%>
@@ -18,10 +18,11 @@ map_name = amd_nethome
 
 <% if @maphome -%>
 [/home]
-<% if (userbit & 1) -%>
+<%   userbit = @hmapperm.split(//).last(3)[0].to_i -%>
+<%   if userbit & 1 == 1 -%>
 map_type = exec
 map_name = <%= @mapdir -%>/amd_nethome
-<% else -%>
+<%   else -%>
 map_name = amd_nethome
-<% end -%>
+<%   end -%>
 <% end -%>
