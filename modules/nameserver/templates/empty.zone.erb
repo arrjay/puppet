@@ -1,7 +1,7 @@
 $TTL <%= @_minttl -%>
 
 ; NOTE $ORIGIN abuse
-@ SOA @ <%= @_admin -%> <%= @_serial -%> <%= @_refresh -%> <%= @_retry -%> <%= @_expiry -%> <%= @_nxttl -%>
+@ SOA @ <%= @admin -%> <%= @_serial -%> <%= @_refresh -%> <%= @_retry -%> <%= @_expiry -%> <%= @_nxttl -%>
 
 <% @nameservers.each do |nameserver| -%>
 @	NS	<%= nameserver -%>
