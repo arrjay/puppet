@@ -34,5 +34,5 @@ zone "<%= zone -%>" { type master; file "<%= @_chrootref -%>/localhost-reverse.d
   "test", "example", "invalid", "example.com", "example.net", "example.org",
 ] -%>
 <% empty_dbs.each do |zone| -%>
-zone "<%= zone -%>" { type master; file "<%= @_chrootref -%>/empty.db"; };
+zone "<%= zone -%>" { type master; file "<%= @_chrootref -%>/master/empty.zone.db"; };
 <% end -%>
