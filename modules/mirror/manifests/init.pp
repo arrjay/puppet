@@ -1,9 +1,11 @@
 # class for managing the mirror user's crontasks. assumes you have a mirror user.
 class mirror (
-  $confdir   = hiera('mirror::confdir'),
-  $packages  = hiera('mirror::packages'),
-  $mirrordir = hiera('mirror::storedir'),
-  $arcdir    = hiera('mirror::archivedir',undef),
+  $confdir	= hiera('mirror::confdir'),
+  $packages	= hiera('mirror::packages'),
+  $mirrordir	= hiera('mirror::storedir'),
+  $arcdir	= hiera('mirror::archivedir',undef),
+  $rsync_config	= hiera('mirror::rsync_conf'),
+  $services	= hiera('mirror::services'),
 ) {
   include sudo
   include crontask
@@ -11,6 +13,16 @@ class mirror (
   $taskdir = $crontask::dir
 
   package{$packages: ensure => installed}
+
+  # configure rsync to serve the mirror back out
+  file {$rsync_config:
+    owner   => root,
+    group   => 0,
+    mode    => 0644,
+    content => template("mirror/rsyncd.conf.erb")
+  }
+
+  service{$services: ensure => running, enable => true }
 
   # create mirror dir and parents if needed
   exec {"/bin/mkdir -p $confdir":

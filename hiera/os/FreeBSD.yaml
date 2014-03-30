@@ -93,6 +93,9 @@ mirror::packages:
     - sysutils/coreutils
     - www/lynx
     - ftp/ncftp3
+mirror::rsync_conf: '/usr/local/etc/rsyncd.conf'
+mirror::services:
+    - rsyncd
 
 # fileserver
 fileserver::packages:
