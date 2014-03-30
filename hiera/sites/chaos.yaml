@@ -197,6 +197,10 @@ interface:
     cobalt:
         ip: 10.100.252.36
         desc: "Cobalt Qube 2700"
+    lead:
+        ip: 10.100.252.37
+        desc: "IBM Thinkpad 860 (via 3c589CS)"
+        macaddr: '00:60:08:eb:68:6c'
     drip:
         ip: 10.100.252.254
         desc: "Linksys WRT54GL"
