@@ -144,7 +144,7 @@ interface:
     sodium:
         ip: 10.100.252.1
         desc: VM
-    selenium:
+    sulfur:
         ip: 10.100.252.2
         desc: VM
     tungsten:
@@ -152,9 +152,6 @@ interface:
         desc: VM
     potassium:
         ip: 10.100.252.4
-        desc: VM
-    sulfur:
-        ip: 10.100.252.5
         desc: VM
     selenium-alt:
         ip: 10.100.252.12
