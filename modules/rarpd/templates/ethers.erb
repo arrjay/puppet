@@ -1,0 +1,5 @@
+<% @_interfaces.each do |name,keys| 
+     if keys['macaddr'] -%>
+<%= keys['macaddr'] -%>	<%= name %>
+<%   end
+   end -%>

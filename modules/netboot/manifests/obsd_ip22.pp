@@ -1,4 +1,4 @@
-class netboot::obsd-ip22 (
+class netboot::obsd_ip22 (
   $version = hiera('netboot::obsd_ip22_ver','5.4'),
 ) {
   require netboot

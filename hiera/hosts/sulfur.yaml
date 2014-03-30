@@ -3,8 +3,11 @@ classes:
     - nfs::server
     - zpool
     - mirror::chaos
-    - netboot::obsd-ip22
+    - netboot::obsd_ip22
+    - netboot::obsd_sparc32
     - ftpserver
+netboot::obsd_sparc32_hosts:
+    - boron
 nameserver::group: 'standard'
 dhcpd:
     template: ifgen
