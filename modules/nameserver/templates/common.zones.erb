@@ -2,12 +2,12 @@ zone "." { type hint; file "<%= @_chrootref -%>/root.hints"; };
 
 <% localhost_forwards = [ "localhost" ] -%>
 <% localhost_forwards.each do |zone| -%>
-zone "<%= zone -%>" { type master; file "<%= @_chrootref -%>/localhost-forward.db"; };
+zone "<%= zone -%>" { type master; file "<%= @_chrootref -%>/master/localhost-forward.zone.db"; };
 <% end -%>
 
 <% localhost_reverses = [ "127.in-addr.arpa", "0.ip6.arpa" ] -%>
 <% localhost_reverses.each do |zone| -%>
-zone "<%= zone -%>" { type master; file "<%= @_chrootref -%>/localhost-reverse.db"; };
+zone "<%= zone -%>" { type master; file "<%= @_chrootref -%>/master/localhost-reverse.zone.db"; };
 <% end -%>
 
 <% empty_dbs = [

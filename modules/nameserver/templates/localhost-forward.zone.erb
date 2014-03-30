@@ -1,6 +1,6 @@
-$TTL <%= @minttl -%>
+$TTL <%= @_minttl -%>
 
-localhost. SOA localhost. <%= @admin -%> <%= @serial -%> <%= @refresh -%> <%= @retry -%> <%= @expiry -%> <%= @nxttl -%>
+localhost. SOA localhost. <%= @admin -%> <%= @_serial -%> <%= @_refresh -%> <%= @_retry -%> <%= @_expiry -%> <%= @_nxttl -%>
 
 <% @nameservers.each do |nameserver| -%>
 	NS	<%= nameserver -%>
