@@ -16,6 +16,9 @@ nameserver::zonedata:
     chaos.produxi.net.rev:
         copy: j.hack
         domain: chaos.produxi.net.
+    j.hack.rev:
+        copy: j.hack
+        domain: j.hack.
 nameserver::zone_params:
     128.16.172.in-addr.arpa:
         type: slave
