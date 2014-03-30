@@ -1,4 +1,8 @@
 classes:
     - nameserver
     - nfs::server
+    - zpool
 nameserver::group: 'standard'
+zpools:
+    minipool:
+        disk: da0
