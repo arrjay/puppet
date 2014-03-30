@@ -1,0 +1,2 @@
+/defaults       type:=nfsl;opts:=rw
+*               rhost:=sulfur;rfs:=/minipool/nethomes;sublink:=${key}
