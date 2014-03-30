@@ -27,20 +27,24 @@ view "<%= name -%>" { match-clients { <%= params['services'].join("; ") -%>; };
 <%     else
          zone_name = zone
          zone_params = @_zone_params[zone] -%>
-<%     end -%>
+<%     end
+       if zone_params['type'] == 'include' -%>
+	include "<%= @_chrootref -%>/<%= zone_name -%>";
+<%     else -%>
 	zone "<%= zone_name -%>" {
 		type <%= zone_params['type'] -%>;
-<%     if zone_params['type'] == 'master' -%>
+<%       if zone_params['type'] == 'master' -%>
 		file "<%= @_chrootref -%>/master/<%= zone_params['source'] -%>.db";
-<%     elsif zone_params['type'] == 'slave'
+<%       elsif zone_params['type'] == 'slave'
          if zone_params['store'] -%>
 		file "<%= @_chrootref -%>/slave/<%= zone_params['store'] -%>";
-<%       else -%>
+<%         else -%>
 		file "<%= @_chrootref -%>/slave/<%= zone_name.gsub("/","_") -%>.db_<%= name -%>";
-<%       end -%>
+<%         end -%>
 		masters { <%= zone_params['masters'].join("; ") -%>; };
-<%     end -%>
+<%       end -%>
 	};
+<%     end -%>
 <%   end -%>
 <%   if params['includes']
        params['includes'].each do |name| -%>
