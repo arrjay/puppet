@@ -4,6 +4,7 @@ class automount (
   $maptype  = hiera('automount::maptype',undef),
   $mapdir   = hiera('automount::mapdir','/etc'),
   $homemap  = hiera('automount::auto_home','amd_nethome'),
+  $sitetpl  = hiera('automount::auto_site_template','amd_site'),
   $hmapperm = hiera('automount::perms_auto_home','0644'),
   $maphome  = hiera('automount::map_home',false),
   $svccmd   = hiera('service',undef),
@@ -28,7 +29,7 @@ class automount (
     file {"$mapdir/amd_site":
       owner   => root,
       group   => 0,
-      content => template("automount/amd_site.erb"),
+      content => template("automount/$sitetpl.erb"),
       mode    => 0644,
       notify  => Exec["reload amd"],
     }
