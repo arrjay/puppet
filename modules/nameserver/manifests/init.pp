@@ -104,6 +104,34 @@ class nameserver (
           target => "$chroot/var/run/named",
           force  => true,
         }
+        file{"/var/named/dev":
+          ensure => directory,
+        }
+        # add devfs rules
+        exec{"add devfs rules for named chroot":
+          command => "/usr/bin/printf '[devfsrules_named_chroot=4]\nadd hide\nadd path run unhide\nadd path random unhide\n' >> /etc/devfs.rules",
+          unless  => "/usr/bin/grep -q 'devfsrules_named_chroot=4' /etc/devfs.rules",
+        }
+        ->
+        augeas{"add devfs mount for named chroot":
+          changes => [
+                       "ins 00 after /files/etc/fstab/*[last()]",
+                       "set /files/etc/fstab/00/spec devfs",
+                       "set /files/etc/fstab/00/file /var/named/dev",
+                       "set /files/etc/fstab/00/vfstype devfs",
+                       "set /files/etc/fstab/00/opt[1] rw",
+                       "set /files/etc/fstab/00/opt[2] ruleset",
+                       "set /files/etc/fstab/00/opt[2]/value 4",
+                       "set /files/etc/fstab/00/dump 0",
+                       "set /files/etc/fstab/00/passno 0",
+                     ],
+          onlyif  => "match /files/etc/fstab/*[file = '/var/named/dev'] size < 1",
+        }
+        ~>
+        exec{"mount /var/named/dev":
+          command => "/sbin/mount /var/named/dev",
+          unless  => "/sbin/mount | /usr/bin/grep -q '/var/named/dev'",
+        }
 	# mangle rc.conf to work-ish
 	augeas{"rc.conf: named_flags":
           changes => [
