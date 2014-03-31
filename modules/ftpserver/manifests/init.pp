@@ -4,6 +4,11 @@ class ftpserver (
   $zfs_parent	= hiera('ftpserver::zfs_root',undef),
   $anonshares	= hiera('ftpserver::anonshares',undef),
 ) {
+  case $::osfamily {
+    'FreeBSD': {
+      $service = 'ftpd'
+    }
+  }
   if $anonftp {
     user{'ftp':
       uid	=> 21,
@@ -28,4 +33,7 @@ class ftpserver (
   if $anonshares {
     create_resources( share, $anonshares )
   }
+
+  service{$service: enable => true, ensure => running}
+
 }
