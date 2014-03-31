@@ -16,7 +16,7 @@ class mirror::chaos (
     ensure => present,
     devices => off,
     mountpoint => $mirrordir,
-    sharenfs => 'ro',
+    sharenfs => 'ro -alldirs',
   }
 
   user{"mirror":
