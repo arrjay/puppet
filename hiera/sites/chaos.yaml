@@ -212,7 +212,7 @@ interface:
         macaddr: '00:16:3e:2d:4d:5f'
         routeable: no
     iodine:
-        ip: 10.100.252.254
+        ip: 10.100.252.253
         macaddr: '20:4e:7f:48:42:d1'
         desc: "Netgear GS108T"
         routeable: no
