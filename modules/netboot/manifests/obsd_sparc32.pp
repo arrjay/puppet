@@ -4,6 +4,7 @@ class netboot::obsd_sparc32 (
 ) {
   require rarpd
   require inetd::tftpd
+  include bootparamd
 
   $interfaces = hiera_hash("interface")
 
@@ -25,6 +26,7 @@ class netboot::obsd_sparc32 (
     $interfaces = $netboot::obsd_sparc32::interfaces
     $ip = $interfaces[$host]['ip']
     netboot::tftplink{"$ip": source => "obsd.$netboot::obsd_sparc32::version.boot.net", suffix => "SUN4M"}
+    bootparamd::line{"$host": content => "$host root=$::hostname:/m/OpenBSD/$netboot::obsd_sparc32::version/sparc/\n"}
   }
 
   if $hosts {
