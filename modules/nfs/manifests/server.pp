@@ -1,5 +1,6 @@
 class nfs::server {
   include fileserver
+  include portmap
 
   case $::operatingsystem {
     'FreeBSD': {

@@ -9,6 +9,7 @@ classes:
 netboot::obsd_sparc32_hosts:
     - boron
 nameserver::group: 'standard'
+portmap::bind_ip: 10.100.252.2
 dhcpd:
     template: ifgen
     authoritative: true
