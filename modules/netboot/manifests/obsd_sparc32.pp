@@ -14,12 +14,17 @@ class netboot::obsd_sparc32 (
     unless  => "/usr/bin/diff $filepath/bsd.rd $inetd::tftpd::tftproot/obsd.$version.rd",
   }
 
+  exec{"copy boot.net to netboot":
+    command => "/bin/cp -p $filepath/boot.net $inetd::tftpd::tftproot/obsd.$version.boot.net",
+    unless  => "/usr/bin/diff $filepath/boot.net $inetd::tftpd::tftproot/obsd.$version.boot.net",
+  }
+
   define obsd_sparc32_tftplink (
     $host = $title,
   ) {
     $interfaces = $netboot::obsd_sparc32::interfaces
     $ip = $interfaces[$host]['ip']
-    netboot::tftplink{"$ip": source => "obsd.$netboot::obsd_sparc32::version.rd", suffix => "SUN4M"}
+    netboot::tftplink{"$ip": source => "obsd.$netboot::obsd_sparc32::version.boot.net", suffix => "SUN4M"}
   }
 
   if $hosts {
