@@ -5,6 +5,7 @@ classes:
     - mirror::chaos
     - netboot::obsd_ip22
     - netboot::obsd_sparc32
+    - netboot::netbsd_ip2x
     - ftpserver
 netboot::obsd_sparc32_hosts:
     - boron

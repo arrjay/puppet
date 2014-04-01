@@ -2,7 +2,7 @@ class netboot::obsd_ip22 (
   $version = hiera('netboot::obsd_ip22_ver','5.4'),
 ) {
   require netboot
-  class{"tuning::freebsd": portrange_last => '32767'}
+  require netboot::ip2x_common
 
   $filepath = "$netboot::site_mirror/OpenBSD/$version/sgi"
 
