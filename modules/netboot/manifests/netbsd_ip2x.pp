@@ -13,7 +13,7 @@ class netboot::netbsd_ip2x (
   }
   ~>
   exec{"gunzip netbsd-INSTALL32_IP2x.gz":
-    command => "/usr/bin/gunzip $inetd::tftpd::tftproot/netbsd-INSTALL32_IP2x.gz",
+    command => "/usr/bin/gunzip -k $inetd::tftpd::tftproot/netbsd-INSTALL32_IP2x.gz",
     refreshonly => true,
   }
 
@@ -24,7 +24,7 @@ class netboot::netbsd_ip2x (
   }
   ~>
   exec{"gunzip netbsd-INSTALL32_IP2x.ecoff.gz":
-    command => "/usr/bin/gunzip $inetd::tftpd::tftproot/netbsd-INSTALL32_IP2x.ecoff.gz",
+    command => "/usr/bin/gunzip -k $inetd::tftpd::tftproot/netbsd-INSTALL32_IP2x.ecoff.gz",
     refreshonly => true,
   }
 }
