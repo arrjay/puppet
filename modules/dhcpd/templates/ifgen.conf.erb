@@ -7,28 +7,29 @@ subnet <%= @_network['subnet'] -%> netmask <%= @_network['netmask'] -%> {
 group {
   # routeable
   option routers <%= @_network['gateway'] -%>;
-<% @_interfaces.each do |name,keys| -%>
-<% if keys['routeable'] != false -%>
-<% if keys['macaddr'] -%>
+<% interfaces = @_interfaces.keys.sort
+   interfaces.each do |name|
+     if @_interfaces[name]['routeable'] != false 
+       if @_interfaces[name]['macaddr'] -%>
   host <%= name -%> {
-    hardware ethernet <%= keys['macaddr'] -%>;
-    fixed-address <%= keys['ip'] -%>;
+    hardware ethernet <%= @_interfaces[name]['macaddr'] -%>;
+    fixed-address <%= @_interfaces[name]['ip'] -%>;
   }
-<% end -%>
-<% end -%>
-<% end -%>
+<%     end
+     end
+   end -%>
 }
 
 group {
   # non-routeable
-<% @_interfaces.each do |name,keys| -%>
-<% if keys['routeable'] == false -%>
-<% if keys['macaddr'] -%>
+<% interfaces.each do |name|
+     if @_interfaces[name]['routeable'] == false
+       if @_interfaces[name]['macaddr'] -%>
   host <%= name -%> {
-    hardware ethernet <%= keys['macaddr'] -%>;
-    fixed-address <%= keys['ip'] -%>;
+    hardware ethernet <%= @_interfaces[name]['macaddr'] -%>;
+    fixed-address <%= @_interfaces[name]['ip'] -%>;
   }
-<% end -%>
-<% end -%>
-<% end -%>
+<%     end
+     end
+   end -%>
 }

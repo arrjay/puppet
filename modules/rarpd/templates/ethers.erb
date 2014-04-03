@@ -1,5 +1,6 @@
-<% @_interfaces.each do |name,keys| 
-     if keys['macaddr'] -%>
-<%= keys['macaddr'] -%>	<%= name %>
+<% interfaces = @_interfaces.keys
+   interfaces.sort.each do |name| 
+     if @_interfaces[name]['macaddr'] -%>
+<%= @_interfaces[name]['macaddr'] -%>	<%= name %>
 <%   end
    end -%>
