@@ -15,6 +15,7 @@ nameserver::miscopts:
     - 'disable-empty-zone "1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.IP6.ARPA"'
 nameserver::zonedefaults:
     admin: rbergero.gmail.com.
+dhcpd::template: ifgen
 nameserver::zonedata:
     j.hack:
         serial: 2014033000

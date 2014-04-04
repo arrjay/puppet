@@ -1,4 +1,6 @@
-class dhcpd {
+class dhcpd (
+  $template = hiera(dhcpd::template),
+) {
   case $::osfamily {
     'FreeBSD' : {
       if $::kernelmajversion > 9 {
@@ -16,25 +18,23 @@ class dhcpd {
   $params = hiera_hash("dhcpd")
   $dnsdomain = hiera("dnsdomain")
 
-  # calling these for ifgen to work
-  $_network = hiera_hash("network")
-  $_interfaces = hiera_hash("interface")
-
   package { $package: ensure => installed }
 
   exec { "restart dhcpd":
     refreshonly => true,
     command     => "/usr/sbin/service $svc restart",
-    subscribe   => File[$cfg],
     onlyif      => "$bin -T -cf $cfg -lf $leases",
   }
 
-  $template = $dhcpd::params['template']
-
-  file {$cfg:
-    owner   => root,
-    group   => 0,
-    content => template("dhcpd/${dhcpd::template}.conf.erb"),
+  if $template == ifgen {
+    require dhcpd::ifgen
+  } else {
+    file {$cfg:
+      owner   => root,
+      group   => 0,
+      content => template("dhcpd/${dhcpd::template}.conf.erb"),
+      notify  => ['restart dhcpd'],
+    }
   }
 
   service { "$svc": enable => true }

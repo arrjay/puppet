@@ -1,0 +1,9 @@
+<% if @macaddr -%>
+  host <%= @clientname -%> {
+    hardware ethernet <%= @macaddr -%>;
+    fixed-address <%= @ip -%>;
+<%   if @bootfile -%>
+    filename "<%= @bootfile -%>";
+<%   end -%>
+  }
+<% end -%>
