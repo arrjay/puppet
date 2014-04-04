@@ -56,4 +56,7 @@ class netboot::irix62 (
     target => "../irix/6.2/S200_6.2_IRIX_1/dist/miniroot",
   }
 
+  # irix 6.2 dist links are handled outside of this, though
+  include netboot::irix62::links
+
 }
