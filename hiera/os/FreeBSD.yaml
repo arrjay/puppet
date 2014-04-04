@@ -138,3 +138,11 @@ piwigo::packages:
 
 # resolvconf
 resolvconf::file: /etc/resolv.conf
+
+# rshd
+inetd::rshd::hosts_equiv: /etc/hosts.equiv
+
+# netboot
+netboot::packages::irix_common:
+    - shells/mksh
+netboot::binary::ksh_path: /usr/local/bin/mksh
