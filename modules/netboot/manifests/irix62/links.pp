@@ -14,7 +14,7 @@ class netboot::irix62::links(
   ) {
     file{"$netboot::irix_common::mount/6.2/$object":
       ensure => symlink,
-      target => "../irix/6.2/$target$object",
+      target => "../irix/6.2/$target/$object",
     }
   }
 
