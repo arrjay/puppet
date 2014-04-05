@@ -40,6 +40,7 @@
      "mipspro_cxx" => "mipspro/S700_6.\[2-3]_MIPSpro_C++_7.0.1/dist",
      "snmp" => "snmp/S700_6.\[2-5]_SNMP_Access_to_HP-UX_MIB_1.1.2/dist",
      "i2_patches" => "irix/6.2/S999_6.2_Patches_for_IRIX_with_Indigo2_1996_08/dist",
+     "devlib" => "irix/6.2/irix-6.2-development-libraries",
    }
 
    links = {
@@ -102,23 +103,13 @@
        "CaseVision" => min,
        "ProDev" => min,
        "SpeedShop" => plusdocs,
-       "WV_dev" => sw64,
        "WorkShop" => plusdocs64,
        "c_dev" => eoe,
        "cite" => nil,
        "compiler_dev" => compiler_dev,
        "compiler_eoe" => compiler,
-       "complib" => headers,
-       "dev" => plusdocs64,
-       "dmedia_dev" => dmedia_dev,
-       "dvdr" => onlydocs,
-       "gl_dev" => plusdocs64,
        "impactI2V_dev" => min,
-       "inst_dev" => plusdocs,
-       "motif_dev" => sw64,
-       "sgitcl_dev" => min,
        "x_books" => books,
-       "motif_books" => books,
        "patchSG0001384" => compiler_patch,
      },
      "apps" => {
@@ -154,9 +145,6 @@
        "nfs3" => min,
        "onc3_eoe" => nil,
      },
-     "mipspro_cxx" => {
-       "ViewKit_dev" => plusdocs64,
-     },
      "snmp" => {
        "patchSG0002826" => xpg4,
        "snmpd" => nil,
@@ -164,6 +152,19 @@
      "i2_patches" => {
        "patchSG0001447" => eoe_sw64_patch,
        "patchSG0001472" => eoe_sw64_patch,
+     },
+     "devlib" => {
+       "ViewKit_dev" => plusdocs64,
+       "WV_dev" => sw64,
+       "complib" => headers,
+       "dev" => plusdocs64,
+       "dmedia_dev" => dmedia_dev,
+       "dvdr" => onlydocs,
+       "gl_dev" => plusdocs64,
+       "inst_dev" => plusdocs,
+       "motif_books" => books,
+       "motif_dev" => sw64,
+       "sgitcl_dev" => min,
      }
    }
   -%>
@@ -211,11 +212,11 @@
  "webspace" : { "target" : "<%= folders['disc2'] -%>", "exts" : [ ".data", ".help", ".idb", ".man", ".sw" ] },
  "whatsnew" : { "target" : "<%= folders['disc2'] -%>", "exts" : [ ".doc", ".idb", ".man", ".registration", ".sw" ] },
  "xlators_3d" : { "target" : "<%= folders['disc2'] -%>", "exts" : [ ".doc", ".idb", ".man", ".sw" ] },
- "irix_dev" : { "target" : "<%= folders['devel'] -%>", "exts" : [ ".gifts", ".idb" ] },
- "license_dev" : { "target" : "<%= folders['devel'] -%>", "exts" : [ ".books", ".demo", ".hdr", ".idb", ".lib", ".lib32", ".lib64", ".man", ".sw" ] },
+ "irix_dev" : { "target" : "<%= folders['devlib'] -%>", "exts" : [ ".gifts", ".idb" ] },
+ "license_dev" : { "target" : "<%= folders['devlib'] -%>", "exts" : [ ".books", ".demo", ".hdr", ".idb", ".lib", ".lib32", ".lib64", ".man", ".sw" ] },
  "patchSG0001378" : { "target" : "<%= folders['devel'] -%>", "exts" : [ ".ftn77_eoe_sw32", ".ftn77_eoe_sw64", ".ftn_dev_sw32", ".ftn_dev_sw64", ".idb" ] },
  "patchSG0001390" : { "target" : "<%= folders['devel'] -%>", "exts" : [ ".compiler_dev_sw32", ".compiler_dev_sw64", ".compiler_eoe_sw", ".compiler_eoe_sw64", ".idb" ] },
- "x_dev" : { "target" : "<%= folders['devel'] -%>", "exts" : [ ".idb", ".man", ".src", ".sw", ".sw32", ".sw64" ] },
+ "x_dev" : { "target" : "<%= folders['devlib'] -%>", "exts" : [ ".idb", ".man", ".src", ".sw", ".sw32", ".sw64" ] },
  "impr_dev" : { "target" : "<%= folders['apps'] -%>", "exts" : [ ".books", ".idb", ".man", ".sw", ".sw32", ".sw5_3", ".sw64" ] },
  "patchSG0001270" : { "target" : "<%= folders['apps'] -%>", "exts" : [ ".compiler_eoe_sw", ".compiler_eoe_sw64", ".idb" ] },
  "patchSG0001278" : { "target" : "<%= folders['apps'] -%>", "exts" : [ ".dev_man", ".eoe_man", ".eoe_sw", ".idb" ] },
