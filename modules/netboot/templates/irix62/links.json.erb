@@ -34,6 +34,7 @@
      "apps" => "irix/6.2/S700_6.2_Applications_1996_08/dist",
      "dse" => "irix/6.2/S700_Desktop_Special_Edition_1.1/dist",
      "vmt" => "irix/6.2/S700_Visual_Magic_Tools_1.0/dist",
+     "nfs" => "onc3_nfs/S700_6.\[2-5]_ONC3_NFS_v3/dist",
    }
 
    links = {
@@ -142,6 +143,11 @@
        "ido" => onlybook,
        "insight_eoe" => onlybook,
        "insight_style" => onlybook,
+     },
+     "nfs" => {
+       "nfs" => plusdocs,
+       "nfs3" => min,
+       "onc3_eoe" => nil,
      }
    }
   -%>
@@ -219,6 +225,6 @@
  "patchSG0000926" : { "target" : "<%= folders['dse'] -%>", "exts" : [ ".eoe1_sw", ".gl_dev_sw", ".idb", ".x_eoe_sw" ] },
  "patchSG0000944" : { "target" : "<%= folders['dse'] -%>", "exts" : [ ".InPerson_sw", ".idb" ] },
  "patchSG0001005" : { "target" : "<%= folders['dse'] -%>", "exts" : [ ".idb", ".showcase_sw" ] },
- "pcnfsd" : { "target" : "<%= folders['dse'] -%>", "exts" : [ ".idb", ".man", ".spool", ".sw" ] },
+ "pcnfsd" : { "target" : "<%= folders['nfs'] -%>", "exts" : [ ".idb", ".man", ".spool", ".sw" ] },
  "explorer" : { "target" : "<%= folders['vmt'] -%>", "exts" : [ ".idb", ".links", ".man", ".sw" ] }
 }
