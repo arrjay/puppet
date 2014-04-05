@@ -19,13 +19,17 @@
    dmedia = plusdocs32 + [ ".data" ]
    desktop_eoe = plusdocs + [ ".data" ]
    xpg4 = [ ".eoe_man", ".eoe_sw", ".idb" ]
-   books =  [ ".books", ".idb" ]
+   books = [ ".books", ".idb" ]
+   softwin_patch = [ ".SoftWindows2_sw", ".idb" ]
+   compiler_patch = [ ".compiler_eoe_hdr", ".compiler_eoe_sw", ".compiler_eoe_sw32", ".compiler_eoe_sw64", ".idb" ]
+   eoe_sw_patch = [ ".eoe_sw", ".idb" ]
 
    folders = {
      # as referenced from /i/6.2/..
      "disc1" => "irix/6.2/S200_6.2_IRIX_1/dist",
      "disc2" => "irix/6.2/S201_6.2_IRIX_2/dist",
      "devel" => "irix/6.2/S300_6.[2-3]_IRIS_Development_Option_7.0.1/dist",
+     "apps" => "irix/6.2/S700_6.2_Applications_1996_08/dist",
    }
 
    links = {
@@ -63,7 +67,6 @@
        "4Dwm" => nil,
        "InPerson" => plusdocs,
        "PeoplePages" => plusdocs,
-       "demos" => nil,
        "desktop_tools" => plusdocs,
        "dynaweb" => plusdocs,
        "fddivis" => nil,
@@ -81,6 +84,7 @@
        "annotator" => desktop_eoe,
        "desktop_eoe" => desktop_eoe,
        "insight" => plusdocs64,
+       "insight_gloss" => onlydocs,
        "vli" => nil,
        "webserver" => min,
      },
@@ -105,6 +109,23 @@
        "sgitcl_dev" => min,
        "x_books" => books,
        "motif_books" => books,
+       "patchSG0001384" => compiler_patch,
+     },
+     "apps" => {
+       "cms_eoe" => sw64,
+       "demos" => nil,
+       "impr_base" => plusdocs,
+       "impr_rip" => nil,
+       "impr_rip_printers" => nil,
+       "impr_scan" => nil,
+       "impr_server" => nil,
+       "patchSG0001038" => softwin_patch,
+       "patchSG0001239" => softwin_patch,
+       "patchSG0001281" => eoe_sw_patch,
+       "patchSG0001336" => compiler_patch,
+       "patchSG0001413" => eoe_sw_patch,
+       "patchSG0001456" => eoe_sw_patch,
+       "mmailp" => plusdocs,
      }
    }
   -%>
@@ -148,15 +169,19 @@
  "tooltalk_eoe" : { "target" : "<%= folders['disc1'] -%>", "exts" : [ ".books", ".idb", ".man", ".sw", ".sw32", ".sw64"  ] },
  "SoftWindows2" : { "target" : "<%= folders['disc2'] -%>", "exts" : [ ".books", ".hyperhelp", ".idb", ".install", ".lang", ".man", ".sw", ".sw2" ] },
  "acrobat" : { "target" : "<%= folders['disc2'] -%>", "exts" : [ ".dnx", ".idb", ".man", ".sw" ] },
- "insight_gloss" : { "target" : "<%= folders['disc2'] -%>", "exts" : [ ".books", ".idb", ".man" ] },
- "netscape" : { "target" : "<%= folders['disc2'] -%>", "exts" : [ ".idb", ".man", ".plugin", ".src", ".sw" ] },
+ "netscape" : { "target" : "<%= folders['apps'] -%>", "exts" : [ ".idb", ".man", ".plugin", ".src", ".sw" ] },
  "webspace" : { "target" : "<%= folders['disc2'] -%>", "exts" : [ ".data", ".help", ".idb", ".man", ".sw" ] },
  "whatsnew" : { "target" : "<%= folders['disc2'] -%>", "exts" : [ ".doc", ".idb", ".man", ".registration", ".sw" ] },
  "xlators_3d" : { "target" : "<%= folders['disc2'] -%>", "exts" : [ ".doc", ".idb", ".man", ".sw" ] },
  "irix_dev" : { "target" : "<%= folders['devel'] -%>", "exts" : [ ".gifts", ".idb" ] },
  "license_dev" : { "target" : "<%= folders['devel'] -%>", "exts" : [ ".books", ".demo", ".hdr", ".idb", ".lib", ".lib32", ".lib64", ".man", ".sw" ] },
  "patchSG0001378" : { "target" : "<%= folders['devel'] -%>", "exts" : [ ".ftn77_eoe_sw32", ".ftn77_eoe_sw64", ".ftn_dev_sw32", ".ftn_dev_sw64", ".idb" ] },
- "patchSG0001384" : { "target" : "<%= folders['devel'] -%>", "exts" : [ ".compiler_eoe_hdr", ".compiler_eoe_sw", ".compiler_eoe_sw32", ".compiler_eoe_sw64", ".idb" ] },
  "patchSG0001390" : { "target" : "<%= folders['devel'] -%>", "exts" : [ ".compiler_dev_sw32", ".compiler_dev_sw64", ".compiler_eoe_sw", ".compiler_eoe_sw64", ".idb" ] },
- "x_dev" : { "target" : "<%= folders['devel'] -%>", "exts" : [ ".idb", ".man", ".src", ".sw", ".sw32", ".sw64" ] }
+ "x_dev" : { "target" : "<%= folders['devel'] -%>", "exts" : [ ".idb", ".man", ".src", ".sw", ".sw32", ".sw64" ] },
+ "impr_dev" : { "target" : "<%= folders['apps'] -%>", "exts" : [ ".books", ".idb", ".man", ".sw", ".sw32", ".sw5_3", ".sw64" ] },
+ "patchSG0001270" : { "target" : "<%= folders['apps'] -%>", "exts" : [ ".compiler_eoe_sw", ".compiler_eoe_sw64", ".idb" ] },
+ "patchSG0001278" : { "target" : "<%= folders['apps'] -%>", "exts" : [ ".dev_man", ".eoe_man", ".eoe_sw", ".idb" ] },
+ "patchSG0001295" : { "target" : "<%= folders['apps'] -%>", "exts" : [ ".eoe1_sw", ".eoe_sw", ".idb" ] },
+ "patchSG0001326" : { "target" : "<%= folders['apps'] -%>", "exts" : [ ".desktop_eoe_sw", ".idb" ] },
+ "patchSG0001389" : { "target" : "<%= folders['apps'] -%>", "exts" : [ ".eoe_sw", ".idb", ".nfs_sw" ] }
 }
