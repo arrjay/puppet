@@ -25,6 +25,7 @@
    softwin_patch = [ ".SoftWindows2_sw", ".idb" ]
    compiler_patch = [ ".compiler_eoe_hdr", ".compiler_eoe_sw", ".compiler_eoe_sw32", ".compiler_eoe_sw64", ".idb" ]
    eoe_sw_patch = [ ".eoe_sw", ".idb" ]
+   eoe_sw64_patch = [ ".eoe_sw", ".eoe_sw32", ".eoe_sw64", ".idb" ]
 
    folders = {
      # as referenced from /i/6.2/..
@@ -38,6 +39,7 @@
      "mipspro_c" => "mipspro/S700_6.\[2-5]_MIPSpro_C_Compiler_7.2.1/dist",
      "mipspro_cxx" => "mipspro/S700_6.\[2-3]_MIPSpro_C++_7.0.1/dist",
      "snmp" => "snmp/S700_6.\[2-5]_SNMP_Access_to_HP-UX_MIB_1.1.2/dist",
+     "i2_patches" => "irix/6.2/S999_6.2_Patches_for_IRIX_with_Indigo2_1996_08/dist",
    }
 
    links = {
@@ -158,6 +160,10 @@
      "snmp" => {
        "patchSG0002826" => xpg4,
        "snmpd" => nil,
+     },
+     "i2_patches" => {
+       "patchSG0001447" => eoe_sw64_patch,
+       "patchSG0001472" => eoe_sw64_patch,
      }
    }
   -%>
@@ -240,5 +246,6 @@
  "c_fe" : { "target" : "<%= folders['mipspro_c'] -%>", "exts" : [ ".idb", ".man", ".sw", ".sw64" ] },
  "c++_dev" : { "target" : "<%= folders['mipspro_cxx'] -%>", "exts" : [ ".books", ".hdr", ".idb", ".man", ".sw", ".sw32", ".sw64" ] },
  "RapidApp" : { "target" : "<%= folders['mipspro_cxx'] -%>", "exts" : [ ".books", ".idb", ".man", ".sw", ".tutorial" ] },
- "pcp_eoe" : { "target" : "<%= folders['snmp'] -%>", "exts" : [ ".books", ".idb", ".man", ".sw", ".sw64" ] }
+ "pcp_eoe" : { "target" : "<%= folders['snmp'] -%>", "exts" : [ ".books", ".idb", ".man", ".sw", ".sw64" ] },
+ "patchSG0001406" : { "target" : "<%= folders['i2_patches'] -%>", "exts" : [ ".idb", ".x_eoe_sw", ".x_eoe_sw64" ] }
 }
