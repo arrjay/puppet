@@ -9,6 +9,7 @@
    sw64_nd = sw64m_nd + [ ".sw" ]
    sw64 = sw64m + [ ".sw" ]
    compiler = sw64 + [ ".hdr" ]
+   eoe = compiler + [ ".books", ".src" ]
    plusdocs32 = plusdocs + [ ".sw32" ]
    dmedia = plusdocs32 + [ ".data" ]
    xpg4 = [ ".eoe_man", ".eoe_sw", ".idb" ]
@@ -30,7 +31,7 @@
        "dmedia_eoe" => dmedia,
        "dps_eoe" => plusdocs32,
        "efast" => nil,
-       "eoe" => nil,
+       "eoe" => eoe,
        "ftn77_eoe" => sw64,
        "ftn90_eoe" => sw64m,
        "goldengate" => sw32,
