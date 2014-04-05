@@ -5,8 +5,7 @@ class netboot::irix62::links(
 
   # this is not a template, but it's the only sane way to *find* the file
   # unless you really truly want it in your puppet code...
-  #$linklist = parseyaml(template('netboot/irix62/links.yaml'))
-  $linklist = parsejson(template('netboot/irix62/links.json'))
+  $linklist = parsejson(template('netboot/irix62/links.json.erb'))
 
   # handle extensions...
   define sublink(
