@@ -17,6 +17,7 @@
    plusdocs64 = plusdocs32 + [ ".sw64" ]
    dmedia_dev = plusdocs64 + [ ".src" ]
    dmedia = plusdocs32 + [ ".data" ]
+   dmedia_t = plusdocs + [ ".data" ]
    desktop_eoe = plusdocs + [ ".data" ]
    xpg4 = [ ".eoe_man", ".eoe_sw", ".idb" ]
    books = [ ".books", ".idb" ]
@@ -30,6 +31,7 @@
      "disc2" => "irix/6.2/S201_6.2_IRIX_2/dist",
      "devel" => "irix/6.2/S300_6.[2-3]_IRIS_Development_Option_7.0.1/dist",
      "apps" => "irix/6.2/S700_6.2_Applications_1996_08/dist",
+     "dse" => "irix/6.2/S700_Desktop_Special_Edition_1.1/dist",
    }
 
    links = {
@@ -126,6 +128,13 @@
        "patchSG0001413" => eoe_sw_patch,
        "patchSG0001456" => eoe_sw_patch,
        "mmailp" => plusdocs,
+     },
+     "dse" => {
+       "adminmagic" => plusdocs,
+       "dmedia_tools" => dmedia_t,
+       "netls_nodelock" => min,
+       "sgiperl" => nil,
+       "webspace_author" => dmedia_t,
      }
    }
   -%>
@@ -183,5 +192,25 @@
  "patchSG0001278" : { "target" : "<%= folders['apps'] -%>", "exts" : [ ".dev_man", ".eoe_man", ".eoe_sw", ".idb" ] },
  "patchSG0001295" : { "target" : "<%= folders['apps'] -%>", "exts" : [ ".eoe1_sw", ".eoe_sw", ".idb" ] },
  "patchSG0001326" : { "target" : "<%= folders['apps'] -%>", "exts" : [ ".desktop_eoe_sw", ".idb" ] },
- "patchSG0001389" : { "target" : "<%= folders['apps'] -%>", "exts" : [ ".eoe_sw", ".idb", ".nfs_sw" ] }
+ "patchSG0001389" : { "target" : "<%= folders['apps'] -%>", "exts" : [ ".eoe_sw", ".idb", ".nfs_sw" ] },
+ "1_1_DesktopSpecialEdition" : { "target" : "<%= folders['dse'] -%>", "exts" : [ ".idb", ".man" ] },
+ "patchSG0000253" : { "target" : "<%= folders['dse'] -%>", "exts" : [ ".eoe1_sw", ".idb" ] },
+ "patchSG0000455" : { "target" : "<%= folders['dse'] -%>", "exts" : [ ".4Dwm_man", ".4Dwm_sw", ".desktop_eoe_books", ".desktop_eoe_sw", ".idb" ] },
+ "patchSG0000517" : { "target" : "<%= folders['dse'] -%>", "exts" : [ ".eoe2_man", ".eoe2_sw", ".idb" ] },
+ "patchSG0000547" : { "target" : "<%= folders['dse'] -%>", "exts" : [ ".eoe1_sw", ".idb", ".nfs3_sw", ".nfs_sw" ] },
+ "patchSG0000568" : { "target" : "<%= folders['dse'] -%>", "exts" : [ ".eoe1_sw", ".idb" ] },
+ "patchSG0000615" : { "target" : "<%= folders['dse'] -%>", "exts" : [ ".galileo_sw", ".idb" ] },
+ "patchSG0000617" : { "target" : "<%= folders['dse'] -%>", "exts" : [ ".cadmin_sw", ".idb" ] },
+ "patchSG0000653" : { "target" : "<%= folders['dse'] -%>", "exts" : [ ".galileo_sw", ".idb" ] },
+ "patchSG0000670" : { "target" : "<%= folders['dse'] -%>", "exts" : [ ".eoe1_sw", ".eoe2_sw", ".idb" ] },
+ "patchSG0000721" : { "target" : "<%= folders['dse'] -%>", "exts" : [ ".idb", ".sirius_sw" ] },
+ "patchSG0000766" : { "target" : "<%= folders['dse'] -%>", "exts" : [ ".eoe1_man", ".eoe1_sw", ".eoe2_sw", ".idb" ] },
+ "patchSG0000775" : { "target" : "<%= folders['dse'] -%>", "exts" : [ ".eoe2_sw", ".idb" ] },
+ "patchSG0000824" : { "target" : "<%= folders['dse'] -%>", "exts" : [ ".idb", ".inventor_eoe_sw" ] },
+ "patchSG0000841" : { "target" : "<%= folders['dse'] -%>", "exts" : [ ".idb", ".isdn_eoe_sw" ] },
+ "patchSG0000844" : { "target" : "<%= folders['dse'] -%>", "exts" : [ ".idb", ".motif_eoe_sw" ] },
+ "patchSG0000926" : { "target" : "<%= folders['dse'] -%>", "exts" : [ ".eoe1_sw", ".gl_dev_sw", ".idb", ".x_eoe_sw" ] },
+ "patchSG0000944" : { "target" : "<%= folders['dse'] -%>", "exts" : [ ".InPerson_sw", ".idb" ] },
+ "patchSG0001005" : { "target" : "<%= folders['dse'] -%>", "exts" : [ ".idb", ".showcase_sw" ] },
+ "pcnfsd" : { "target" : "<%= folders['dse'] -%>", "exts" : [ ".idb", ".man", ".spool", ".sw" ] }
 }
