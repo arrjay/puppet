@@ -14,7 +14,7 @@ class netboot::irix62::links(
   ) {
     file{"$netboot::irix_common::mount/6.2/$object":
       ensure => symlink,
-      target => "../irix/6.2/$target/$object",
+      target => "../$target/$object",
     }
   }
 
@@ -24,10 +24,9 @@ class netboot::irix62::links(
     $target,
     $exts = ['.idb', '.man', '.sw'], # set this to not-an-array to get no-ops
   ) {
-    #fail("$object: $target!")
     file{"$netboot::irix_common::mount/6.2/$object":
       ensure => symlink,
-      target => "../irix/6.2/$target/$object",
+      target => "../$target/$object",
     }
 
     if is_array($exts) {
