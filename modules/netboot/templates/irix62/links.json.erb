@@ -15,10 +15,12 @@
    dmedia = plusdocs32 + [ ".data" ]
    desktop_eoe = plusdocs + [ ".data" ]
    xpg4 = [ ".eoe_man", ".eoe_sw", ".idb" ]
+   books =  [ ".books", ".idb" ]
 
    folders = {
      "disc1" => "S200_6.2_IRIX_1/dist",
      "disc2" => "S201_6.2_IRIX_2/dist",
+     "devel" => "S300_6.[2-3]_IRIS_Development_Option_7.0.1",
    }
 
    links = {
@@ -29,7 +31,6 @@
        "c++_eoe" => sw64,
        "c_eoe" => sw64,
        "cadmin" => nil,
-       "compiler_eoe" => compiler,
        "desktop_base" => sw64,
        "dmedia_eoe" => dmedia,
        "dps_eoe" => plusdocs32,
@@ -77,6 +78,28 @@
        "insight" => plusdocs64,
        "vli" => nil,
        "webserver" => min,
+     },
+     "devel" => {
+       "CaseVision" => min,
+       "ProDev" => min,
+       "SpeedShop" => plusdocs,
+       "WV_dev" => sw64,
+       "WorkShop" => plusdocs64,
+       "c_dev" => eoe,
+       "cite" => nil,
+       "compiler_dev" => eoe,
+       "compiler_eoe" => compiler,
+       "complib" => nil,
+       "dev" => plusdocs64,
+       "dmedia_dev" => plusdocs64,
+       "dvdr" => nil,
+       "gl_dev" => plusdocs64,
+       "impactI2V_dev" => min,
+       "inst_dev" => plusdocs,
+       "motif_dev" => sw64,
+       "sgitcl_dev" => min,
+       "x_books" => books,
+       "motif_books" => books,
      }
    }
   -%>
@@ -124,5 +147,10 @@
  "netscape" : { "target" : "S201_6.2_IRIX_2/dist", "exts" : [ ".idb", ".man", ".plugin", ".src", ".sw" ] },
  "webspace" : { "target" : "S201_6.2_IRIX_2/dist", "exts" : [ ".data", ".help", ".idb", ".man", ".sw" ] },
  "whatsnew" : { "target" : "S201_6.2_IRIX_2/dist", "exts" : [ ".doc", ".idb", ".man", ".registration", ".sw" ] },
- "xlators_3d" : { "target" : "S201_6.2_IRIX_2/dist", "exts" : [ ".doc", ".idb", ".man", ".sw" ] }
+ "xlators_3d" : { "target" : "S201_6.2_IRIX_2/dist", "exts" : [ ".doc", ".idb", ".man", ".sw" ] },
+ "license_dev" : { "target" : "S300_6.[2-3]_IRIS_Development_Option_7.0.1", "exts" : [ ".books", ".demo", ".hdr", ".idb", ".lib", ".lib32", ".lib64", ".man", ".sw" ] },
+ "patchSG0001378" : { "target" : "S300_6.[2-3]_IRIS_Development_Option_7.0.1", "exts" : [ ".ftn77_eoe_sw32", ".ftn77_eoe_sw64", ".ftn_dev_sw32", ".ftn_dev_sw64", ".idb" ] },
+ "patchSG0001384" : { "target" : "S300_6.[2-3]_IRIS_Development_Option_7.0.1", "exts" : [ ".compiler_eoe_hdr", ".compiler_eoe_sw", ".compiler_eoe_sw32", ".compiler_eoe_sw64", ".idb" ] },
+ "patchSG0001390" : { "target" : "S300_6.[2-3]_IRIS_Development_Option_7.0.1", "exts" : [ ".compiler_dev_sw32", ".compiler_dev_sw64", ".compiler_eoe_sw", "..compiler_eoe_sw64", ".idb" ] },
+ "x_dev" : { "target" : "S300_6.[2-3]_IRIS_Development_Option_7.0.1", "exts" : [ ".idb", ".man", ".src", ".sw", ".sw32", ".sw64" ] }
 }
