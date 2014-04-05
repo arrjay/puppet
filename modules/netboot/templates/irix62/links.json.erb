@@ -1,36 +1,81 @@
+<%
+   # handy extension lists
+   min = [ ".idb", ".sw" ]
+   plusdocs = min + [ ".books", ".man" ]
+   isdn = plusdocs + [ ".asi" ]
+   sw32 = [ ".idb", ".man", ".sw", ".sw32" ]
+   sw64m_nd = [ ".idb", ".sw32", ".sw64" ]
+   sw64m = sw64m_nd + [ ".man" ]
+   sw64_nd = sw64m_nd + [ ".sw" ]
+   sw64 = sw64m + [ ".sw" ]
+   compiler = sw64 + [ ".hdr" ]
+   plusdocs32 = plusdocs + [ ".sw32" ]
+   dmedia = plusdocs32 + [ ".data" ]
+   xpg4 = [ ".eoe_man", ".eoe_sw", ".idb" ]
+
+   folders = {
+     "disc1" => "S200_6.2_IRIX_1/dist",
+   }
+
+   links = {
+     "disc1" => {
+       "FDDIXPress" => nil,
+       "ViewKit_eoe" => sw64,
+       "WV_eoe" => sw64,
+       "c++_eoe" => sw64,
+       "c_eoe" => sw64,
+       "cadmin" => nil,
+       "compiler_eoe" => compiler,
+       "desktop_base" => sw64,
+       "dmedia_eoe" => dmedia,
+       "dps_eoe" => plusdocs32,
+       "efast" => nil,
+       "eoe" => nil,
+       "ftn77_eoe" => sw64,
+       "ftn90_eoe" => sw64m,
+       "goldengate" => sw32,
+       "hippi" => plusdocs,
+       "il_eoe" => sw32,
+       "insight_base" => nil,
+       "isdn_eoe" => isdn,
+       "io4prom" => min,
+       "kernLM_eoe" => min,
+       "vino" => nil,
+       "x_eoe" => sw64,
+       "motif_eoe" => sw64,
+       "media_warehouse" => plusdocs,
+       "license_eoe" => plusdocs,
+       "performer_eoe" => sw64,
+       "websupport_eoe" => sw64_nd,
+       "xpg4" => xpg4,
+     }
+   }
+  -%>
 {
- "FDDIXPress" : { "target" : "S200_6.2_IRIX_1/dist" },
- "ViewKit_eoe" : { "target" : "S200_6.2_IRIX_1/dist", "exts" : [ ".idb", ".man", ".sw", ".sw32", ".sw54" ] },
- "WV_eoe" : { "target" : "S200_6.2_IRIX_1/dist", "exts" : [ ".idb", ".man", ".sw", ".sw32", ".sw64" ] },
- "c++_eoe" : { "target" : "S200_6.2_IRIX_1/dist", "exts" : [ ".idb", ".man", ".sw", ".sw32", ".sw64" ] },
- "c_eoe" : { "target" : "S200_6.2_IRIX_1/dist", "exts" : [ ".idb", ".man", ".sw", ".sw32", ".sw64" ] },
- "cadmin" : { "target" : "S200_6.2_IRIX_1/dist" },
- "compiler_eoe" : { "target" : "S200_6.2_IRIX_1/dist", "exts" : [ ".hdr", ".idb", ".man", ".sw", ".sw32", ".sw64" ] },
- "desktop_base" : { "target" : "S200_6.2_IRIX_1/dist", "exts" : [ ".idb", ".man", ".sw", ".sw32", ".sw64" ] },
- "dmedia_eoe" : { "target" : "S200_6.2_IRIX_1/dist", "exts" : [ ".books", ".data", ".idb", ".man", ".sw", ".sw32" ] },
- "dps_eoe" : { "target" : "S200_6.2_IRIX_1/dist", "exts" : [ ".books", ".idb", ".man", ".sw", ".sw32" ] },
- "efast" : { "target" : "S200_6.2_IRIX_1/dist" },
- "eoe" : { "target" : "S200_6.2_IRIX_1/dist" },
- "ftn77_eoe" : { "target" : "S200_6.2_IRIX_1/dist", "exts" : [ ".idb", ".man", ".sw", ".sw32", ".sw64" ] },
- "ftn90_eoe" : { "target" : "S200_6.2_IRIX_1/dist", "exts" : [ ".idb", ".man", ".sw32", ".sw64" ] },
- "goldengate" : { "target" : "S200_6.2_IRIX_1/dist", "exts" : [ ".idb", ".man", ".sw", ".sw32" ] },
- "hippi"  : { "target" : "S200_6.2_IRIX_1/dist", "exts" : [ ".books", ".idb", ".man", ".sw" ] },
- "il_eoe" : { "target" : "S200_6.2_IRIX_1/dist", "exts" : [ ".idb", ".man", ".sw", ".sw32" ] },
- "insight_base" : { "target" : "S200_6.2_IRIX_1/dist" },
+<%# pop the *first* link and treat that one special.  -%>
+<% tags = links.keys
+   tag0 = tags.pop
+   files = links[tag0].keys
+   file0 = files.pop 
+-%>
+ "<%= file0 -%>" : { "target" : "<%= folders[tag0] -%>"<% if links[tag0][file0] -%>, "exts" : [ "<%- l_exts = links[tag0][file0].sort -%>
+<%= l_exts.pop -%>"<% unless l_exts.empty?
+    l_exts.each{|val| -%>, "<%= val -%>"<% } -%>
+ ] <%   end
+   end -%>
+ }<%# deal with the rest of tag0 now -%><% unless files.empty?
+  files.each{|file| -%>,
+ "<%= file -%>" : { "target" : "<%= folders[tag0] -%>"<% if links[tag0][file] -%>, "exts" : [ "<%- l_exts = links[tag0][file].sort -%>
+<%= l_exts.pop -%>"<% unless l_exts.empty?
+    l_exts.each{|val| -%>, "<%= val -%>"<% } -%>
+ ]<%   end
+   end -%>
+ }<% }
+  end -%>
+,<%# misc entries that don't lend to re-using %>
  "inst.README" : { "target" : "S200_6.2_IRIX_1/dist", "exts" : "none" },
  "inst.init": { "target" : "S200_6.2_IRIX_1/dist", "exts" : "none" },
  "inventor_eoe" : { "target" : "S200_6.2_IRIX_1/dist", "exts" : [ ".data", ".demo", ".idb", ".man", ".sw", ".sw32", ".sw64" ] },
- "io4prom" : { "target" : "S200_6.2_IRIX_1/dist", "exts" : [ ".idb", ".sw" ] },
- "isdn_eoe" : { "target" : "S200_6.2_IRIX_1/dist", "exts" : [ ".asi", ".books", ".idb", ".man", ".sw" ] },
- "kernLM_eoe" : { "target" : "S200_6.2_IRIX_1/dist", "exts" : [ ".idb", ".sw" ] },
- "license_eoe" : { "target" : "S200_6.2_IRIX_1/dist", "exts" : [ ".books", ".idb", ".man", ".sw" ] },
- "media_warehouse" : { "target" : "S200_6.2_IRIX_1/dist", "exts" : [ ".books", ".idb", ".man", ".sw" ] },
- "motif_eoe" : { "target" : "S200_6.2_IRIX_1/dist", "exts" : [ ".idb", ".man", ".sw", ".sw32", ".sw64" ] },
- "performer_eoe" : { "target" : "S200_6.2_IRIX_1/dist", "exts" : [ ".idb", ".man", ".sw", ".sw32", ".sw64" ] },
  "sgitcl_eoe" : { "target" : "S200_6.2_IRIX_1/dist", "exts" : [ ".books", ".demos", ".help", ".idb", ".man", ".sw" ] },
- "tooltalk_eoe" : { "target" : "S200_6.2_IRIX_1/dist", "exts" : [ ".books", ".idb", ".man", ".sw", ".sw32", ".sw64"  ] },
- "vino" : { "target" : "S200_6.2_IRIX_1/dist" },
- "websupport_eoe" : { "target" : "S200_6.2_IRIX_1/dist", "exts" : [ ".idb", ".sw", ".sw32", ".sw64" ] },
- "x_eoe" : { "target" : "S200_6.2_IRIX_1/dist", "exts" : [ ".idb", ".man", ".sw", ".sw32", ".sw64" ] },
- "xpg4" : { "target" : "S200_6.2_IRIX_1/dist", "exts" : [ ".eoe_man", ".eoe_sw", ".idb" ] }
+ "tooltalk_eoe" : { "target" : "S200_6.2_IRIX_1/dist", "exts" : [ ".books", ".idb", ".man", ".sw", ".sw32", ".sw64"  ] }
 }
