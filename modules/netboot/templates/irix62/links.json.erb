@@ -41,6 +41,7 @@
      "snmp" => "snmp/S700_6.\[2-5]_SNMP_Access_to_HP-UX_MIB_1.1.2/dist",
      "i2_patches" => "irix/6.2/S999_6.2_Patches_for_IRIX_with_Indigo2_1996_08/dist",
      "devlib" => "irix/6.2/irix-6.2-development-libraries",
+     "devfound" => "irix/6.2/irix-development-foundation-1.2-for-irix-6.2",
    }
 
    links = {
@@ -48,7 +49,6 @@
        "FDDIXPress" => nil,
        "ViewKit_eoe" => sw64,
        "WV_eoe" => sw64,
-       "c++_eoe" => sw64,
        "c_eoe" => sw64,
        "cadmin" => nil,
        "desktop_base" => sw64,
@@ -69,7 +69,6 @@
        "x_eoe" => sw64,
        "motif_eoe" => sw64,
        "media_warehouse" => plusdocs,
-       "license_eoe" => plusdocs,
        "performer_eoe" => sw64,
        "websupport_eoe" => sw64_nd,
        "xpg4" => xpg4,
@@ -104,10 +103,7 @@
        "ProDev" => min,
        "SpeedShop" => plusdocs,
        "WorkShop" => plusdocs64,
-       "c_dev" => eoe,
        "cite" => nil,
-       "compiler_dev" => compiler_dev,
-       "compiler_eoe" => compiler,
        "impactI2V_dev" => min,
        "x_books" => books,
        "patchSG0001384" => compiler_patch,
@@ -165,7 +161,18 @@
        "motif_books" => books,
        "motif_dev" => sw64,
        "sgitcl_dev" => min,
-     }
+     },
+     "devfound" => {
+       "c++_eoe" => sw64,
+       "c_dev" => eoe,
+       "compiler_dev" => compiler_dev,
+       "compiler_eoe" => compiler,
+       "ftn77_dev" => plusdocs,
+       "ftn90_dev" => plusdocs,
+       "langtools" => nil,
+       "license_eoe" => plusdocs,
+       "modules" => nil,
+     },
    }
   -%>
 {
@@ -245,8 +252,16 @@
  "pcnfsd" : { "target" : "<%= folders['nfs'] -%>", "exts" : [ ".idb", ".man", ".spool", ".sw" ] },
  "explorer" : { "target" : "<%= folders['vmt'] -%>", "exts" : [ ".idb", ".links", ".man", ".sw" ] },
  "c_fe" : { "target" : "<%= folders['mipspro_c'] -%>", "exts" : [ ".idb", ".man", ".sw", ".sw64" ] },
- "c++_dev" : { "target" : "<%= folders['mipspro_cxx'] -%>", "exts" : [ ".books", ".hdr", ".idb", ".man", ".sw", ".sw32", ".sw64" ] },
+ "c++_dev" : { "target" : "<%= folders['devfound'] -%>", "exts" : [ ".books", ".hdr", ".idb", ".man", ".sw", ".sw64" ] },
  "RapidApp" : { "target" : "<%= folders['mipspro_cxx'] -%>", "exts" : [ ".books", ".idb", ".man", ".sw", ".tutorial" ] },
  "pcp_eoe" : { "target" : "<%= folders['snmp'] -%>", "exts" : [ ".books", ".idb", ".man", ".sw", ".sw64" ] },
- "patchSG0001406" : { "target" : "<%= folders['i2_patches'] -%>", "exts" : [ ".idb", ".x_eoe_sw", ".x_eoe_sw64" ] }
+ "patchSG0001406" : { "target" : "<%= folders['i2_patches'] -%>", "exts" : [ ".idb", ".x_eoe_sw", ".x_eoe_sw64" ] },
+ "ftn_dev" : { "target" : "<%= folders['devfound'] -%>", "exts" : [ ".hdr", ".idb", ".man", ".sw", ".sw64" ] },
+ "ftn_eoe" : { "target" : "<%= folders['devfound'] -%>", "exts" : [ ".idb", ".man", ".sw", ".sw64" ] },
+ "patchSG0002052" : { "target" : "<%= folders['devfound'] -%>", "exts" : [ ".ftn90_dev_man", ".ftn90_dev_sw", ".idb" ] },
+ "patchSG0002360" : { "target" : "<%= folders['devfound'] -%>", "exts" : [ ".ftn_dev_hdr", ".ftn_dev_sw", ".ftn_dev_sw64", ".idb" ] },
+ "patchSG0002813" : { "target" : "<%= folders['devfound'] -%>", "exts" : [ ".c++_dev_sw", ".c++_dev_sw64", ".c++_eoe_sw", ".c++_eoe_sw64", ".idb" ] },
+ "patchSG0003596" : { "target" : "<%= folders['devfound'] -%>", "exts" : [ ".compiler_dev_sw", ".compiler_dev_sw32", ".compiler_dev_sw64", ".compiler_eoe_sw", ".compiler_eoe_sw64", ".idb" ] },
+ "patchSG0003597" : { "target" : "<%= folders['devfound'] -%>", "exts" : [ ".compiler_dev_hdr", ".ftn77_eoe_sw", ".ftn77_eoe_sw64", ".ftn90_dev_sw", ".ftn_dev_sw", ".ftn_dev_sw64", ".ftn_eoe_sw", ".ftn_eoe_sw64", ".idb" ] },
+ "patchSG0003598" : { "target" : "<%= folders['devfound'] -%>", "exts" : [ ".compiler_dev_hdr", ".compiler_dev_sw", ".compiler_dev_sw64", ".compiler_eoe_man", ".compiler_eoe_sw", ".compiler_eoe_sw64", ".idb" ] }
 }
