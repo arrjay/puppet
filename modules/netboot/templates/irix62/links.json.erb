@@ -12,7 +12,7 @@
    sw64_nd = sw64m_nd + [ ".sw" ]
    sw64 = sw64m + [ ".sw" ]
    compiler = sw64 + [ ".hdr" ]
-   compiler_dev = sw64 + [ ".books", ".src" ]
+   compiler_dev = [ ".sw", ".man", ".idb", ".sw64", ".books", ".src" ]
    eoe = compiler + [ ".books", ".src" ]
    plusdocs32 = plusdocs + [ ".sw32" ]
    plusdocs64 = plusdocs32 + [ ".sw64" ]
@@ -164,9 +164,8 @@
      },
      "devfound" => {
        "c++_eoe" => sw64,
-       "c_dev" => eoe,
        "compiler_dev" => compiler_dev,
-       "compiler_eoe" => compiler,
+       "compiler_eoe" => sw64,
        "ftn77_dev" => plusdocs,
        "ftn90_dev" => plusdocs,
        "langtools" => nil,
@@ -263,5 +262,6 @@
  "patchSG0002813" : { "target" : "<%= folders['devfound'] -%>", "exts" : [ ".c++_dev_sw", ".c++_dev_sw64", ".c++_eoe_sw", ".c++_eoe_sw64", ".idb" ] },
  "patchSG0003596" : { "target" : "<%= folders['devfound'] -%>", "exts" : [ ".compiler_dev_sw", ".compiler_dev_sw32", ".compiler_dev_sw64", ".compiler_eoe_sw", ".compiler_eoe_sw64", ".idb" ] },
  "patchSG0003597" : { "target" : "<%= folders['devfound'] -%>", "exts" : [ ".compiler_dev_hdr", ".ftn77_eoe_sw", ".ftn77_eoe_sw64", ".ftn90_dev_sw", ".ftn_dev_sw", ".ftn_dev_sw64", ".ftn_eoe_sw", ".ftn_eoe_sw64", ".idb" ] },
- "patchSG0003598" : { "target" : "<%= folders['devfound'] -%>", "exts" : [ ".compiler_dev_hdr", ".compiler_dev_sw", ".compiler_dev_sw64", ".compiler_eoe_man", ".compiler_eoe_sw", ".compiler_eoe_sw64", ".idb" ] }
+ "patchSG0003598" : { "target" : "<%= folders['devfound'] -%>", "exts" : [ ".compiler_dev_hdr", ".compiler_dev_sw", ".compiler_dev_sw64", ".compiler_eoe_man", ".compiler_eoe_sw", ".compiler_eoe_sw64", ".idb" ] },
+ "c_dev" : { "target" : "<%= folders['devfound'] -%>", "exts" : [ ".books", ".hdr", ".idb", ".man", ".src", ".sw" ] }
 }
