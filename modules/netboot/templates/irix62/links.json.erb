@@ -136,21 +136,21 @@
  }<%   }
    } -%>
 ,<%# misc entries that don't lend to re-using %>
- "inst.README" : { "target" : "S200_6.2_IRIX_1/dist", "exts" : "none" },
- "inst.init": { "target" : "S200_6.2_IRIX_1/dist", "exts" : "none" },
- "inventor_eoe" : { "target" : "S200_6.2_IRIX_1/dist", "exts" : [ ".data", ".demo", ".idb", ".man", ".sw", ".sw32", ".sw64" ] },
- "sgitcl_eoe" : { "target" : "S200_6.2_IRIX_1/dist", "exts" : [ ".books", ".demos", ".help", ".idb", ".man", ".sw" ] },
- "tooltalk_eoe" : { "target" : "S200_6.2_IRIX_1/dist", "exts" : [ ".books", ".idb", ".man", ".sw", ".sw32", ".sw64"  ] },
- "SoftWindows2" : { "target" : "S201_6.2_IRIX_2/dist", "exts" : [ ".books", ".hyperhelp", ".idb", ".install", ".lang", ".man", ".sw", ".sw2" ] },
- "acrobat" : { "target" : "S201_6.2_IRIX_2/dist", "exts" : [ ".dnx", ".idb", ".man", ".sw" ] },
- "insight_gloss" : { "target" : "S201_6.2_IRIX_2/dist", "exts" : [ ".books", ".idb", ".man" ] },
- "netscape" : { "target" : "S201_6.2_IRIX_2/dist", "exts" : [ ".idb", ".man", ".plugin", ".src", ".sw" ] },
- "webspace" : { "target" : "S201_6.2_IRIX_2/dist", "exts" : [ ".data", ".help", ".idb", ".man", ".sw" ] },
- "whatsnew" : { "target" : "S201_6.2_IRIX_2/dist", "exts" : [ ".doc", ".idb", ".man", ".registration", ".sw" ] },
- "xlators_3d" : { "target" : "S201_6.2_IRIX_2/dist", "exts" : [ ".doc", ".idb", ".man", ".sw" ] },
- "license_dev" : { "target" : "S300_6.[2-3]_IRIS_Development_Option_7.0.1", "exts" : [ ".books", ".demo", ".hdr", ".idb", ".lib", ".lib32", ".lib64", ".man", ".sw" ] },
- "patchSG0001378" : { "target" : "S300_6.[2-3]_IRIS_Development_Option_7.0.1", "exts" : [ ".ftn77_eoe_sw32", ".ftn77_eoe_sw64", ".ftn_dev_sw32", ".ftn_dev_sw64", ".idb" ] },
- "patchSG0001384" : { "target" : "S300_6.[2-3]_IRIS_Development_Option_7.0.1", "exts" : [ ".compiler_eoe_hdr", ".compiler_eoe_sw", ".compiler_eoe_sw32", ".compiler_eoe_sw64", ".idb" ] },
- "patchSG0001390" : { "target" : "S300_6.[2-3]_IRIS_Development_Option_7.0.1", "exts" : [ ".compiler_dev_sw32", ".compiler_dev_sw64", ".compiler_eoe_sw", "..compiler_eoe_sw64", ".idb" ] },
- "x_dev" : { "target" : "S300_6.[2-3]_IRIS_Development_Option_7.0.1", "exts" : [ ".idb", ".man", ".src", ".sw", ".sw32", ".sw64" ] }
+ "inst.README" : { "target" : "<%= folders['disc1'] -%>", "exts" : "none" },
+ "inst.init": { "target" : "<%= folders['disc1'] -%>", "exts" : "none" },
+ "inventor_eoe" : { "target" : "<%= folders['disc1'] -%>", "exts" : [ ".data", ".demo", ".idb", ".man", ".sw", ".sw32", ".sw64" ] },
+ "sgitcl_eoe" : { "target" : "<%= folders['disc1'] -%>", "exts" : [ ".books", ".demos", ".help", ".idb", ".man", ".sw" ] },
+ "tooltalk_eoe" : { "target" : "<%= folders['disc1'] -%>", "exts" : [ ".books", ".idb", ".man", ".sw", ".sw32", ".sw64"  ] },
+ "SoftWindows2" : { "target" : "<%= folders['disc2'] -%>", "exts" : [ ".books", ".hyperhelp", ".idb", ".install", ".lang", ".man", ".sw", ".sw2" ] },
+ "acrobat" : { "target" : "<%= folders['disc2'] -%>", "exts" : [ ".dnx", ".idb", ".man", ".sw" ] },
+ "insight_gloss" : { "target" : "<%= folders['disc2'] -%>", "exts" : [ ".books", ".idb", ".man" ] },
+ "netscape" : { "target" : "<%= folders['disc2'] -%>", "exts" : [ ".idb", ".man", ".plugin", ".src", ".sw" ] },
+ "webspace" : { "target" : "<%= folders['disc2'] -%>", "exts" : [ ".data", ".help", ".idb", ".man", ".sw" ] },
+ "whatsnew" : { "target" : "<%= folders['disc2'] -%>", "exts" : [ ".doc", ".idb", ".man", ".registration", ".sw" ] },
+ "xlators_3d" : { "target" : "<%= folders['disc2'] -%>", "exts" : [ ".doc", ".idb", ".man", ".sw" ] },
+ "license_dev" : { "target" : "<%= folders['devel'] -%>", "exts" : [ ".books", ".demo", ".hdr", ".idb", ".lib", ".lib32", ".lib64", ".man", ".sw" ] },
+ "patchSG0001378" : { "target" : "<%= folders['devel'] -%>", "exts" : [ ".ftn77_eoe_sw32", ".ftn77_eoe_sw64", ".ftn_dev_sw32", ".ftn_dev_sw64", ".idb" ] },
+ "patchSG0001384" : { "target" : "<%= folders['devel'] -%>", "exts" : [ ".compiler_eoe_hdr", ".compiler_eoe_sw", ".compiler_eoe_sw32", ".compiler_eoe_sw64", ".idb" ] },
+ "patchSG0001390" : { "target" : "<%= folders['devel'] -%>", "exts" : [ ".compiler_dev_sw32", ".compiler_dev_sw64", ".compiler_eoe_sw", "..compiler_eoe_sw64", ".idb" ] },
+ "x_dev" : { "target" : "<%= folders['devel'] -%>", "exts" : [ ".idb", ".man", ".src", ".sw", ".sw32", ".sw64" ] }
 }
