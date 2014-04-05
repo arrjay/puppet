@@ -37,6 +37,7 @@
      "nfs" => "onc3_nfs/S700_6.\[2-5]_ONC3_NFS_v3/dist",
      "mipspro_c" => "mipspro/S700_6.\[2-5]_MIPSpro_C_Compiler_7.2.1/dist",
      "mipspro_cxx" => "mipspro/S700_6.\[2-3]_MIPSpro_C++_7.0.1/dist",
+     "snmp" => "snmp/S700_6.\[2-5]_SNMP_Access_to_HP-UX_MIB_1.1.2/dist",
    }
 
    links = {
@@ -153,6 +154,10 @@
      },
      "mipspro_cxx" => {
        "ViewKit_dev" => plusdocs64,
+     },
+     "snmp" => {
+       "patchSG0002826" => xpg4,
+       "snmpd" => nil,
      }
    }
   -%>
@@ -234,5 +239,6 @@
  "explorer" : { "target" : "<%= folders['vmt'] -%>", "exts" : [ ".idb", ".links", ".man", ".sw" ] },
  "c_fe" : { "target" : "<%= folders['mipspro_c'] -%>", "exts" : [ ".idb", ".man", ".sw", ".sw64" ] },
  "c++_dev" : { "target" : "<%= folders['mipspro_cxx'] -%>", "exts" : [ ".books", ".hdr", ".idb", ".man", ".sw", ".sw32", ".sw64" ] },
- "RapidApp" : { "target" : "<%= folders['mipspro_cxx'] -%>", "exts" : [ ".books", ".idb", ".man", ".sw", ".tutorial" ] }
+ "RapidApp" : { "target" : "<%= folders['mipspro_cxx'] -%>", "exts" : [ ".books", ".idb", ".man", ".sw", ".tutorial" ] },
+ "pcp_eoe" : { "target" : "<%= folders['snmp'] -%>", "exts" : [ ".books", ".idb", ".man", ".sw", ".sw64" ] }
 }
