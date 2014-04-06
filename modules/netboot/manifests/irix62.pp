@@ -56,6 +56,31 @@ class netboot::irix62 (
     target => "../irix/6.2/S200_6.2_IRIX_1/dist/miniroot",
   }
 
+  # retrieve/extract patches
+  define getpatch(
+    $dirname = $title,
+    $tarfile,
+  ) {
+    exec{"fetch $dirname package ($tarfile)":
+      command => "/usr/bin/fetch $netboot::irix_common::patch_mirror/6.2/$tarfile -o $netboot::irix_common::mount/patches/$tarfile",
+      creates => "$netboot::irix_common::mount/patches/$tarfile",
+    }
+    ->
+    file{"$netboot::irix_common::mount/patches/$dirname":
+      ensure => directory,
+    }
+    ~>
+    exec{"extract $tarfile":
+      command => "/usr/bin/tar xf $netboot::irix_common::mount/patches/$tarfile -C $netboot::irix_common::mount/patches/$dirname",
+      refreshonly => true,
+    }
+  }
+
+  getpatch{'6.2_POSIX': tarfile => '6.2_POSIX.tardist'}
+  getpatch{'6.2_req_rec_Indigo_Indy_ChallengeS_All-Indigo2': tarfile => '6.2_req_rec_Indigo_Indy_ChallengeS_All-Indigo2.tardist'}
+  getpatch{'6.2_y2k_Indigo_Indy_ChallengeS_All-Indigo2': tarfile => '6.2_y2k_Indigo_Indy_ChallengeS_All-Indigo2.tardist'}
+  getpatch{'patchSG0003911': tarfile => 'patchSG0003911.tar'} # Compiler/linker
+
   # irix 6.2 dist links are handled outside of this, though
   include netboot::irix62::links
 

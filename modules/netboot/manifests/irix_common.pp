@@ -29,8 +29,6 @@ class netboot::irix_common (
   $m_uid = hiera('mirror::uid')
   file{"$mount/patches":
     ensure => directory,
-    owner => $m_uid,
-    group => $m_uid,
   }
 
   # mount it in tftp-space
