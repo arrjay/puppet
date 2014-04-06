@@ -8,3 +8,4 @@ netboot::user::irix:
     home: /private/irixinst
     password: '!!'
     comment: 'Irix Installation User'
+netboot::mirror::irix_patches: 'moroder.produxi.net::swarchive/patches/sgi/irix'
