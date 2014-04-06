@@ -11,7 +11,6 @@ class netboot::irix_common (
 ) {
   include inetd::tftpd
   include inetd::rshd
-  include crontask
 
   package{$packages: ensure => installed}
 
@@ -32,30 +31,6 @@ class netboot::irix_common (
     ensure => directory,
     owner => $m_uid,
     group => $m_uid,
-  }
-
-  file{"$crontask::dir/netboot-sync-irix-patches.sh":
-    ensure => present,
-    owner => root,
-    group => 0,
-    mode => 0755,
-    source => "puppet:///modules/netboot/sync-irix-patches.sh",
-  }
-
-  file{"$m_confdir/netboot4irix.conf":
-    ensure => present,
-    owner => root,
-    group => 0,
-    mode => 0644,
-    content => template("netboot/irix_netboot.conf.erb"),
-  }
-
-  cron{"netboot-mirror-irix-patches":
-    command => "$crontask::dir/netboot-sync-irix-patches.sh $m_confdir",
-    user => mirror,
-    hour => 7,
-    minute => 23,
-    weekday => 'Thu',
   }
 
   # mount it in tftp-space
