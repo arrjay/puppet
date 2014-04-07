@@ -4,7 +4,7 @@ class bootparamd (
 
   # get router for bootparamd, else solaris gets damn unhappy.
   $netinfo = hiera_hash('network')
-  $router = $netinfo['router']
+  $router = $netinfo['gateway']
 
   case $::osfamily {
     'FreeBSD': {
