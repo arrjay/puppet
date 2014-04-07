@@ -4,6 +4,7 @@ class bootparamd (
 
   # get router for bootparamd, else solaris gets damn unhappy.
   $netinfo = hiera_hash('network')
+  $router = $netinfo['router']
 
   case $::osfamily {
     'FreeBSD': {
@@ -22,7 +23,7 @@ class bootparamd (
 
   # -s to enable syslog, -r to wire down a router
   augeas{"rc.conf: bootparamd flags":
-    changes => [ "set /files/etc/rc.conf/bootparamd_flags '\"-s -r $netinfo['router']\"'" ],
+    changes => [ "set /files/etc/rc.conf/bootparamd_flags '\"-s -r $router\"'" ],
     notify  => Exec["restart bootparamd"],
   }
 
