@@ -1,8 +1,10 @@
 netboot::uri::fxarcs: 'http://moroder.produxi.net/software-archive/jigdo-data/sgi/irix/6.5/S100_6.5.29_Installation_Tools_Overlays_1/stand/fx.ARCS'
 netboot::rsync::irix: 'moroder.produxi.net::swarchive/jigdo-data/sgi'
 netboot::mount::irix: '/i'
-netboot::zfs_parent::irix: 'minipool'
 netboot::zfs_fs::irix: 'irix'
+netboot::mount::jumpstart: '/j'
+netboot::zfs_fs::jumpstart: 'jumpstart'
+netboot::rsync::solaris8: 'moroder.produxi.net::swarchive/jigdo-data/oracle/solaris/8/SOL_8_204_SPARC.dvd'
 netboot::user::irix:
     name: guest
     home: /private/irixinst

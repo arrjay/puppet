@@ -9,13 +9,16 @@ classes:
     - netboot::debian_ip2x
     - ftpserver
     - netboot::irix62
-netboot::obsd_sparc32_hosts:
+    - netboot::solaris8_sparc
+netboot::solaris8::sun4m_hosts:
     - boron
 netboot::irix62_hosts:
     - fluorine
 netboot::netbsd_ip2x_ver: 6.1.3
 netboot::user::irix:
     home: /minipool/private/irixinst
+netboot::zfs_parent::irix: 'minipool'
+netboot::zfs_parent::jumpstart: 'minipool'
 nameserver::group: 'standard'
 dhcpd:
     authoritative: true
