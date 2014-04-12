@@ -6,6 +6,9 @@ class netboot::solaris8_sparc(
   # needed for downcase, of all things.
   include stdlib
 
+  # pick up dhcpd/ifgen
+  require dhcpd::ifgen
+
   # pick up definitions appropriate for all jumpstart OSes
   include netboot::jumpstart_common
 
@@ -106,6 +109,11 @@ class netboot::solaris8_sparc(
       ensure => present,
       source => "$netboot::jumpstart_common::mount/sol8/Solaris_8/Tools/Boot/usr/platform/sun4m/lib/fs/nfs/inetboot",
     }
+    ->
+    file{"$inetd::tftpd::tftproot/inetboot.sol8.sun4u":
+      ensure => present,
+      source => "$netboot::jumpstart_common::mount/sol8/Solaris_8/Tools/Boot/usr/platform/sun4u/lib/fs/nfs/inetboot",
+    }
     #->
     # http://malpaso.ru/solaris-jumpstart-bug/ - hack sol8/Solaris_8/Tools/Boot/sbin/rcS to wire out netmask in
     # actually, my particular problem turned out to be bootparamd returning idiocy.
@@ -125,5 +133,18 @@ class netboot::solaris8_sparc(
 
   if $sun4m_hosts {
     solaris8_sun4m_host{$sun4m_hosts: }
+  }
+
+  define solaris8_sun4u_host(
+    $host = $title,
+  ) {
+    $interfaces = $netboot::jumpstart_common::interfaces
+    $ip = $interfaces[$host]['ip']
+    netboot::tftplink{"$ip": source => "inetboot.sol8.sun4u"}
+  }
+
+  if $sun4u_hosts {
+    notice("we only set up the tftp link - specify host params in hieradata!")
+    solaris8_sun4u_host{$sun4u_hosts: }
   }
 }

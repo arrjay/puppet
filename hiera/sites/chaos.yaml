@@ -166,7 +166,13 @@ interface:
         ip: 10.100.252.15
         desc: VIP
         macaddr: '00:03:ba:a2:71:dc'
+        bootfile: '0A64FC0F'
+        bootserver: 10.100.252.2
         routeable: no
+        vendorspace: 'SUNW'
+        extra:
+            - 'option SUNW.install-path "/j/sol8"'
+            - 'option SUNW.root-path-name "/j/sol8/Solaris_8/Tools/Boot"'
     cobalt-bootif:
         ip: 10.100.252.16
         desc: VIP

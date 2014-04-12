@@ -2,8 +2,10 @@ class netboot::jumpstart_common (
   $filesystem = hiera('netboot::zfs_fs::jumpstart'),
   $mount = hiera('netboot::mount::jumpstart'),
   $parent = hiera('netboot::zfs_parent::jumpstart'),
+  $ipv4_addr = hiera('netboot::ip::jumpstart'),
 ) {
   include inetd::tftpd
+  include dhcpd::ifgen
 
   # define interfaces here, since many solaris boxes can rarp
   $interfaces = hiera_hash("interface")
@@ -46,5 +48,13 @@ class netboot::jumpstart_common (
   # augeas puts spaces in sysctl.conf output *if adding*
     augeas {"sysctl.conf - enable net.inet.icmp.maskrepl":
     changes => [ "set /files/etc/sysctl.conf/net.inet.icmp.maskrepl 1", ],
+  }
+
+  # chuck options needed in dhcp config
+  $servername = $::hostname
+  concat::fragment{"dhcpd: SUNW jumpstart common options":
+    target => $dhcpd::cfg,
+    content => template("netboot/dhcpd_sunw.erb"),
+    order => 06,
   }
 }

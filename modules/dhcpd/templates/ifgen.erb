@@ -2,8 +2,19 @@
   host <%= @clientname -%> {
     hardware ethernet <%= @macaddr -%>;
     fixed-address <%= @ip -%>;
+<%   if @bootserver -%>
+    next-server <%= @bootserver -%>;
+<%   end -%>
 <%   if @bootfile -%>
     filename "<%= @bootfile -%>";
+<%   end -%>
+<%   if @vendorspace -%>
+    vendor-option-space <%= @vendorspace -%>;
+<%   end -%>
+<%   if @extra -%>
+<%     @extra.each do |line| -%>
+    <%= line -%>;
+<%     end -%>
 <%   end -%>
   }
 <% end -%>
