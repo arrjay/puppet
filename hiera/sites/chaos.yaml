@@ -171,8 +171,8 @@ interface:
         routeable: no
         vendorspace: 'SUNW'
         extra:
-            - 'option SUNW.install-path "/j/sol9"'
-            - 'option SUNW.root-path-name "/j/sol9/Solaris_9/Tools/Boot"'
+            - 'option SUNW.install-path "/j/sol10"'
+            - 'option SUNW.root-path-name "/j/sol10/Solaris_10/Tools/Boot"'
     cobalt-bootif:
         ip: 10.100.252.16
         desc: VIP

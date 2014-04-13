@@ -6,6 +6,7 @@ netboot::mount::jumpstart: '/j'
 netboot::zfs_fs::jumpstart: 'jumpstart'
 netboot::rsync::solaris8: 'moroder.produxi.net::swarchive/jigdo-data/oracle/solaris/8/SOL_8_204_SPARC.dvd'
 netboot::rsync::solaris9: 'moroder.produxi.net::swarchive/jigdo-data/oracle/solaris/9/SOL_9_905_SPARC'
+netboot::rsync::solaris10: 'moroder.produxi.net::swarchive/jigdo-data/oracle/solaris/10/SOL_10_113_SPARC'
 netboot::user::irix:
     name: guest
     home: /private/irixinst
