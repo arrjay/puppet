@@ -69,6 +69,14 @@ class mirror (
     source  => "puppet:///modules/mirror/ncftp-freebsd.cfg",
   }
 
+  file{"$confdir/ncftp/hp.cfg":
+    ensure  => present,
+    owner   => mirror,
+    group   => mirror,
+    mode    => 0644,
+    source  => "puppet:///modules/mirror/ncftp-hp.cfg",
+  }
+
   file{"$crontask::dir/trimtrees.pl":
     ensure  => present,
     owner   => root,
