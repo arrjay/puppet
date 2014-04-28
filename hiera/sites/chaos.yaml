@@ -182,6 +182,7 @@ interface:
         ip: 10.100.252.30
         desc: "AlphaPC 164LX"
         macaddr: '00:00:f8:10:2a:b9'
+        bootserver: 10.100.252.2
     fluorine:
         ip: 10.100.252.31
         desc: "SGI IP22"
