@@ -2,6 +2,7 @@ class netboot::alphapc_164lx_fw (
   $srm_rom = hiera('netboot::uri::alphapc_164lx_srmfw'),
   $fwupdate_exe = hiera('netboot::uri::alphapc_164lx_fwupdate'),
   $ab_rom_zip = hiera('netboot::uri::alphapc_164lx_alphabios_zip'),
+  $default_fw = hiera('netboot::flag::alphapc_164lx_defaultfw','alphabios'), # or srm
 ) {
   include inetd::tftpd
 
@@ -38,5 +39,23 @@ class netboot::alphapc_164lx_fw (
   exec{"move LX164NT.ROM to $lxroot":
     command => "/bin/mv /tmp/LX164NT.ROM $lxroot/lx164nt.rom",
     refreshonly => true,
+  }
+
+  case $default_fw {
+    alphabios: {
+      file {"$inetd::tftpd::tftproot/lx164nt.rom":
+        ensure => link,
+        target => '164lx/lx164nt.rom',
+      }
+    }
+    srm: {
+      file {"$inetd::tftpd::tftproot/lx164nt.rom":
+        ensure => link,
+        target => '164lx/lx164srm.rom',
+      }
+    }
+    default: {
+      fail ("unsupported alphapc164lx firmware type: $default_fw")
+    }
   }
 }

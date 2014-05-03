@@ -51,6 +51,7 @@ class dhcpd::ifgen {
     $vendorspace = undef,
     $extra = undef,
     $bootserver = undef,
+    $always_rfc1048 = false,
   ) {
     if $routeable == true {
       concat::fragment{"dhcpd: $clientname":

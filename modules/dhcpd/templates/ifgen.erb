@@ -8,6 +8,9 @@
 <%   if @bootfile -%>
     filename "<%= @bootfile -%>";
 <%   end -%>
+<%   if @always_rfc1048 -%>
+    always-reply-rfc1048 true;
+<%   end -%>
 <%   if @vendorspace -%>
     vendor-option-space <%= @vendorspace -%>;
 <%   end -%>

@@ -16,3 +16,4 @@ netboot::user::irix:
     password: '!!'
     comment: 'Irix Installation User'
 netboot::mirror::irix_patches: 'http://moroder.produxi.net/software-archive/patches/sgi/irix'
+netboot::flag::alphapc_164lx_defaultfw: 'srm'
