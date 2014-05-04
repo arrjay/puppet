@@ -9,6 +9,7 @@ classes:
     - netboot::debian_ip2x
     - ftpserver
     - netboot::irix62
+    - netboot::irix65
     - netboot::solaris8_sparc
     - netboot::solaris9_sparc
     - netboot::solaris10_sparc

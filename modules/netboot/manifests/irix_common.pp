@@ -60,12 +60,12 @@ class netboot::irix_common (
     $component = $title,
   ) {
     exec{"rsync4irix: mkdir $component":
-      command => "/bin/mkdir -p $netboot::irix_common::mount/$component",
+      command => "/bin/mkdir -p \"$netboot::irix_common::mount/$component\"",
       creates => "$netboot::irix_common::mount/$component",
       notify => Exec["rsync4irix: $component"],
     }
     exec{"rsync4irix: $component":
-      command => "/usr/local/bin/rsync -rlDx $netboot::irix_common::source/$component/ $netboot::irix_common::mount/$component/",
+      command => "/usr/local/bin/rsync -rlDx \"$netboot::irix_common::source/$component/\" \"$netboot::irix_common::mount/$component/\"",
       refreshonly => true,
       timeout => 1800,
     }
