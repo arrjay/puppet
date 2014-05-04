@@ -24,6 +24,7 @@ netboot::irix62_hosts:
     - fluorine
 netboot::obsd_alpha_hosts:
     - neon
+    - krypton-bootif
 netboot::netbsd_ip2x_ver: 6.1.3
 netboot::user::irix:
     home: /minipool/private/irixinst

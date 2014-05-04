@@ -160,8 +160,11 @@ interface:
     krypton-bootif:
         ip: 10.100.252.14
         desc: VIP
-        macaddr: '00:d0:b7:8e:50:19'
+        macaddr: '00:50:8b:b2:8b:71'
         routeable: no
+        bootserver: 10.100.252.2
+        bootfile: '0A64FC0E'
+        always_rfc1048: true
     manganese-bootif:
         ip: 10.100.252.15
         desc: VIP
