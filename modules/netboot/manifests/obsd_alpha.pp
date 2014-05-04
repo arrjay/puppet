@@ -1,5 +1,5 @@
 class netboot::obsd_alpha(
-  $version = hiera('netboot::obsd_alpha_ver','5.4'),
+  $version = hiera('netboot::obsd_alpha_ver','5.5'),
   $hosts   = hiera('netboot::obsd_alpha_hosts',undef),
 ) {
   require netboot
