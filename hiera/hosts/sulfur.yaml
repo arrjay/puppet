@@ -15,6 +15,7 @@ classes:
     - netboot::solaris10_sparc
     - netboot::alphapc_164lx_fw
     - netboot::obsd_alpha
+    - netboot::netbsd_cobalt
 netboot::ip::jumpstart: '10.100.252.2'
 netboot::solaris8::sun4m_hosts:
     - boron
@@ -30,6 +31,7 @@ netboot::user::irix:
     home: /minipool/private/irixinst
 netboot::zfs_parent::irix: 'minipool'
 netboot::zfs_parent::jumpstart: 'minipool'
+netboot::zfs_parent::netbsd_cobalt: 'minipool'
 nameserver::group: 'standard'
 dhcpd:
     authoritative: true

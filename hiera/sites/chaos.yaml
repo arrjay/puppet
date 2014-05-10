@@ -181,6 +181,9 @@ interface:
         desc: VIP
         macaddr: '00:10:e0:00:05:9b'
         routeable: no
+        bootserver: 10.100.252.2
+        extra:
+            - 'option root-path "/nfsroot"'
     neon:
         ip: 10.100.252.30
         desc: "AlphaPC 164LX"
