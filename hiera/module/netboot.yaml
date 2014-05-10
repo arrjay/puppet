@@ -18,5 +18,4 @@ netboot::user::irix:
 netboot::mirror::irix_patches: 'http://moroder.produxi.net/software-archive/patches/sgi/irix'
 netboot::flag::alphapc_164lx_defaultfw: 'srm'
 netboot::rsync::netbsd_cobalt: 'moroder.produxi.net::swarchive/jigdo-data/3rdparty/NetBSD-cobalt/restorecd-5.2.2-20140201/nfsroot/'
-netboot::mount::netbsd_cobalt: '/n'
 netboot::zfs_fs::netbsd_cobalt: 'netbsd_cobalt'
