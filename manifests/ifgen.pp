@@ -23,6 +23,12 @@ class dhcpd::ifgen {
     order => 05,
   }
 
+  concat::fragment{"dhcpd:: MacNC vendor options (openfirmware)":
+    target => $dhcpd::cfg,
+    content => template("dhcpd/macnc.erb"),
+    order => 05,
+  }
+
   concat::fragment{"dhcpd: subnet/group routeable":
     target => $dhcpd::cfg,
     content => template("dhcpd/ifgen_start.erb"),
