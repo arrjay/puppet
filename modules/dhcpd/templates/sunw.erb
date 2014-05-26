@@ -51,6 +51,8 @@ option SUNW.terminal-name code 15 = text;                           #unused
 # SbootURI, Path to the standalone boot file or path to the WAN boot file.
 #           standalone: tftp://inetboot.sun4u
 #           wan boot:   http://host.domain/path-to-file
+# for whatever combination of firmware/wanboot screwiness I'm in, the
+#  server actually needs to be specified by IP.
 option SUNW.standalone-boot-uri code 16 = text;                     #optional
 
 # SHTTPproxy, IP address and port number of the proxy server for 

@@ -222,6 +222,8 @@ interface:
         ip: 10.100.252.38
         desc: "Apple PowerMac5,1"
         macaddr: '00:30:65:b3:27:2a'
+        bootserver: 10.100.252.2
+        bootfile: 'yaboot'
     nessus:
         ip: 10.100.252.252
         desc: VIP

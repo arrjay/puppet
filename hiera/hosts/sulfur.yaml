@@ -16,6 +16,7 @@ classes:
     - netboot::alphapc_164lx_fw
     - netboot::obsd_alpha
     - netboot::netbsd_cobalt
+    - netboot::yaboot
 netboot::ip::jumpstart: '10.100.252.2'
 netboot::solaris8::sun4m_hosts:
     - boron
