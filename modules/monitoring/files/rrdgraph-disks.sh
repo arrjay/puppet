@@ -33,6 +33,12 @@ case $platform in
         disks=''
       fi
     fi
+    if [ -d /sys/class/mmc_host ]; then
+      for x in /sys/class/mmc_host/*/*/block/* ; do
+        disk=${x##*/}
+        disks="${disk} ${disks}"
+      done
+    fi
     ;;
   *)
     exit 255
