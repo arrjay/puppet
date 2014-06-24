@@ -28,6 +28,10 @@ case $platform in
         disk=${x##*/}
         disks="${disk} ${disks}"
       done
+      # if you didn't find any disks (but had the scsi_disk class), disks=='* ' - unset now
+      if [ "${disks}" == '* ' ]; then
+        disks=''
+      fi
     fi
     ;;
   *)
