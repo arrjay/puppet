@@ -28,6 +28,7 @@ netboot::obsd_alpha_hosts:
     - neon
     - krypton-bootif
 netboot::netbsd_ip2x_ver: 6.1.3
+netboot::obsd_ip22_ver: 5.5
 netboot::user::irix:
     home: /minipool/private/irixinst
 netboot::zfs_parent::irix: 'minipool'
