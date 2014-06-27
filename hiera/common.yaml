@@ -21,9 +21,9 @@ upsdefs:
         desc: 'electric six'
     JB0803005867:
         name: elo
-        desc: 'HID UPS'
+        desc: 'electric light orchestra'
     3B1110X36238:
-        name: tesla
+        name: booberry
         desc: 'tesla'
 ntp::servers:
     - ntp-0.produxi.net
