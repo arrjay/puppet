@@ -20,8 +20,11 @@ upsdefs:
         name: six
         desc: 'electric six'
     JB0803005867:
-        name: beck
+        name: elo
         desc: 'HID UPS'
+    3B1110X36238:
+        name: tesla
+        desc: 'tesla'
 ntp::servers:
     - ntp-0.produxi.net
     - ntp-1.produxi.net
