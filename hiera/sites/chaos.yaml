@@ -228,6 +228,10 @@ interface:
         ip: 10.100.252.39
         desc: "Power Computing PowerBase 240"
         macaddr: '00:00:c5:5f:39:74'
+    arsenic:
+        ip: 10.100.252.40
+        desc: "IBM Model 7042/7043"
+        macaddr: '01:00:5e:00:00:01'
     nessus:
         ip: 10.100.252.252
         desc: VIP
