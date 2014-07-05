@@ -232,6 +232,14 @@ interface:
         ip: 10.100.252.40
         desc: "IBM Model 7042/7043"
         macaddr: '01:00:5e:00:00:01'
+    oxygen:
+        ip: 10.100.252.41
+        desc: "SGI IP32 (r12k)"
+        macaddr: '08:00:69:0e:67:33'
+    bromine:
+        ip: 10.100.252.42
+        desc: "NeXTcube Turbo"
+        macaddr: '00:00:0f:01:24:e7'
     nessus:
         ip: 10.100.252.252
         desc: VIP
