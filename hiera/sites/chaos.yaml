@@ -224,6 +224,10 @@ interface:
         macaddr: '00:30:65:b3:27:2a'
         bootserver: 10.100.252.2
         bootfile: 'yaboot'
+    vanadium:
+        ip: 10.100.252.39
+        desc: "Power Computing PowerBase 240"
+        macaddr: '00:00:c5:5f:39:74'
     nessus:
         ip: 10.100.252.252
         desc: VIP
