@@ -18,7 +18,7 @@ nameserver::zonedefaults:
 dhcpd::template: ifgen
 nameserver::zonedata:
     j.hack:
-        serial: 2014033000
+        serial: 2014070600
         nameservers:
             - sulfur
             - potassium
@@ -148,11 +148,11 @@ interface:
     sulfur:
         ip: 10.100.252.2
         desc: VM
-    tungsten:
-        ip: 10.100.252.3
-        desc: VM
     potassium:
         ip: 10.100.252.4
+        desc: VM
+    copper:
+        ip: 10.100.252.5
         desc: VM
     selenium-alt:
         ip: 10.100.252.12
