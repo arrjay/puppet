@@ -1,6 +1,0 @@
-ldapclient::server: 'molybdenum.produxi.net'
-ldapclient::basedn: 'dc=produxi,dc=net'
-ldapclient::nss_min_uid: '500'
-ldapclient::nss_max_uid: '100000'
-ldapclient::nss_user_attr: 'uidNumber'
-ldapclient::nss_group_attr: 'primaryGroupID'
