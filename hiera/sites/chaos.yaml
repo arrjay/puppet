@@ -1,6 +1,7 @@
 automount::auto_home: chaos_nethome
 automount::auto_site_template: chaos_site
 dnsdomain: j.hack
+krbclient::realm: 'INT.J.HACK'
 network:
     subnet: 10.100.252.0
     netmask: 255.255.255.0
