@@ -232,7 +232,7 @@ interface:
     arsenic:
         ip: 10.100.252.40
         desc: "IBM Model 7042/7043"
-        macaddr: '01:00:5e:00:00:01'
+        macaddr: '00:06:29:21:f0:23'
     oxygen:
         ip: 10.100.252.41
         desc: "SGI IP32 (r12k)"
