@@ -2,6 +2,12 @@ automount::auto_home: chaos_nethome
 automount::auto_site_template: chaos_site
 dnsdomain: j.hack
 krbclient::realm: 'INT.J.HACK'
+ldapclient::server: 'potassium.j.hack'
+ldapclient::basedn: 'dc=int,dc=j,dc=hack'
+ldapclient::nss_min_uid: '500'
+ldapclient::nss_max_uid: '100000'
+ldapclient::nss_user_attr: 'uidNumber'
+ldapclient::nss_group_attr: 'primaryGroupID'
 network:
     subnet: 10.100.252.0
     netmask: 255.255.255.0
