@@ -39,7 +39,7 @@ dhcpd:
     authoritative: true
 zpools:
     minipool:
-        disk: da0
+        disk: da1
 mirror::storedir: /m
 mirror::storefs: mirrors
 mirror::storepool: minipool
