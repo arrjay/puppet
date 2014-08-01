@@ -25,7 +25,7 @@ nameserver::zonedefaults:
 dhcpd::template: ifgen
 nameserver::zonedata:
     j.hack:
-        serial: 2014070600
+        serial: 2014072900
         nameservers:
             - sulfur
             - potassium
@@ -191,6 +191,12 @@ interface:
         bootserver: 10.100.252.2
         extra:
             - 'option root-path "/nfsroot"'
+    niobium:
+        ip: 10.100.252.17
+        desc: "Apple PowerBook6,5"
+        macaddr: '00:11:24:31:af:7e'
+        bootserver: 10.100.252.2
+        bootfile: 'yaboot'
     neon:
         ip: 10.100.252.30
         desc: "AlphaPC 164LX"
