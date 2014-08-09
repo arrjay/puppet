@@ -80,7 +80,7 @@ class fileserver::netatalk2(
   }
 
   # configure netatalk to start/start it
-  service{"$service": enable => true, ensure => running }
+  service{"$service": enable => true }
 
   # install pam config if missing
   file{"/etc/pam.d/netatalk":
