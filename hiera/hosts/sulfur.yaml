@@ -18,6 +18,7 @@ classes:
     - netboot::netbsd_cobalt
     - netboot::yaboot
     - fileserver::netatalk2
+    - httpd::apache2
 netboot::ip::jumpstart: '10.100.252.2'
 netboot::solaris8::sun4m_hosts:
     - boron
@@ -53,3 +54,7 @@ ftpserver::anonroot: /minipool/private/ftproot
 ftpserver::anonshares:
     OpenBSD:
         dest: /m/OpenBSD
+httpd::apache2::documentroot: /m
+httpd::apache2::sites:
+    _default_:
+        port: 80
