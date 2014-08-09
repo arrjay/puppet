@@ -163,3 +163,8 @@ intca::certdir: '/etc/pki/tls/certs'
 # monitoring
 monitoring::packages:
     - sysstat
+    - smartmontools
+
+# hardware monitoring
+hwmonitoring::packages:
+    - lm_sensors
