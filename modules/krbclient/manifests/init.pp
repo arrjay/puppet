@@ -2,6 +2,9 @@ class krbclient (
   $realm = hiera('krbclient::realm'),
   $krb5_conf = hiera('krbclient::config',undef),
 ) {
+  # fix clock ;)
+  include ntp
+
   $packages = hiera('krbclient::packages',undef)
 
   if $packages {

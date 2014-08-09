@@ -173,3 +173,8 @@ hwmonitoring::packages:
 krbclient::packages:
     - krb5-workstation
 krbclient::config: '/etc/krb5.conf'
+
+# ntp
+ntp::packages: ntp
+ntp::service: ntpd
+ntp::configfile: /etc/ntp.conf

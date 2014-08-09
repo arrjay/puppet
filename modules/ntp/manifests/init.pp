@@ -16,6 +16,7 @@ class ntp (
   if $::virtual =~ /^xen0$/ {
     $virtualserver = true
   }
+
   if $svc {
     service{$svc: enable => true}
     file{$conf:
@@ -28,5 +29,9 @@ class ntp (
     exec{"$svccmd $svc restart":
       refreshonly => true,
     }
+  }
+
+  if $packages {
+    package{$packages: ensure=> installed}
   }
 }
