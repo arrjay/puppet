@@ -89,7 +89,7 @@ class httpd::apache2 (
   $osrel = "$::operatingsystem$::operatingsystemmajrelease"
 
   # call before we go to template, so we can set up handlers for php :)
-  if defined("phpstack") {
+  if defined(Class["phpstack"]) {
     # complete the phpstack class before executing this code.
     include phpstack
     case $::operatingsystem {

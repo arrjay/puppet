@@ -8,8 +8,8 @@ classes:
     - fileserver::netatalk
     - fileserver::samba
     - mediaserver
-    - httpd::apache2
     - piwigo
+    - httpd::apache2
 ntp::servers:
     - ntp-2.vt.edu
     - ac-ntp1.net.cmu.edu
