@@ -197,6 +197,10 @@ interface:
         macaddr: '00:11:24:31:af:7e'
         bootserver: 10.100.252.2
         bootfile: 'yaboot'
+    arsenic-altif:
+        ip: 10.100.252.18
+        desc: VIP
+        macaddr: '00:06:29:21:f0:23'
     neon:
         ip: 10.100.252.30
         desc: "AlphaPC 164LX"
@@ -244,7 +248,7 @@ interface:
     arsenic:
         ip: 10.100.252.40
         desc: "IBM Model 7042/7043"
-        macaddr: '00:06:29:21:f0:23'
+        macaddr: '02:60:8c:f2:46:98'
     oxygen:
         ip: 10.100.252.41
         desc: "SGI IP32 (r12k)"
