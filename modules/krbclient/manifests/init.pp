@@ -1,6 +1,13 @@
 class krbclient (
-  $realm = hiera('krbclient::realm')
+  $realm = hiera('krbclient::realm'),
+  $krb5_conf = hiera('krbclient::config',undef),
 ) {
+  $packages = hiera('krbclient::packages',undef)
+
+  if $packages {
+    package{$packages: ensure => installed}
+  }
+
   $svccmd = hiera('service')
   define pam_k5_aug($target = $title) {
     case $::operatingsystem {
@@ -28,6 +35,14 @@ class krbclient (
       }
       $pam_files = ['/etc/pam.d/sshd', '/etc/pam.d/system']
       pam_k5_aug{$pam_files:} ~> Exec["restart sshd"]
+    }
+  }
+  if $krb5_conf {
+    file{$krb5_conf:
+      owner   => root,
+      group   => 0,
+      mode    => 0644,
+      content => template("krbclient/krb5.conf.erb"),
     }
   }
 }

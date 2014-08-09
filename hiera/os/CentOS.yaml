@@ -168,3 +168,8 @@ monitoring::packages:
 # hardware monitoring
 hwmonitoring::packages:
     - lm_sensors
+
+# krbclient
+krbclient::packages:
+    - krb5-workstation
+krbclient::config: '/etc/krb5.conf'
