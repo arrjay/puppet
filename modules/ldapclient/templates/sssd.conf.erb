@@ -4,4 +4,6 @@ config_file_version = 2
 domains = <%= @krb_domain %>
 
 [domain/<%= @krb_domain -%>]
+ldap_schema = rfc2307bis
+ldap_id_mapping = False
 id_provider = ad
