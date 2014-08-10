@@ -169,6 +169,14 @@ monitoring::packages:
 hwmonitoring::packages:
     - lm_sensors
 
+# ldapclient (sssd)
+ldapclient::packages:
+    - adcli
+    - sssd
+ldapclient::services:
+    - sssd
+ldapclient::sssd_config: '/etc/sssd/sssd.conf'
+
 # krbclient
 krbclient::packages:
     - krb5-workstation

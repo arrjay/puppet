@@ -1,0 +1,7 @@
+[sssd]
+services = nss, pam, ssh, autofs
+config_file_version = 2
+domains = <%= @krb_domain %>
+
+[domain/<%= @krb_domain -%>]
+id_provider = ad

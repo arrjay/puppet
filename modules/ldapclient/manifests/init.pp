@@ -13,12 +13,21 @@ class ldapclient (
   $nss_group_base  = hiera('ldapclient::nss_group_base',undef),
   $binddn          = hiera('ldapclient::binddn',undef),
   $bindpw          = hiera('ldapclient::bindpw',undef),
+  $sssd_config     = hiera('ldapclient::sssd_config',undef),
 ) {
+  include krbclient
   include intca
   $packages = hiera('ldapclient::packages',undef)
+  $services = hiera('ldapclient::services',undef)
+
+  $krb_domain = $krbclient::realm
 
   if $packages {
     package{$packages: ensure=> installed}
+  }
+
+  if $services {
+    service{$services: enable=> true, ensure => running}
   }
 
   if $ldap_config {
@@ -39,7 +48,16 @@ class ldapclient (
     }
   }
 
-  define nss_ldap_enable($database = $title) {
+  if $sssd_config {
+    file {$sssd_config:
+      owner   => root,
+      group   => 0,
+      mode    => 0600,
+      content => template("ldapclient/sssd.conf.erb"),
+    }
+  }
+
+  define ldap_enable($database = $title) {
     case $::operatingsystem {
       'FreeBSD': {
         $nss = '/etc/nsswitch.conf'
@@ -57,9 +75,21 @@ class ldapclient (
           onlyif => "match /files/$nss/database[ . = '$database' ]/service[ . = 'ldap' ] size == 0 and match /files/$nss/database[. = '$database' /service[ . = 'compat' size != 0",
         }
       }
+      'CentOS': {
+        $nss = '/etc/nsswitch.conf'
+        augeas { "$nss: enable sss for $database lookup":
+          changes => [
+            "set /files/$nss/database[ . = '$database' ]/service[ last() + 1 ] 'sss'",
+          ],
+          onlyif => "match /files/$nss/database[ . = '$database' ]/service[ . = 'sss' ] size == 0",
+        }
+      }
     }
   }
 
-  nss_ldap_enable{"passwd":}
-  nss_ldap_enable{"group":}
+  ldap_enable{"passwd":}
+  ldap_enable{"group":}
+  if $::operatingsystem == 'CentOS' {
+    ldap_enable{"shadow":}
+  }
 }
