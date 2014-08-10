@@ -48,12 +48,61 @@ class ldapclient (
     }
   }
 
+        define sss_auth($target = $title) {
+          $pam_sysauth = "/files/etc/pam.d/$target/"
+          # 4 augeas calls for 4 different argument sets to sss
+          augeas {"pam $target: enable sss auth stack":
+            changes => [
+              "ins 100 before $pam_sysauth*[type = 'auth'][module = 'pam_deny.so']",
+              "set $pam_sysauth/100/type 'auth'",
+              "set $pam_sysauth/100/control 'sufficient'",
+              "set $pam_sysauth/100/module 'pam_sss.so'",
+              "set $pam_sysauth/100/argument[last()+1] 'use_first_pass'",
+            ],
+            onlyif => "match $pam_sysauth*[type = 'auth'][module = 'pam_sss.so'] size == 0",
+          }
+          augeas {"pam $target: enable sss account stack":
+            changes => [
+              "ins 200 before $pam_sysauth*[type = 'account'][module = 'pam_permit.so']",
+              "set $pam_sysauth/200/type 'account'",
+              "set $pam_sysauth/200/control '[default=bad success=ok user_unknown=ignore]'",
+              "set $pam_sysauth/200/module 'pam_sss.so'",
+            ],
+            onlyif => "match $pam_sysauth*[type = 'account'][module = 'pam_sss.so'] size == 0",
+          }
+          augeas {"pam $target: enable sss password stack":
+            changes => [
+              "ins 300 before $pam_sysauth*[type = 'password'][module = 'pam_deny.so']",
+              "set $pam_sysauth/300/type 'password'",
+              "set $pam_sysauth/300/control 'sufficient'",
+              "set $pam_sysauth/300/module 'pam_sss.so'",
+              "set $pam_sysauth/300/argument[last()+1] 'use_authtok'",
+            ],
+            onlyif => "match $pam_sysauth*[type = 'password'][module = 'pam_sss.so'] size == 0",
+          }
+          augeas {"pam $target: enable sss session stack":
+            changes => [
+              "ins 400 after $pam_sysauth*[type = 'session'][module = 'pam_unix.so']",
+              "set $pam_sysauth/400/type 'session'",
+              "set $pam_sysauth/400/control 'optional'",
+              "set $pam_sysauth/400/module 'pam_sss.so'",
+            ],
+            onlyif => "match $pam_sysauth*[type = 'session'][module = 'pam_sss.so'] size == 0",
+          }
+        }
+
   if $sssd_config {
     file {$sssd_config:
       owner   => root,
       group   => 0,
       mode    => 0600,
       content => template("ldapclient/sssd.conf.erb"),
+    }
+    case $::operatingsystem {
+      'CentOS' : {
+        sss_auth{"system-auth": }
+        sss_auth{"password-auth": }
+      }
     }
   }
 
