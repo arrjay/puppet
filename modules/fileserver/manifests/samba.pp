@@ -8,11 +8,20 @@ class fileserver::samba (
   $shares      = hiera('fileserver::samba_shares',undef),
   $homeserver  = hiera('fileserver::samba_homeserver',false),
 ) {
-  $svccmd = hiera('service')
-  # we use puppetlabs-concat for share definitions.
-
   # we need kerberos before kicking samba over. WE DO AD.
   include krbclient
+  include ldapclient
+  # we use puppetlabs-concat for share definitions.
+
+  # if you're trying to sssd, use 'net ads join' instead of adclient to join.
+  #  this lets the system krbtab be updated, then sssd Just Works.
+  case $::operatingsystem {
+    'CentOS' : {
+      $force_dual_krbtab = "yes"
+    }
+  }
+
+  $svccmd = hiera('service')
 
   $realm = $krbclient::realm
 
@@ -38,6 +47,11 @@ class fileserver::samba (
         "databases/tdb",
         "devel/autoconf",
       ]: ensure => installed } ~> package{$samba_pkg: ensure => installed, provider => 'portupgrade' }
+    }
+    'CentOS': {
+      $samba_svc = "samba"
+      $samba_pkg = "samba"
+      package{$samba_pkg: ensure => installed}
     }
   }
 

@@ -6,6 +6,9 @@
   ; domain config
   security = ADS
   realm = <%= @realm %>
+<% if @force_dual_krbtab == 'yes' -%>
+  kerberos method = secrets and keytab
+<% end -%>
 
   ; logging
   log file = <%= @logspec %>

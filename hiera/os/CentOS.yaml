@@ -186,3 +186,6 @@ krbclient::config: '/etc/krb5.conf'
 ntp::packages: ntp
 ntp::service: ntpd
 ntp::configfile: /etc/ntp.conf
+
+# fileserver
+fileserver::samba_conf: /etc/samba/smb.conf
