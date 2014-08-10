@@ -49,7 +49,7 @@ class fileserver::samba (
       ]: ensure => installed } ~> package{$samba_pkg: ensure => installed, provider => 'portupgrade' }
     }
     'CentOS': {
-      $samba_svc = "samba"
+      $samba_svc = "smb"
       $samba_pkg = "samba"
       package{$samba_pkg: ensure => installed}
     }
