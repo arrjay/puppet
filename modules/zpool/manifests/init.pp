@@ -5,6 +5,18 @@ class zpool (
   # if this is a linux variant, pull in the zfs module now.
   case $::osfamily {
     'RedHat' : {
+      exec {'create hostid':
+        command  => 'dd if=/dev/random bs=1 count=4 2>/dev/null|hexdump -e \'"%x\n"\'>/etc/hostid',
+        provider => 'shell',
+        creates  => '/etc/hostid',
+        before   => Package["zfs"],
+      }
+      file {'/etc/hostid':
+        owner  => root,
+        group  => 0,
+        mode   => 0644,
+        before => Package["zfs"],
+      }
       yumrepo {'zfs':
         enabled  => '1',
         gpgcheck => '1',
