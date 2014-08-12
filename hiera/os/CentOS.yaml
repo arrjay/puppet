@@ -189,3 +189,15 @@ ntp::configfile: /etc/ntp.conf
 
 # fileserver
 fileserver::samba_conf: /etc/samba/smb.conf
+
+# pkgenv
+pkgenv::packages:
+    - git
+    - rpm-build
+    - gcc
+    - make
+    - patch
+    - redhat-rpm-config
+    - rpmdevtools
+    - rpmlint
+    - rpmrebuild
