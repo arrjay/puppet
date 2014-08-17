@@ -6,7 +6,7 @@ class avahi {
       unless      => "/bin/pgrep -u avahi"
     }
   }
-  case $::operatingsystem {
+  case $::osfamily {
     'FreeBSD': {
        if ($pkgng_enabled) {
          # install avahi metaport now
@@ -17,6 +17,9 @@ class avahi {
        
        avahi::fbstartavahi { 'avahi-daemon': }
        service{"dbus": enable => true, ensure => running, } ~> service{"avahi-daemon": enable => true, } ~> Fbstartavahi[ 'avahi-daemon' ]
+    }
+    'RedHat': {
+      package { 'avahi' : ensure => installed }
     }
   }
 }
