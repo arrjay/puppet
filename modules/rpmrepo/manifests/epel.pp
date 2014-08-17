@@ -1,5 +1,7 @@
 class rpmrepo::epel (
 ) {
+  include rpmrepo
+
   yumrepo {'epel':
     enabled  => '1',
     gpgcheck => '1',
@@ -14,6 +16,7 @@ class rpmrepo::epel (
   }
   exec{'add epel gpgkey':
     command => "/bin/rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6",
-    unless => "/bin/rpm -qi gpg-pubkey-c105b9de-4e0fd3a3"
+    unless => "/bin/rpm -qi gpg-pubkey-c105b9de-4e0fd3a3",
+    before => Yumrepo['epel'],
   }
 }

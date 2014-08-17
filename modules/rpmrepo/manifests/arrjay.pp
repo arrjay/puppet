@@ -1,5 +1,7 @@
 class rpmrepo::arrjay (
 ) {
+  include rpmrepo
+
   yumrepo {'arrjay':
     enabled  => '1',
     gpgcheck => '1',
@@ -14,6 +16,7 @@ class rpmrepo::arrjay (
   }
   exec{'add arrjay gpgkey':
     command => "/bin/rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-arrjay.net",
-    unless => "/bin/rpm -qi gpg-pubkey-e564a4c8-515734c3"
+    unless => "/bin/rpm -qi gpg-pubkey-e564a4c8-515734c3",
+    before => Yumrepo['arrjay'],
   }
 }
