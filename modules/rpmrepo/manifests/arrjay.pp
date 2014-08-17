@@ -5,7 +5,7 @@ class rpmrepo::arrjay (
   yumrepo {'arrjay':
     enabled  => '1',
     gpgcheck => '1',
-    baseurl  => 'http://arrjay.github.io/el$releasever/$basearch',
+    baseurl  => 'http://arrjay.github.io/rpm/el$releasever/$basearch',
   }
   file {'/etc/pki/rpm-gpg/RPM-GPG-KEY-arrjay.net':
     owner  => root,
