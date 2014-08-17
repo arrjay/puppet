@@ -201,3 +201,21 @@ pkgenv::packages:
     - rpmdevtools
     - rpmlint
     - rpmrebuild
+
+# mediaserver
+mediaserver::packages:
+    - mt-daapd
+    - python-eyed3
+    - ffmpeg
+    - perl-MP3-Tag
+    - id3v2
+mediaserver::mt_daapd_config: /etc/mt-daapd.conf
+mediaserver::mt_daapd_webdir: /usr/share/mt-daapd/admin-root
+mediaserver::mt_daapd_dbdir: /var/cache/mt-daapd
+mediaserver::mt_daapd_sscprog: /usr/bin/mt-daapd-ssc.sh
+mediaserver::mt_daapd_plugdir: /usr/lib64/mt-daapd/plugins
+mediaserver::mt_daapd_user: mt-daapd
+
+# sudo
+sudo::packages:
+    - sudo
