@@ -1,6 +1,11 @@
 class mediaserver::forked-daapd (
 ) {
   # per-os variables
+  case $::osfamily {
+    'RedHat' : {
+      $daapd_config = '/etc/forked-daapd.conf'
+    }
+  }
 
   # per-os initialization
   case $::osfamily {
@@ -16,4 +21,11 @@ class mediaserver::forked-daapd (
 
   # common initialization
   include avahi
+
+  file{$daapd_config:
+    owner => 'root',
+    group => 0,
+    mode => '0644',
+    content => template('mediaserver/forked-daapd.conf.erb'),
+  }
 }
