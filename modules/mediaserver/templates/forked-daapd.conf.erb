@@ -1,59 +1,33 @@
 general {
-        # Username
-        uid = "forked-daapd"
-        logfile = "/var/log/forked-daapd.log"
-        # Database location
-        db_path = "/var/cache/forked-daapd/songs3.db"
-        # Available levels: fatal, log, warning, info, debug, spam
-        loglevel = log
-        # Admin password for the non-existent web interface
-        admin_password = "unused"
-        # Enable/disable IPv6
-        ipv6 = no
+	uid = "<%= @daap_user -%>"
+	logfile = "<%= @forked_daapd_log -%>"
+	db_path = "<%= @forked_daapd_db -%>"
+	loglevel = log
+	admin_password = "unused"
+	ipv6 = no
 }
 
 # Library configuration
 library {
-        # Name of the library as displayed by the clients
-        # %h: hostname, %v: version
-        name = "My Music on %h"
-        # TCP port to listen on. Default port is 3689 (daap)
-        port = 3689
-        # Password for the library. Optional.
-#       password = ""
+	name = "<%= @servername -%>"
+	port = <%= @port %>
+<% if @password -%>
+	password = "<%= @password -%>"
+<% end -%>
+	directories = { "/srv/music" }
+<% if @podcast_dir != '' -%>
+	podcasts = { "/<%= @podcast_dir -%>" }
+<% end -%>
+<% if @audiobook_dir != '' -%>
+	audiobooks = { "/<%= @audiobook_dir -%>" }
+<% end -%>
+<% if @compilation_dir != '' -%>
+	compilations = { "/<%= @compilations_dir -%>" }
+	compilation_artist = "<%= @compilation_artist -%>"
+<% end -%>
 
-        # Directories to index
-        directories = { "/srv/music" }
-
-        # Directories containing podcasts
-        # For each directory that is indexed the path is matched against these
-        # names. If there is a match all items in the directory are marked as 
-        # podcasts. Eg. if you index /srv/music, and your podcasts are in
-        # /srv/music/Podcasts, you can set this to "/Podcasts".
-        # (changing this setting only takes effect after rescan, see the README)
-        podcasts = { "/Podcasts" }
-
-        # Directories containing audiobooks
-        # For each directory that is indexed the path is matched against these
-        # names. If there is a match all items in the directory are marked as 
-        # audiobooks.
-        # (changing this setting only takes effect after rescan, see the README)
-        audiobooks = { "/Audiobooks" }
-        # Directories containing compilations (eg soundtracks)
-        # For each directory that is indexed the path is matched against these
-        # names. If there is a match all items in the directory are marked as 
-        # compilations.
-        # (changing this setting only takes effect after rescan, see the README)
-        compilations = { "/Compilations" }
-
-        # Compilations usually have many artists, and if you don't want every
-        # artist to be listed when artist browsing in Remote, you can set
-        # a single name which will be used for all music in the compilation dir
-        # (changing this setting only takes effect after rescan, see the README)
-        compilation_artist = "Various artists"
-
-        # There are 5 default playlists: "Library", "Music", "Movies", "TV Shows"
-        # and "Podcasts". Here you can change the names of these playlists.
+# There are 5 default playlists: "Library", "Music", "Movies", "TV Shows"
+# and "Podcasts". Here you can change the names of these playlists.
 #       name_library    = "Library"
 #       name_music      = "Music"
 #       name_movies     = "Movies"
@@ -61,53 +35,52 @@ library {
 #       name_podcasts   = "Podcasts"
 #       name_audiobooks = "Audiobooks"
 
-        # Artwork file names (without file type extension)
-        # forked-daapd will look for jpg and png files with these base names
-#       artwork_basenames = { "artwork", "cover", "Folder" }
+# Artwork file names (without file type extension)
+# forked-daapd will look for jpg and png files with these base names
+<% unless @artwork_names.empty? -%>
+	artwork_basenames = { <% @artwork_names.each do |name| -%>
+"<%= name -%>",<% end -%> }
+<% end -%>
 
-        # File types the scanner should ignore
-        # Non-audio files will never be added to the database, but here you
-        # can prevent the scanner from even probing them. This might improve
-        # scan time. By default .db and .ini are ignored.
-#       filetypes_ignore = { ".db", ".ini" }
+<% unless @ignore_filetypes.empty? -%>
+	filetypes_ignore = { <% @ignore_filetypes.each do |extension| -%>
+"<%= extension -%>",<% end -%> }
+<% end -%>
 
-        # Disable startup file scanning
-        # When forked-daapd starts it will do an initial file scan of your
-        # library (and then watch it for changes). If you are sure your library
-        # never changes while forked-daapd is not running, you can disable the
-        # initial file scan and save some system ressources. Disabling this scan
-        # may lead to forked-daapd's database coming out of sync with the
-        # library. If that happens read the instructions in the README on how
-        # to trigger a full rescan.
-#       filescan_disable = false
+<% if @filescan_disable -%>
+	filescan_disable = false
+<% end -%>
 
-        # Should iTunes metadata override ours?
-#       itunes_overrides = false
+# Formats: mp4a, mp4v, mpeg, alac, flac, mpc, ogg, wma, wmal, wmav, aif, wav
+# Formats that should never be transcoded
+<% unless @skip_transcode.empty? -%>
+	no_transcode = { <% @skip_transcode.each do |extension| -%>
+"<%= extension -%>",<% end -%> }
+<% end -%>
 
-        # Formats: mp4a, mp4v, mpeg, alac, flac, mpc, ogg, wma, wmal, wmav, aif, wav
-        # Formats that should never be transcoded
-#       no_transcode = { "alac", "mp4a" }
-        # Formats that should always be transcoded
-#       force_transcode = { "ogg", "flac" }
+<% unless @force_transcode.empty? -%>
+	force_transcode = { <% @force_transcode.each do |extension| -%>
+"<%= extension -%>",<% end -%> }
+<% end -%>
 }
 
 # Local audio output
 audio {
-        # Name - used in the speaker list in Remote
-        nickname = "Computer"
-        # Audio device name for local audio output
-#       card = "default"
-        # Mixer channel to use for volume control - ALSA/Linux only
-        # If not set, PCM will be used if available, otherwise Master.
-#       mixer = ""
+	# Name - used in the speaker list in Remote
+	nickname = "Computer"
+	# Audio device name for local audio output
+#	card = "default"
+	# Mixer channel to use for volume control - ALSA/Linux only
+	# If not set, PCM will be used if available, otherwise Master.
+#	mixer = ""
 }
 
 # AirPlay/Airport Express device settings
 # (make sure you get the capitalization of the device name right)
 #airplay "My AirPlay device" {
-        # forked-daapd's volume goes to 11! If that's more than you can handle
-        # you can set a lower value here
-#       max_volume = 11
-        # AirPlay password
-#       password = "s1kr3t"
+	# forked-daapd's volume goes to 11! If that's more than you can handle
+	# you can set a lower value here
+#	max_volume = 11
+	# AirPlay password
+#	password = "s1kr3t"
 #}
