@@ -204,11 +204,13 @@ pkgenv::packages:
 
 # mediaserver
 mediaserver::packages:
-    - mt-daapd
     - python-eyed3
     - ffmpeg
     - perl-MP3-Tag
     - id3v2
+    - vbrfix
+    - git
+
 mediaserver::mt_daapd_config: /etc/mt-daapd.conf
 mediaserver::mt_daapd_webdir: /usr/share/mt-daapd/admin-root
 mediaserver::mt_daapd_dbdir: /var/cache/mt-daapd
