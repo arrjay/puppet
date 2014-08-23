@@ -58,6 +58,12 @@ class mediaserver::core (
       owner  => root,
       group  => 0,
     }
+    file{"$confdir/run":
+      ensure => directory,
+      mode   => 0700,
+      owner  => $music_user,
+      group  => $music_group,
+    }
     file{"$confdir/music.conf":
       ensure  => present,
       mode    => 0755,
