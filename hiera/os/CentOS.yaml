@@ -210,6 +210,8 @@ mediaserver::packages:
     - id3v2
     - vbrfix
     - git
+    - flac
+    - lame
 
 mediaserver::mt_daapd_config: /etc/mt-daapd.conf
 mediaserver::mt_daapd_webdir: /usr/share/mt-daapd/admin-root
