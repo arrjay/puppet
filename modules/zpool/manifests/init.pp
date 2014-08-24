@@ -32,7 +32,8 @@ class zpool (
       }
       exec{'add zfs gpgkey':
         command => "/bin/rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-zfsonlinux",
-        unless => "/bin/rpm -qi gpg-pubkey-f14ab620-514b76b7"
+        unless => "/bin/rpm -qi gpg-pubkey-f14ab620-514b76b7",
+        before => Yumrepo['zfs'],
       }
       package{'zfs': ensure => present}
     }
