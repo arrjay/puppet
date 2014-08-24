@@ -20,7 +20,7 @@ class zpool (
       yumrepo {'zfs':
         enabled  => '1',
         gpgcheck => '1',
-        baseurl  => 'http://archive.zfsonlinux.org/epel/6/$basearch',
+        baseurl  => 'http://archive.zfsonlinux.org/epel/$releasever/$basearch',
         before   => Package['zfs'],
       }
       file {'/etc/pki/rpm-gpg/RPM-GPG-KEY-zfsonlinux':
