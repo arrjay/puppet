@@ -35,6 +35,7 @@ class zpool (
         unless => "/bin/rpm -qi gpg-pubkey-f14ab620-514b76b7",
         before => Yumrepo['zfs'],
       }
+      package{'kernel-devel': ensure => present, before => Package["zfs"], }
       package{'zfs': ensure => present}
     }
   }
