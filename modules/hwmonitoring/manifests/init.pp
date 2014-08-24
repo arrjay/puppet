@@ -15,7 +15,7 @@ class hwmonitoring {
       hwmonitoring::startsvc{ $hwmonitoring::services: }
     }
 
-    include mrtg
+    require mrtg
     include crontask
 
     $mrtgdir = "$mrtg::dir/temps"
