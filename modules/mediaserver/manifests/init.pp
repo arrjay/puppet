@@ -15,7 +15,13 @@ class mediaserver (
   $daapd_scan   = hiera('mediaserver::daapd_scan_without_clients',true),
   $daapd_sctyp  = hiera('mediaserver::daapd_scan_type','2'),
   $daapd_comp   = hiera('mediaserver::daapd_xfr_compression',true),
+  $music_root = hiera('mediaserver::music_root'),
 ) {
+  case $::osfamily {
+    'RedHat' : {
+      package{'mt-daapd': ensure => installed}
+    }
+  }
   include mediaserver::core
 
   file{$mtd_config:
