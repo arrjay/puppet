@@ -63,6 +63,9 @@ case $platform in
   *linux*)
     _ifstat() {
       bytes=$(ifconfig $1 | sed 's/^[ ]*//'|awk -F: '$1 == "RX bytes" { print $2, $3 }'|awk 'BEGIN{OFS=":"} { print $1, $6 }')
+      if [ -z "$bytes" ] ; then
+        bytes=$(ifconfig $1 | awk '$1 == "TX" && $2 ==  "packets" { txpkt=$5 }; $1 == "RX" && $2 == "packets" { rxpkt=$5 }; END{ OFS=":"; print rxpkt, txpkt }')
+      fi
       netstat -inN | awk "BEGIN {OFS=\":\"} \$1 == \"${1}\" { i++ ; print \$4, \$5, \$6, ${bytes%:*}, \$8, \$9, ${bytes#*:}, \$11 + \$7 } END { if ( i == 0 ) print 0, 0, 0, 0, 0, 0, 0, 0 }"
     }
     ;;
