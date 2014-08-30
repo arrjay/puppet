@@ -189,6 +189,15 @@ ntp::configfile: /etc/ntp.conf
 
 # fileserver
 fileserver::samba_conf: /etc/samba/smb.conf
+fileserver::packages:
+    - fdupes
+    - p7zip
+    - genisoimage
+#    - udfclient
+#    - jigdo
+#    - geteltorito
+#    - hfsutils
+#    - dmg2img    
 
 # pkgenv
 pkgenv::packages:
