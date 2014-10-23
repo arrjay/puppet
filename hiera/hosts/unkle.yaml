@@ -1,6 +1,18 @@
 classes:
+    - rpmrepo::arrjay
     - fileserver::samba
+    - zpool
+    - mediaserver
+    - fileserver::nfs
 ntp::servers:
     - ntp-2.vt.edu
     - ac-ntp1.net.cmu.edu
     - ntp.theforest.us
+zpools:
+    datapool:
+        disk:
+mediaserver::music_root: '/datapool/media/audio'
+mediaserver::music_upload_dir: '/srv/music_upload'
+mediaserver::music_staging_dir: '/srv/music_staging'
+mediaserver::confdir: '/private/mediaserver'
+mediaserver::music_meta_dir: '/srv/music_meta'

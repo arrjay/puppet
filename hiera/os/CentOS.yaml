@@ -5,6 +5,17 @@ puppet::configfile: '/etc/puppet/puppet.conf'
 # cron tasks
 crontask::dir: /usr/local/libexec/crontasks
 
+# network ups tools
+nut::user: nut
+nut::group: nut
+nut::svcname: nut-server
+nut::packages: nut
+nut::ups_conf: '/etc/ups/ups.conf'
+nut::nut_conf: '/etc/ups/nut.conf'
+nut::upsd_users: '/etc/ups/upsd.users'
+nut::upsd_conf: '/etc/ups/upsd.conf'
+nut::upsmon_conf: '/etc/ups/upsmon.conf'
+
 # nginx module for CentOS
 httpd::nginx::svcname: nginx
 httpd::nginx::package: nginx
