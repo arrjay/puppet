@@ -1,8 +1,6 @@
 classes:
-    - mirror
     - fileserver::netatalk
     - fileserver::samba
-    - mediaserver
     - piwigo
     - httpd::apache2
 ntp::servers:
@@ -15,11 +13,6 @@ mirror::archivedir: '/datapool/software/archive'
 automount::map_home: yes
 automount::homemap: 'zfs_magic_home.sh'
 automount::perms_auto_home: '744'
-mediaserver::confdir: '/auxpool/localhome/mediaserver'
-mediaserver::music_root: '/datapool/media/audio'
-mediaserver::music_upload_dir: '/datapool/media/INCOMING/music'
-mediaserver::music_staging_dir: '/datapool/media/INCOMING/music-staging'
-mediaserver::music_meta_dir: '/datapool/media/META/music'
 fileserver::samba_homeserver: yes
 fileserver::samba_shares:
     sw-archive:
