@@ -243,3 +243,14 @@ mediaserver::mt_daapd_user: mt-daapd
 # sudo
 sudo::packages:
     - sudo
+
+mirror::services:
+    - rsyncd
+mirror::rsync_conf: '/etc/rsyncd.conf'
+mirror::packages:
+    - rsync
+    - wget
+    - coreutils
+    - lynx
+    - ncftp
+    - perl-Digest-MD5

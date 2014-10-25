@@ -175,7 +175,7 @@ class mirror (
   }
 
   cron{"mirror-centos":
-    command  => "$crontask::dir/mirror-netbsd.sh $confdir",
+    command  => "$crontask::dir/mirror-centos.sh $confdir",
     user     => 'mirror',
     hour     => 17,
     minute   => 28,

@@ -4,6 +4,7 @@ classes:
     - zpool
     - mediaserver
     - fileserver::nfs
+    - mirror
 ntp::servers:
     - ntp-2.vt.edu
     - ac-ntp1.net.cmu.edu
@@ -16,3 +17,6 @@ mediaserver::music_upload_dir: '/srv/music_upload'
 mediaserver::music_staging_dir: '/srv/music_staging'
 mediaserver::confdir: '/private/mediaserver'
 mediaserver::music_meta_dir: '/srv/music_meta'
+mirror::confdir: '/auxpool/localhome/mirror'
+mirror::storedir: '/auxpool/mirror'
+mirror::archivedir: '/datapool/software/archive'

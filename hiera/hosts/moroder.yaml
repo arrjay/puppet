@@ -1,9 +1,4 @@
 classes:
-    - nfs::server
-    - freebsd::portsnap
-    - nut::monitoring
-    - ldapclient
-    - krbclient
     - mirror
     - fileserver::netatalk
     - fileserver::samba

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 home=${1}
 
@@ -13,8 +13,10 @@ for branch in ${TGCWARE_DISTS} ; do
     tardist=$(echo $url|sed s@.*/@@)
     if [ ! -f ${tardist} ] ; then
       # sleep from 1 to 3 seconds
+      number=$RANDOM
+      let "time %= 10"
       # NOTE: FreeBSDism
-      sleep $(jot -r 1 1 3)
+      sleep $time
       wget -q $url
       # check if it worked with tar, toss the listing not the error
       tar tf ${tardist} > /dev/null
