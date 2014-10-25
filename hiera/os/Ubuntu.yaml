@@ -75,3 +75,12 @@ dnsmasq::svcname: dnsmasq
 
 # resolver configuration
 resolvconf::file: '/etc/resolv.conf'
+
+# package building env
+pkgenv::packages:
+    - git
+    - rpm
+    - gcc
+    - make
+    - mock
+    - patch
