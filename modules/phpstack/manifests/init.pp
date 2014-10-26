@@ -37,6 +37,11 @@ class phpstack (
         "graphics/php5-gd",
         "misc/php5-calendar",
       ]: ensure => installed }
-      }
+    }
+    'CentOS' : {
+      package{[
+        "php"
+      ]: ensure => installed}
+    }
   }
 }
