@@ -1,0 +1,42 @@
+# this file exists more because pidora identifies 'wrong'
+service: /sbin/service
+puppet::configfile: '/etc/puppet/puppet.conf'
+
+# crontasks
+crontask::dir: /usr/local/libexec/crontasks
+
+# nut
+nut::user: nut
+nut::group: nut
+nut::svcname: nut-server
+nut::packages: nut
+nut::ups_conf: '/etc/ups/ups.conf'
+nut::nut_conf: '/etc/ups/nut.conf'
+nut::upsd_users: '/etc/ups/upsd.users'
+nut::upsd_conf: '/etc/ups/upsd.conf'
+nut::upsmon_conf: '/etc/ups/upsmon.conf'
+
+# mrtg
+mrtg::packages:
+    - mrtg
+mrtg::datadir: '/var/lib/mrtg'
+
+# graphing
+graphing::dir: '/srv/www/graphing'
+
+# nginx
+httpd::nginx::svcname: nginx
+httpd::nginx::package: nginx
+httpd::nginx::pidfile: /var/run/nginx.pid
+httpd::nginx::bin: /usr/sbin/nginx
+httpd::nginx::configfile: /etc/nginx/nginx.conf
+httpd::nginx::error_log: /var/log/nginx/error.log
+httpd::nginx::log_file: /var/log/nginx/access.log
+httpd::nginx::user: nginx
+httpd::nginx::group: nginx
+httpd::nginx::top_includes:
+    - /etc/nginx/mime.types
+
+# intca
+intca::file: '/etc/pki/tls/certs/PRODUXI-CA.crt'
+intca::certdir: '/etc/pki/tls/certs'
