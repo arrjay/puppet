@@ -1,6 +1,8 @@
 classes:
     - httpd::apache2
     - phpstack
+    - mysql::server
+    - mysql::php
 httpd::apache2::sites:
     _default_:
         port: 443
