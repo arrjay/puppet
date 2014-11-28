@@ -204,6 +204,8 @@ fileserver::packages:
     - fdupes
     - p7zip
     - genisoimage
+    - md5deep
+    - duc
 #    - udfclient
 #    - jigdo
 #    - geteltorito
