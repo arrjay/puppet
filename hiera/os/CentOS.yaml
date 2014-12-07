@@ -206,6 +206,7 @@ fileserver::packages:
     - genisoimage
     - md5deep
     - duc
+    - lsscsi
 #    - udfclient
 #    - jigdo
 #    - geteltorito
