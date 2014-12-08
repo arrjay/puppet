@@ -1,0 +1,7 @@
+classes:
+    - zpool
+    - fileserver::nfs
+    - fileserver::iscsi
+zpools:
+    internal:
+        disk:
