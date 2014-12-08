@@ -207,6 +207,7 @@ fileserver::packages:
     - md5deep
     - duc
     - lsscsi
+    - mc
 #    - udfclient
 #    - jigdo
 #    - geteltorito
