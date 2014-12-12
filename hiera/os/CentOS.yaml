@@ -261,6 +261,8 @@ mirror::packages:
 
 # automount
 automount::services: autofs
-automount::packages: autofs
+automount::packages:
+    - autofs
+#    - nfs-utils
 automount::maptype: sun
 automount::homemap: auto.nethome
