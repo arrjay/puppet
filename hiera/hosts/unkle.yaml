@@ -20,3 +20,6 @@ mediaserver::music_meta_dir: '/datapool/media/META/music'
 mirror::confdir: '/auxpool/localhome/mirror'
 mirror::storedir: '/auxpool/mirror'
 mirror::archivedir: '/datapool/software/archive'
+automount::map_home: yes
+automount::homemap: 'zfs_home_lx.sh'
+automount::perms_auto_home: '744'
