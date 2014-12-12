@@ -258,3 +258,9 @@ mirror::packages:
     - lynx
     - ncftp
     - perl-Digest-MD5
+
+# automount
+automount::services: autofs
+automount::packages: autofs
+automount::maptype: sun
+automount::homemap: auto.nethome

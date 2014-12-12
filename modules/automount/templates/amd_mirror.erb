@@ -1,6 +1,11 @@
+<% if @maptype == 'am-utils' -%>
 /defaults	type:=nfsl;opts:=ro
+<% end -%>
 <% moroder_auxpool_mirrors = [ 'FreeBSD', 'NetBSD', 'OpenBSD', 'centos', 'cygwin', 'nekoware', 'pkgsrc', 'tgcware' ] -%>
 <% moroder_auxpool_mirrors.each do |key| -%>
+<% if @maptype == 'am-utils' -%>
 <%= key -%> rhost:=moroder.produxi.net;rfs:=/auxpool/mirror;sublink:=<%= key %>
+<% else -%>
+<%= key -%>		moroder.produxi.net:/auxpool/mirror/<%= key %>
 <% end -%>
-
+<% end -%>

@@ -1,7 +1,24 @@
+<% if @maptype == 'am-utils' -%>
 /defaults	type:=nfsl;opts:=rw
+<% end -%>
+<% if @maptype == 'am-utils' -%>
 audio		rhost:=carlos;rfs:=/datapool/music
-mirror		type:=auto;fs:=<%= @mapdir -%>/amd_mirror;pref:=null;opts:=fullybrowsable
 music		rhost:=carlos;rfs:=/datapool/music
+<% else -%>
+audio		carlos:/datapool/music
+music		carlos:/datapool/music
+<% end -%>
+<% if @maptype == 'am-utils' -%>
+mirror		type:=auto;fs:=<%= @mapdir -%>/amd_mirror;pref:=null;opts:=fullybrowsable
+<% else -%>
+mirror		-fstype=autofs,browse file:<%= @mapdir -%>/auto.mirror
+<% end -%>
+<% if @maptype == 'am-utils' -%>
 nethome_carlos	rhost:=carlos;rfs:=/datapool/nethomes
 redist		rhost:=carlos;rfs:=/datapool/software/redist
 video		rhost:=carlos;rfs:=/datapool/video
+<% else -%>
+nethome_carlos	carlos:/datapool/nethomes
+redist		carlos:/datapool/software/redist
+video		carlos:/datapool/video
+<% end -%>

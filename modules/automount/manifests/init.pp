@@ -16,6 +16,43 @@ class automount (
     package { $packages: ensure => installed }
   }
   if $maptype == 'sun' {
+    exec {"restart $services":
+      refreshonly => true,
+      command     => "$svccmd $services restart",
+    }
+    exec {"reload $services":
+      refreshonly => true,
+      command     => "$svccmd $services reload",
+    }
+    file {"$mapdir/auto.site":
+      owner   => root,
+      group   => 0,
+      content => template("automount/$sitetpl.erb"),
+      mode    => 0644,
+      notify  => Exec["reload $services"],
+    }
+    file {"$mapdir/auto.mirror":
+      owner   => root,
+      group   => 0,
+      content => template("automount/amd_mirror.erb"),
+      mode    => 0644,
+      notify  => Exec["reload $services"],
+    }
+    # usually we use the stock map
+    file {"$mapdir/auto.nethome":
+      owner  => root,
+      group  => 0,
+      source => "puppet:///modules/automount/$homemap",
+      mode   => $hmapperm,
+      notify => Exec["reload $services"],
+    }
+    file {"$mapdir/auto.master":
+      owner   => root,
+      group   => 0,
+      content => template("automount/auto.master.erb"),
+      mode    => 0644,
+      notify  => Exec["restart $services"],
+    }
   }
   if $maptype == 'am-utils' {
     exec {"restart amd":

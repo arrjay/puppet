@@ -1,0 +1,15 @@
+# auto.master file is managed by puppet!
+/misc	<%= @mapdir -%>/auto.misc
+/net	-hosts
+# c7+(?) can do this, but we don't
+#+dir:/etc/auto.master.d
+# Include central master map if defined in nsswitchery
++auto.master
+
+# our stuff!
+/site		<%= @mapdir -%>/auto.site
+/nethome	<%= @mapdir -%>/auto.nethome
+<% if @maphome -%>
+/home	<%= @mapdir -%>/auto.nethome
+<% end -%>
+
