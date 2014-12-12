@@ -1,2 +1,2 @@
 /defaults       type:=nfsl;opts:=rw
-*               rhost:=carlos;rfs:=/datapool/nethomes;sublink:=${key}
+*               rhost:=unkle;rfs:=/datapool/home/${key}
