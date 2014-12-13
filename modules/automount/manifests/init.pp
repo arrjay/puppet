@@ -5,9 +5,11 @@ class automount (
   $mapdir   = hiera('automount::mapdir','/etc'),
   $homemap  = hiera('automount::auto_home','amd_nethome'),
   $sitetpl  = hiera('automount::auto_site_template','amd_site'),
-  $hmapperm = hiera('automount::perms_auto_home','0644'),
+  $nhmaperm = hiera('automount::perms_auto_nethome','0644'),
+  $hmaperm  = hiera('automount::perms_auto_home','0644'),
   $maphome  = hiera('automount::map_home',false),
   $svccmd   = hiera('service',undef),
+  $nhomemap = hiera('automount::auto_nethome','amd_nethome'),
 ) {
   if $services {
     service { $services: enable => true, ensure => running }
@@ -42,8 +44,15 @@ class automount (
     file {"$mapdir/auto.nethome":
       owner  => root,
       group  => 0,
+      source => "puppet:///modules/automount/$nhomemap",
+      mode   => $nhmaperm,
+      notify => Exec["reload $services"],
+    }
+    file {"$mapdir/auto.home":
+      owner  => root,
+      group  => 0,
       source => "puppet:///modules/automount/$homemap",
-      mode   => $hmapperm,
+      mode   => $hmaperm,
       notify => Exec["reload $services"],
     }
     file {"$mapdir/auto.master":
@@ -81,7 +90,7 @@ class automount (
     file {"$mapdir/amd_nethome":
       owner  => root,
       group  => 0,
-      source => "puppet:///modules/automount/$homemap",
+      source => "puppet:///modules/automount/$nhomemap",
       mode   => $hmapperm,
       notify => Exec["reload amd"],
     }

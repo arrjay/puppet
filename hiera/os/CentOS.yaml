@@ -265,4 +265,5 @@ automount::packages:
     - autofs
 #    - nfs-utils
 automount::maptype: sun
-automount::homemap: auto.nethome
+automount::nhomemap: auto.nethome
+automount::auto_home: auto.nethome

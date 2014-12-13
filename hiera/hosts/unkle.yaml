@@ -23,3 +23,5 @@ mirror::archivedir: '/datapool/software/archive'
 automount::map_home: yes
 automount::homemap: 'zfs_home_lx.sh'
 automount::perms_auto_home: '744'
+automount::nhomemap: 'zfs_home_lx.sh'
+automount::perms_auto_nethome: '744'
