@@ -1,3 +1,7 @@
 classes:
     - automount
     - ldapclient
+
+automount::homemap: 'create_home.sh'
+automount::perms_auto_home: '744'
+automount::map_home: yes
