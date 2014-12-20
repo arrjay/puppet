@@ -16,7 +16,13 @@ mirror		-fstype=autofs,browse file:<%= @mapdir -%>/auto.mirror
 <% if @maptype == 'am-utils' -%>
 redist		rhost:=unkle;rfs:=/datapool/software/redist
 video		rhost:=unkle;rfs:=/datapool/media/video
+album_art	rhost:=unkle;rfs:=/datapool/media/images;sublink=album_art
+music-staging	rhost:=unkle;rfs:=/datapool/media/INCOMING;sublink=music-staging
+os-images	rhost:=unkle;rfs:=/datapool/software/os-images
 <% else -%>
 redist		unkle:/datapool/software/redist
 video		unkle:/datapool/media/video
+album_art	unkle:/datapool/media/images/album_art
+music-staging	unkle:/datapool/media/INCOMING/music-staging
+os-images	unkle:/datapool/software/os-images
 <% end -%>
