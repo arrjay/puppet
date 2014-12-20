@@ -1,6 +1,7 @@
 classes:
     - automount
     - ldapclient
+    - rpmrepo::arrjay
 
 automount::homemap: 'create_home.sh'
 automount::perms_auto_home: '744'
