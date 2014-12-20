@@ -26,3 +26,8 @@ album_art	unkle:/datapool/media/images/album_art
 music-staging	unkle:/datapool/media/INCOMING/music-staging
 os-images	unkle:/datapool/software/os-images
 <% end -%>
+<% if @maptype == 'am-utils' -%>
+upload_music	fs:=${autodir}/cifs/${rhost}/${key};type:=program;opts:=rw,guest;rhost:=unkle;rfs:=upload_music;mount:="/sbin/mount.cifs mount.cifs -o ${opts} \\\/\\\/${rhost}/${rfs} ${fs}" 
+<% else -%>
+upload_music	-fstype=cifs,rw,guest ://unkle/upload_music
+<% end -%>
