@@ -209,7 +209,7 @@ fileserver::packages:
     - lsscsi
     - mc
 #    - udfclient
-#    - jigdo
+    - jigdo
 #    - geteltorito
 #    - hfsutils
 #    - dmg2img    
