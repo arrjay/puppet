@@ -210,7 +210,7 @@ fileserver::packages:
     - mc
 #    - udfclient
     - jigdo
-#    - geteltorito
+    - geteltorito
 #    - hfsutils
 #    - dmg2img    
 
