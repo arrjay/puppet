@@ -9,3 +9,8 @@ httpd::apache2::additional_http_opts:
     - 'DirectoryIndex index.php'
     - 'php_value session.save_handler "files"'
     - 'php_value session.save_path    "/var/lib/php/session"'
+httpd::apache2::sites:
+    _default_:
+        port: 443
+        ssl_cert: "/etc/pki/tls/certs/%{::fqdn}.crt"
+        ssl_key: "/etc/pki/tls/private/%{::fqdn}.key"
