@@ -4,7 +4,6 @@ classes:
     - nut
     - monitoring
     - hwmonitoring
-    - monitoring
     - ntp
     - snmp
     - serialconsole
