@@ -1,0 +1,11 @@
+classes:
+    - httpd::apache2
+    - phpstack
+    - mysql::server
+    - mysql::php
+httpd::apache2::additional_http_opts:
+    - "<FilesMatch \.php$>\nSetHandler application/x-httpd-php\n</FilesMatch>"
+    - 'AddType text/html .php'
+    - 'DirectoryIndex index.php'
+    - 'php_value session.save_handler "files"'
+    - 'php_value session.save_path    "/var/lib/php/session"'
