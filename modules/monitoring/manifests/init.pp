@@ -1,9 +1,16 @@
 class monitoring (
 ) {
+  $vmpackages = hiera('monitoring::vmware_packages',undef)
   $packages = hiera('monitoring::packages',undef)
   $services = hiera('monitoring::services',undef)
   include mrtg
   include crontask
+
+  if $::virtual == 'vmware' {
+    if $vmpackages {
+      package{$vmpackages: ensure => installed}
+    }
+  }
 
   if $packages {
     package{$packages: ensure => installed}

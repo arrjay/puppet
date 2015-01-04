@@ -176,6 +176,9 @@ monitoring::packages:
     - sysstat
     - smartmontools
 
+monitoring::vmware_packages:
+    - open-vm-tools
+
 # hardware monitoring
 hwmonitoring::packages:
     - lm_sensors
