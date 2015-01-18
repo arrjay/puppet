@@ -3,12 +3,18 @@ classes:
     - phpstack
     - mysql::server
     - mysql::php
+# heh. we set *this* to engage net ads fuckery for httpd. NOT A FILESERVER.
+    - fileserver::samba
 httpd::apache2::additional_http_opts:
     - "<FilesMatch \.php$>\nSetHandler application/x-httpd-php\n</FilesMatch>"
     - 'AddType text/html .php'
     - 'DirectoryIndex index.php'
     - 'php_value session.save_handler "files"'
     - 'php_value session.save_path    "/var/lib/php/session"'
+httpd::apache2::additional_http_mods:
+    auth_kerb_module:
+        modpath: modules/mod_auth_kerb.so
+
 httpd::apache2::sites:
     _default_:
         port: 443
