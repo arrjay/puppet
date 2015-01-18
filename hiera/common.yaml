@@ -24,6 +24,9 @@ upsdefs:
     3B1110X36238:
         name: booberry
         desc: 'tesla'
+    3B0805X12257:
+        name: prunes
+        desc: 'the electric prunes'
 ntp::servers:
     - ntp-0.produxi.net
     - ntp-1.produxi.net
