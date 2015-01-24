@@ -84,3 +84,16 @@ pkgenv::packages:
     - make
     - mock
     - patch
+
+# ldapclient (sssd)
+ldapclient::packages:
+    - adcli
+    - sssd-ad
+ldapclient::services:
+    - sssd
+ldapclient::sssd_config: '/etc/sssd/sssd.conf'
+
+# krbclient
+krbclient::packages:
+    - krb5-user
+krbclient::config: '/etc/krb5.conf'
