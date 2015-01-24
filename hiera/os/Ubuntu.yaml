@@ -97,3 +97,11 @@ ldapclient::sssd_config: '/etc/sssd/sssd.conf'
 krbclient::packages:
     - krb5-user
 krbclient::config: '/etc/krb5.conf'
+
+# automount
+automount::services: autofs
+automount::packages:
+    - autofs
+automount::maptype: sun
+automount::nhomemap: auto.nethome
+automount::auto_home: auto.nethome
