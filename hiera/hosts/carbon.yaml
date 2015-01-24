@@ -1,0 +1,8 @@
+classes:
+    - rpmrepo::arrjay
+    - zpool
+    - fileserver::nfs
+    - fileserver::iscsi
+zpools:
+    internal:
+        disk:
