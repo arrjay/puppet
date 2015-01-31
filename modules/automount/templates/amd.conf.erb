@@ -8,7 +8,7 @@ auto_dir = /.a
 map_name = amd_site
 
 [/nethome]
-<% userbit = @hmapperm.split(//).last(3)[0].to_i -%>
+<% userbit = @nhmaperm.split(//).last(3)[0].to_i -%>
 <% if userbit & 1 == 1 -%>
 map_type = exec
 map_name = <%= @mapdir -%>/amd_nethome
@@ -18,7 +18,7 @@ map_name = amd_nethome
 
 <% if @maphome -%>
 [/home]
-<%   userbit = @hmapperm.split(//).last(3)[0].to_i -%>
+<%   userbit = @hmaperm.split(//).last(3)[0].to_i -%>
 <%   if userbit & 1 == 1 -%>
 map_type = exec
 map_name = <%= @mapdir -%>/amd_nethome

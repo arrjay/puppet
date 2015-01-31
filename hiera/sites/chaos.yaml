@@ -1,4 +1,5 @@
 automount::auto_home: chaos_nethome
+automount::auto_nethome: chaos_nethome
 automount::auto_site_template: chaos_site
 dnsdomain: j.hack
 krbclient::realm: 'INT.J.HACK'

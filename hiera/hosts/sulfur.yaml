@@ -1,6 +1,6 @@
 classes:
     - nameserver
-    - nfs::server
+    - fileserver::nfs
     - zpool
     - mirror::chaos
     - netboot::obsd_ip22
