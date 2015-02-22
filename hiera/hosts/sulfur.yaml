@@ -17,6 +17,8 @@ classes:
     - netboot::obsd_alpha
     - netboot::netbsd_cobalt
     - netboot::yaboot
+# NOTE: you'll want to comment out the next two modules while bootstrapping..
+    - ldapclient
     - fileserver::netatalk2
     - httpd::apache2
 netboot::ip::jumpstart: '10.100.252.2'
