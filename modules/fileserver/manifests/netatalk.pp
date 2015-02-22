@@ -24,13 +24,13 @@ class fileserver::netatalk(
       # install prereqs via packages, *then* build it.
       package{[
         "converters/libiconv",
-        "databases/db46",
+        "databases/db5",
         "devel/dbus-glib",
         "devel/gmake",
         "devel/libevent2",
         "devel/libtool",
         "devel/pkgconf",
-        "lang/perl5.14",
+        "lang/perl5.18",
         "net/avahi-app",
         "security/libgcrypt",
       ]: ensure => installed } ~> package{$atalk_pkg: ensure => installed, provider => 'portupgrade' }

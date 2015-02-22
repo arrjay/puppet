@@ -31,10 +31,10 @@ class fileserver::netatalk2(
       # install prereqs via packages, *then* build it.
       package{[
         "converters/libiconv",
-        "databases/db46",
+        "databases/db5",
         "devel/gmake",
         "devel/pkgconf",
-        "lang/perl5.16",
+        "lang/perl5.18",
         "net/avahi-app",
         "security/libgcrypt",
         "net/openslp",
