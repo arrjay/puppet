@@ -26,7 +26,7 @@ nameserver::zonedefaults:
 dhcpd::template: ifgen
 nameserver::zonedata:
     j.hack:
-        serial: 2014072900
+        serial: 2015022200
         nameservers:
             - sulfur
             - potassium
@@ -202,6 +202,12 @@ interface:
         ip: 10.100.252.18
         desc: VIP
         macaddr: '00:06:29:21:f0:23'
+    tantalum:
+        ip: 10.100.252.19
+        desc: "Apple PowerBook6,7"
+        macaddr: '00:14:51:3a:35:8c'
+        bootserver: 10.100.252.2
+        bootfile: 'yaboot'
     neon:
         ip: 10.100.252.30
         desc: "AlphaPC 164LX"
