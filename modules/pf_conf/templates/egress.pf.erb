@@ -1,8 +1,6 @@
-ssh=""
-cvpn=""
-bt=""
-puppet=""
-mirror=""
+<% @keys.each do |key,value| -%>
+<%= key -%>=<%= value %>
+<% end -%>
 
 set skip on lo
 
@@ -19,7 +17,7 @@ block out on vmm from !(vmm) to any
 
 antispoof quick for { lo home vmm }
 
-pass in on internet inet proto { tcp } tp (internet) port 22 rdr-to $ssh port 22
+pass in on internet inet proto { tcp } to (internet) port 22 rdr-to $ssh port 22
 pass in on internet inet proto { tcp, udp } to (internet) port 8123 rdr-to $cvpn port 8123
 pass in on internet inet proto { tcp, udp } to (internet) port 51413 rdr-to $bt port 51413
 
