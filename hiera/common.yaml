@@ -1,4 +1,5 @@
 classes:
     - ssh
+    - root_authkeys
 
 ssh::storeconfigs_enabled: false
