@@ -3,6 +3,8 @@ classes:
 
 pf_conf::source: 'egress.pf'
 
+resolvconf::manage_dhclient: true
+
 resources:
     sysctl::value:
         net.inet.ip.forwarding: 
