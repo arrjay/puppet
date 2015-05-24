@@ -3,6 +3,7 @@
     - sites/%{::site}
     - module/%{calling_module}
     - os/%{::operatingsystem}/%{::operatingsystemmajrelease}
+    - os/%{::operatingsystem}/%{::operatingsystemrelease}
     - os/%{::operatingsystem}
     - common
 
