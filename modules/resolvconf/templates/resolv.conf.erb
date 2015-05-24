@@ -1,2 +1,5 @@
 <%= scope.function_template(["resolvconf/dns.serverlist.erb"]) -%>
 domain <%= @domain %>
+<% if @osfamily == "OpenBSD" -%>
+lookup file bind
+<% end -%>
