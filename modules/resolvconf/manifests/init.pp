@@ -1,10 +1,9 @@
 class resolvconf (
-  $file = hiera('resolvconf::file'),
-  $nameservers = hiera('nameservers'),
-  $domain = hiera('dnsdomain'),
+  $file = '/etc/resolv.conf',
+  $nameservers,
+  $domain,
 ) {
   # this class mostly exists to blow up ubuntu's resolvconf idiocy
-  require stdlib
 
   $servcount = size($nameservers)
   $random = fqdn_rand($servcount,62467)
