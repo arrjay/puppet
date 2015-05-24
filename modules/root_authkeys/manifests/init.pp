@@ -1,5 +1,5 @@
 # stomp on .ssh/authorized_keys for the root user
-class root_authkeys 
+class root_authkeys (
   $roothome = '/root',
 ) {
   file{"$roothome/.ssh":
