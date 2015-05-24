@@ -1,0 +1,61 @@
+# https://blogs.oracle.com/paulj/entry/solaris_netinstall_with_isc_dhcpd
+
+option space SUNW;
+
+# SrootOpt, NFS mount options for the client's root file system
+option SUNW.root-mount-options code 1 = text;                       #optional
+
+# SrootIP4, IP address of root server
+option SUNW.root-server-ip-address code 2 = ip-address;             #required
+
+# SrootNM, Host name of root server
+option SUNW.root-server-hostname code 3 = text;                     #required
+
+# SrootPTH, Path to the client's root directory on the root server
+option SUNW.root-path-name code 4 = text;                           #required
+
+# SswapIP4, IP address of swap server 
+option SUNW.swap-server-ip-address code 5 = ip-address;             #unused
+
+# SswapPTH, Path to the client's swap file on the swap server
+option SUNW.swap-file-path code 6 = text;                           #unused
+
+# SbootFIL, Path to the client's boot file, optional
+option SUNW.boot-file-path code 7 = text;                           #optional
+
+# Stz, Time zone for client 
+option SUNW.posix-timezone-string code 8 = text;                    #unused
+
+# SbootRS, NFS read size used by standalone boot program when
+#          loading the kernel 
+option SUNW.boot-read-size code 9 = unsigned integer 16;            #optional
+
+# SinstIP4, IP address of JumpStart install server
+option SUNW.install-server-ip-address code 10 = ip-address;         #required
+
+# SinstNM, Host name of install server
+option SUNW.install-server-hostname code 11 = text;                 #required
+
+# SinstPTH, Path to installation image on install server
+option SUNW.install-path code 12 = text;                            #required
+
+# SsysidCF, Path to sysidcfg file, in the format server:/path
+option SUNW.sysid-config-file-server code 13 = text;                #optional
+
+# SjumpsCF, Path to JumpStart configuration file in the format server:/path
+option SUNW.jumpstart-config code 14 = text;                        #optional
+
+# Sterm, Terminal type  
+option SUNW.terminal-name code 15 = text;                           #unused
+
+# SbootURI, Path to the standalone boot file or path to the WAN boot file.
+#           standalone: tftp://inetboot.sun4u
+#           wan boot:   http://host.domain/path-to-file
+# for whatever combination of firmware/wanboot screwiness I'm in, the
+#  server actually needs to be specified by IP.
+option SUNW.standalone-boot-uri code 16 = text;                     #optional
+
+# SHTTPproxy, IP address and port number of the proxy server for 
+#             WAN boot, :
+option SUNW.standalone-boot-http-proxy code 17 = text;              #optional
+

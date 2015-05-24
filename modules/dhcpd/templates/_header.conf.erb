@@ -1,0 +1,15 @@
+option domain-name "<%= @dnsdomain -%>";
+option domain-name-servers <%= @_network['nameservers'].join(", ") -%>;
+
+default-lease-time <%= @params['default-lease-time'] -%>;
+max-lease-time <%= @params['max-lease-time'] -%>;
+
+ddns-update-style <%= @params['ddns-update-style'] -%>;
+
+<% if @params['authoritative'] -%>
+authoritative;
+<% else -%>
+not authoritative;
+<% end -%>
+
+log-facility <%= @params['log-facility'] -%>;

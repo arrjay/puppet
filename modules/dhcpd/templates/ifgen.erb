@@ -1,0 +1,23 @@
+<% if @macaddr -%>
+  host <%= @clientname -%> {
+    hardware ethernet <%= @macaddr -%>;
+    fixed-address <%= @ip -%>;
+<%   if @bootserver -%>
+    next-server <%= @bootserver -%>;
+<%   end -%>
+<%   if @bootfile -%>
+    filename "<%= @bootfile -%>";
+<%   end -%>
+<%   if @always_rfc1048 -%>
+    always-reply-rfc1048 true;
+<%   end -%>
+<%   if @vendorspace -%>
+    vendor-option-space <%= @vendorspace -%>;
+<%   end -%>
+<%   if @extra -%>
+<%     @extra.each do |line| -%>
+    <%= line -%>;
+<%     end -%>
+<%   end -%>
+  }
+<% end -%>
