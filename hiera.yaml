@@ -2,6 +2,8 @@
     - hosts/%{::fqdn}
     - sites/%{::site}
     - module/%{calling_module}
+    - os/%{::operatingsystem}/%{::operatingsystemmajrelease}
+    - os/%{::operatingsystem}
     - common
 
 :backends:
