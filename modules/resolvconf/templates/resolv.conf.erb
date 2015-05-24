@@ -1,5 +1,7 @@
-<%= scope.function_template(["resolvconf/dns.serverlist.erb"]) -%>
 domain <%= @domain %>
+<% @ns_shuffled.each do |ns| -%>
+nameserver <%= ns %>
+<% end -%>
 <% if @osfamily == "OpenBSD" -%>
 lookup file bind
 <% end -%>
