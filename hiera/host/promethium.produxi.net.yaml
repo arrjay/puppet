@@ -1,2 +1,9 @@
 classes:
     - vmserver
+
+resources:
+    sysctl::value:
+        net.ipv6.conf.default.disable_ipv6:
+            value: '1'
+        net.ipv6.conf.enp2s0f3.disable_ipv6:
+            value: '1'
