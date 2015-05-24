@@ -2,3 +2,7 @@ classes:
     - pf_conf
 
 pf_conf::source: 'egress.pf'
+
+resources:
+    sysctl::value:
+        net.inet.ip.forwarding: '1'
