@@ -4,14 +4,21 @@ class dhcpd (
   case $::osfamily {
     'FreeBSD' : {
       if $::kernelmajversion > 9 {
-        $packages = ['isc-dhcp42-server']
+        $packages = [ 'isc-dhcp42-server' ]
       } else {
-        $packages = ['net/isc-dhcp42-server']
+        $packages = [ 'net/isc-dhcp42-server' ]
       }
-      $cfg     = '/usr/local/etc/dhcpd.conf'
-      $svc     = 'isc-dhcpd'
-      $bin     = '/usr/local/sbin/dhcpd'
-      $leases  = '/var/db/dhcpd/dhcpd.leases'
+      $cfg        = '/usr/local/etc/dhcpd.conf'
+      $svc        = 'isc-dhcpd'
+      $bin        = '/usr/local/sbin/dhcpd'
+      $leases     = '/var/db/dhcpd/dhcpd.leases'
+    }
+    'RedHat' : {
+      $packages   = [ 'dhcp' ]
+      $svc        = 'dhcpd'
+      $bin        = 'dhcpd'
+      $cfg        = '/etc/dhcp/dhcpd.conf'
+      $leases     = '/var/lib/dhcpd/dhcpd.leases'
     }
   }
 
@@ -22,7 +29,7 @@ class dhcpd (
 
   exec { "restart dhcpd":
     refreshonly => true,
-    command     => "/usr/sbin/service $svc restart",
+    command     => "service $svc restart",
     onlyif      => "$bin -T -cf $cfg -lf $leases",
   }
 
