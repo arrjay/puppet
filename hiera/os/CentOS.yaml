@@ -1,0 +1,2 @@
+ssh::server::options:
+    SyslogFacility: 'AUTHPRIV'
