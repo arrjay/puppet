@@ -6,7 +6,7 @@ class pf_conf (
     ensure	=> present,
     mode	=> '0600',
     owner	=> 0,
-    source	=> "puppet:///modules/pf_conf/$source",
+    content	=> template("pf_conf/$source.erb"),
     notify	=> Exec["pfctl -f /etc/pf.conf"],
   }
   exec{"pfctl -f /etc/pf.conf":
