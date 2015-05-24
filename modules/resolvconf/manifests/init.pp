@@ -26,7 +26,7 @@ class resolvconf (
       unless  => "grep -q '^supersede domain-name-servers' $dhclient_cfg",
     }
     exec {"$dhclient_cfg: reset 'supersede domain-name-servers' opt":
-      command => "perl -pi -e 's/supersede domain-name-servers.*/$dhcp_opt_string/' $dhclient_cfg",
+      command => "perl -pi -e 's/^supersede domain-name-servers.*/$dhcp_opt_string/' $dhclient_cfg",
       unless  => "grep -q '^$dhcp_opt_string' $dhclient_cfg",
     }
   }
