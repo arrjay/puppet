@@ -4,9 +4,9 @@ class dhcpd (
   case $::osfamily {
     'FreeBSD' : {
       if $::kernelmajversion > 9 {
-        $package = 'isc-dhcp42-server'
+        $packages = ['isc-dhcp42-server']
       } else {
-        $package = 'net/isc-dhcp42-server'
+        $packages = ['net/isc-dhcp42-server']
       }
       $cfg     = '/usr/local/etc/dhcpd.conf'
       $svc     = 'isc-dhcpd'
@@ -18,7 +18,7 @@ class dhcpd (
   $params = hiera_hash("dhcpd")
   $dnsdomain = hiera("dnsdomain")
 
-  package { $package: ensure => installed }
+  ensure_packages( $packages )
 
   exec { "restart dhcpd":
     refreshonly => true,
