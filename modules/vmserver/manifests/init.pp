@@ -1,7 +1,7 @@
 # common things for our vm servers (be they Xen, Virtualbox, or KVM)
 class vmserver (
   $packages = ['dnsmasq'],
-  $dnsmasq_conf = hiera('dnsmasq::configfile'),
+  $dnsmasq_conf = '/etc/dnsmasq.conf',
   $dnsmasq_svcname = 'dnsmasq',
 ) {
   #include resolvconf
