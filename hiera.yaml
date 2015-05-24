@@ -1,6 +1,6 @@
 :hierarchy:
-    - hosts/%{::fqdn}
-    - sites/%{::site}
+    - host/%{::fqdn}
+    - site/%{::site}
     - module/%{calling_module}
     - os/%{::operatingsystem}/%{::operatingsystemmajrelease}
     - os/%{::operatingsystem}/%{::operatingsystemrelease}
