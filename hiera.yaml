@@ -1,0 +1,11 @@
+:hierarchy:
+    - hosts/%{::fqdn}
+    - sites/%{::site}
+    - module/%{calling_module}
+    - common
+
+:backends:
+    - yaml
+
+:yaml:
+    :datadir: '/etc/puppet/hiera'

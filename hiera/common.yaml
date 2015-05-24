@@ -1,0 +1,4 @@
+classes:
+    - ssh
+
+ssh::storeconfigs_enabled: false
