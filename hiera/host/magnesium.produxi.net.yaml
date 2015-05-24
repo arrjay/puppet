@@ -5,4 +5,5 @@ pf_conf::source: 'egress.pf'
 
 resources:
     sysctl::value:
-        net.inet.ip.forwarding: '1'
+        net.inet.ip.forwarding: 
+            value: '1'
