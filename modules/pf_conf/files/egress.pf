@@ -1,11 +1,32 @@
-#	$OpenBSD: pf.conf,v 1.54 2014/08/23 05:49:42 deraadt Exp $
-#
-# See pf.conf(5) and /etc/examples/pf.conf
+ssh=""
+cvpn=""
+bt=""
+puppet=""
+mirror=""
 
 set skip on lo
 
-block return	# block stateless traffic
-pass		# establish keep-state
+anchor "ftp-proxy/*"
+pass in quick on home inet proto tcp to port ftp divert-to 127.0.0.1 port 8021
+pass in quick on transit inet proto tcp to port ftp divert-to 127.0.0.1 port 8021
 
-# By default, do not permit remote connections to X11
-block return in on ! lo0 proto tcp to port 6000:6010
+match out on egress inet from !(egress:network) to any nat-to (egress:0)
+
+block in log		# block stateless traffic
+pass out quick		# establish keep-state
+
+block out on vmm from !(vmm) to any
+
+antispoof quick for { lo home vmm }
+
+pass in on internet inet proto { tcp } tp (internet) port 22 rdr-to $ssh port 22
+pass in on internet inet proto { tcp, udp } to (internet) port 8123 rdr-to $cvpn port 8123
+pass in on internet inet proto { tcp, udp } to (internet) port 51413 rdr-to $bt port 51413
+
+pass in on internet inet proto icmp to (internet) icmp-type echoreq
+
+pass in on home
+pass in on transit inet proto tcp to $puppet port 8140
+pass in on transit inet proto tcp to $mirror port 873
+pass in on transit inet proto tcp to $mirror port 80
+pass in on transit to !home:network
