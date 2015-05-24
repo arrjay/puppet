@@ -1,6 +1,6 @@
 # drop a pf.conf file, reload pf services
 class pf_conf (
-  $source
+  $source,
   $keys		= {},
 ) {
   file{'/etc/pf.conf':
