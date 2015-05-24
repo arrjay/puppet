@@ -1,11 +1,10 @@
 # common things for our vm servers (be they Xen, Virtualbox, or KVM)
 class vmserver (
-  $packages = hiera('vmserver::packages'),
+  $packages = ['dnsmasq'],
   $dnsmasq_conf = hiera('dnsmasq::configfile'),
-  $dnsmasq_svcname = hiera('dnsmasq::svcname'),
-  $svccmd = hiera('service'),
+  $dnsmasq_svcname = 'dnsmasq',
 ) {
-  include resolvconf
+  #include resolvconf
   package{$packages: ensure => installed}
   file{$dnsmasq_conf:
     owner	=> root,
@@ -13,9 +12,9 @@ class vmserver (
     mode	=> 0644,
     ensure	=> present,
     content	=> template("vmserver/dnsmasq.conf.erb"),
-    notify	=> Exec["$svccmd $dnsmasq_svcname restart"],
+    notify	=> Exec["service $dnsmasq_svcname restart"],
   }
-  exec{"$svccmd $dnsmasq_svcname restart":
+  exec{"service $dnsmasq_svcname restart":
     refreshonly => true,
   }
 }
