@@ -19,3 +19,11 @@ nameserver::views:
               - type slave
               - file "slaves/produxi.net"
               - ENC[PKCS7,MIIBiQYJKoZIhvcNAQcDoIIBejCCAXYCAQAxggEhMIIBHQIBADAFMAACAQEwDQYJKoZIhvcNAQEBBQAEggEAIxg+M+CcehaMy52elMTAnARAvWqo4EkL8E6JPW7l7vryoQ30W/xEFPs8/FXK0BFqwHVZmo6D1GzfkEnXkAdBfb+PtrjI+S+N6DUJMAQQksf5KXCZkCangNyHduASXPlBrvAJGedQd4Tc/tDDOqU3NMWBeF6Tmi/u/Phnz9udKYXzSflAZUiWmo37par2oWSh/Y+1FxO3Kn2tjDWXX9H5Ax86/HYWb7MXn93Xjxhoo73iO87FZxcfQoiJAXgS0INL5pbxHSWUMzhCElxWfjmh3Ik6MMpDRmOahR4Ekn9srFeDlAtT3ZIBaL0+LbOyAT8DguogSYQy9+NhEyV+R6yjvDBMBgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBBEFBN+bUZx52gzczyXgQFYgCDaO73IaLQYupzb44y6/WKHqThpSc8FHhRQAkIONzJlCA==]
+          '_msdcs.produxi.net':
+              - type slave
+              - file "slaves/produxi.net"
+              - ENC[PKCS7,MIIBiQYJKoZIhvcNAQcDoIIBejCCAXYCAQAxggEhMIIBHQIBADAFMAACAQEwDQYJKoZIhvcNAQEBBQAEggEAmg1E5FGxhTgRK7dimE0jsPS2yqZ59Lz1EArJyTnvC8APNf1owhIOP7H42C8U+t/74d4ShGj/kHT0tTd8usSP8fcYNuYOAUbLXsVm8Y8FZmX4kLoS2A5WheeRdEQQBpiP9ReMFSHAtewye7k46i/ZmHgJ7oj3ny0j+bBSEg/2NeD8yGi22zfXOVMNNyLkGKTkvCBg/sg6/uOXtv8xPcg2M7JKtAr/yh5KFsBTcFAh+HOqgz0RIYwoI0wj0Q3V0xOgSmCmANTmLdaVu+TL5R3+FI5zMgIlh3ACXr+YgnYyRKaRnXn4CFGVmHubXfgclcpPAr/QZIsEFgnH4339R+tO5TBMBgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBA/gaoKNXyXh1Pr+7lbtkizgCAHBzpOpUMTrV4Bo1XQrmw+z6cm6RYD3+uzN5vD4U5GZA==]
+          128.16.172.in-addr.arpa:
+              - type slave
+              - file "slaves/128.16.172.in-addr.arpa"
+              - ENC[PKCS7,MIIBiQYJKoZIhvcNAQcDoIIBejCCAXYCAQAxggEhMIIBHQIBADAFMAACAQEwDQYJKoZIhvcNAQEBBQAEggEALNXIH8bYxfweZySRcji3ypRAw9y3khrmO1EvuIvqRcTEEaHkq+Nk+waVUZpdzTCf/Ap7co6kZrGppuRScslTAoOkwgNEDs6jr2vpOdTk7Zh0sucOtOTYpkrpukvLwpSgNJEpVVCtywWCuQHNYu5ZTiIM71cyCIMq2oPkbEW9o4kVTFbMMMWPoE3teMF/TWhAOlvPvPhdj208/CtVZ+Vjdu95NiR3l1RZovpUGDPMqUPckJZJH2umVJ6hw+y3UmspPPyXlyZGCT53OxYgT5pbixPrViKk/lcZFqINv4mf5OY8TgQ3avqDq0PGpyL5CNCfbzXKXK7vH+CZh0hfWzw4wTBMBgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBCQ/ysptid/con+0fTuYjPsgCCRR1zfOTY+WLOUkU+jzYa+Ig/SWpL9o0wvPiu8lTZImw==]
