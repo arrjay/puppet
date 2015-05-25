@@ -34,5 +34,6 @@ class nameserver (
     forwarders => $forwarders,
     views      => $_views,
     includes   => $_includes,
+    recursion  => false,
   }
 }
