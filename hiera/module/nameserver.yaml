@@ -1,4 +1,10 @@
-nameserver::zones:
-    ".":
-        type: master
-        file: "named.hints"
+nameserver::views:
+    self:
+        match-clients:
+            - 127.0.0.1
+            - '::1'
+        recursion: true
+        zones:
+            '.':
+                - type hint
+                - file "named.ca"
