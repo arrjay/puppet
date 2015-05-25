@@ -1,6 +1,12 @@
 class dhcpd (
-  $template = hiera(dhcpd::template),
+  $template,
+  $lease_default = '86400', # in seconds
+  $lease_max     = '86400', # in seconds
+  $subnet,
+  $netmask,
+  $gateway,
 ) {
+  include resolvconf
   case $::osfamily {
     'FreeBSD' : {
       if $::kernelmajversion > 9 {
@@ -22,8 +28,12 @@ class dhcpd (
     }
   }
 
-  $params = hiera_hash("dhcpd")
-  $dnsdomain = hiera("dnsdomain")
+  $params = hiera_hash("dhcpd::params")
+  $dnsdomain    = $resolvconf::domain
+  $ns_string    = $resolvconf::ns_string
+  # I prefer this to getting a surprise when $::netmask, $::subnet come back in a template
+  $dhcp_subnet  = $subnet
+  $dhcp_netmask = $netmask
 
   ensure_packages( $packages )
 
@@ -40,7 +50,7 @@ class dhcpd (
       owner   => root,
       group   => 0,
       content => template("dhcpd/${dhcpd::template}.conf.erb"),
-      notify  => ['restart dhcpd'],
+      notify  => Exec['restart dhcpd'],
     }
   }
 
