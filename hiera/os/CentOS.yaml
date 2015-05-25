@@ -1,2 +1,9 @@
 ssh::server::options:
     SyslogFacility: 'AUTHPRIV'
+
+nameserver::views:
+    self:
+        includes:
+            - /etc/named.rfc1912.zones
+nameserver::includes:
+    - /etc/named.root.key
