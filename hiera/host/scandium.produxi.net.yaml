@@ -1,4 +1,5 @@
 classes:
     - dhcpd
+    - nameserver
 
 dhcpd::template: 'dyn'
