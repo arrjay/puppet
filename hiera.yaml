@@ -10,9 +10,6 @@
 :backends:
     - eyaml
 
-:yaml:
-    :datadir: '/etc/puppet/hiera'
-
 :eyaml:
     :datadir: '/etc/puppet/hiera'
     :extension: 'yaml'
