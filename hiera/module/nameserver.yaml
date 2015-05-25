@@ -1,0 +1,4 @@
+nameserver::zones:
+    ".":
+        type: master
+        file: "named.hints"
