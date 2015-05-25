@@ -1,0 +1,33 @@
+ddns-update-style none;
+option domain-name "<%= @dnsdomain -%>";
+option domain-name-servers "<%= @ns_string -%>";
+
+default-lease-time <%= @lease_default -%>;
+max-least-time <%= @lease_max -%>;
+
+authoritative;
+
+log-facility local7;
+
+subnet <%= @subnet -%> netmask <%= @netmask -%> {
+  option routers <%= @gateway -%>;
+  option subnet-mask <%= @netmask -%>;
+<% if @tftp_server -%>
+  next-server <%= @tftp_server -%>;
+<% end -%>
+<% if @default_tftpboot -%>
+  filename "<%= @default_tftpboot -%>";
+  pool {
+    on commit {  set ClientIP   = binary-to-ascii(10,8,".",leased-address);
+                 set ClientName = pick-first-value(config-option host-name, option host-name, "");
+                 execute( "<%= @updatedns_path -%>","add",ClientIP,ClientName);
+    }
+    on release { set ClientIP   = binary-to-ascii(10,8,".",leased-address);
+                 execute( "<%= @updatedns_path -%>","delete",ClientIP);
+    }
+    on expiry {  set ClientIP   = binary-to-ascii(10,8,".",leased-address);
+                 execute( "<%= @updatedns_path -%>","delete",ClientIP);
+    }
+    range dynamic-bootp <%= @dyn_range_start -%> <%= @dyn_range_end -%>;
+  }
+}
