@@ -108,6 +108,9 @@ logging {
 <% @views.sort_by {|key,value| key}.each do |key,value| -%>
 <% valid_keys = %w(allow-notify allow-query allow-recursion allow-transfer allow-update-forwarding forwarders match-clients match-destinations match-recursive-only) -%>
 view "<%= key %>" {
+<% if value['recursion'] -%>
+    recursion yes;
+<% end -%>
 <% valid_keys.sort.each do |valid_key| -%>
 <% if value[valid_key] and !value[valid_key].empty? -%>
     <%= valid_key %> { <%= value[valid_key].join('; ') %>; };
