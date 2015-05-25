@@ -2,8 +2,8 @@
 class nameserver (
   $forwarders = [ '8.8.8.8', '8.8.4.4' ],
   # puppet bug #20199
-  $views      = hiera_hash('nameserver::views')
-  $includes   = hiera_array('nameserver::includes')
+  $views      = hiera_hash('nameserver::views'),
+  $includes   = hiera_array('nameserver::includes'),
 ) {
   class { bind: chroot => true }
 
