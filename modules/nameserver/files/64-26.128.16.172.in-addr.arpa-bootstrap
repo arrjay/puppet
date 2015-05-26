@@ -1,6 +1,6 @@
 $ORIGIN .
 $TTL 300        ; 5 minutes
-64/26.128.16.172.in-addr.arpa IN SOA gallium.produxi.net. hostmaster.produxi.net. (
+64/26.128.16.172.in-addr.arpa IN SOA scandium.produxi.net. hostmaster.produxi.net. (
                                 0          ; serial
                                 300        ; refresh (5 minutes)
                                 900        ; retry (15 minutes)
