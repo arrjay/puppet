@@ -8,6 +8,15 @@ nameserver::views:
     self:
         match-clients:
             - 172.16.128.0/24
+        zones:
+            dyn.produxi.net:
+                - type master
+                - file "data/dyn.produxi.net"
+                - allow-update { key dyn.produxi.net; }
+            64/26.128.16.172.in-addr.arpa:
+                - type master
+                - file "data/64-26.128.16.172.in-addr.arpa"
+                - allow-update { key dyn.produxi.net; }
 
 nameserver::addresses:
     - any
@@ -19,3 +28,16 @@ resources:
     isc_key::named:
         /var/named/chroot/etc/dyn.produxi.net.key:
             name: dyn.produxi.net
+    file:
+        /var/named/chroot/var/named/data/dyn.produxi.net:
+            source: "puppet:///modules/nameserver/dyn.produxi.net-bootstrap"
+            replace: no
+            owner: named
+            group: named
+            mode: '0664'
+        /var/named/chroot/var/named/data/64-26.128.16.172.in-addr.arpa:
+            source: "puppet:///modules/nameserver/64-26.128.16.172.in-addr.arpa-bootstrap"
+            replace: no
+            owner: named
+            group: named
+            mode: '0664'

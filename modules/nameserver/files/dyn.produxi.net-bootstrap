@@ -1,0 +1,12 @@
+$ORIGIN .
+$TTL 300	; 5 minutes
+dyn.produxi.net		IN SOA	scandium.produxi.net. hostmaster.produxi.net. (
+				0          ; serial
+				300        ; refresh (5 minutes)
+				900        ; retry (15 minutes)
+				3600       ; expire (1 hour)
+				900        ; minimum (15 minutes)
+				)
+$TTL 3600	; 1 hour
+			NS	scandium.produxi.net.
+			NS	molybdenum.produxi.net.
