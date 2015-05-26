@@ -8,3 +8,6 @@ nameserver::views:
     self:
         match-clients:
             - 172.16.128.0/24
+
+nameserver::addresses:
+    - any
