@@ -11,3 +11,11 @@ nameserver::views:
 
 nameserver::addresses:
     - any
+
+nameserver::includes:
+    - /etc/dyn.produxi.net.key
+
+resources:
+    isc_key::named:
+        /var/named/chroot/etc/dyn.produxi.net.key:
+            name: dyn.produxi.net
