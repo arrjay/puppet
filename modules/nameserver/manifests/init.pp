@@ -3,6 +3,7 @@ class nameserver (
   $forwarders  = [ '8.8.8.8', '8.8.4.4' ],
   $views       = {},
   $includes    = [],
+  $addresses   = [ '127.0.0.1' ],
 ) {
   class { bind: chroot => true }
   # oh, wow. comment all of this out until I upgrade the puppetmaster. epel is breathtakingly dumb.
@@ -31,9 +32,11 @@ class nameserver (
   }
 
   bind::server::conf { '/var/named/chroot/etc/named.conf':
-    forwarders => $forwarders,
-    views      => $_views,
-    includes   => $_includes,
-    recursion  => false,
+    forwarders     => $forwarders,
+    views          => $_views,
+    includes       => $_includes,
+    recursion      => false,
+    listen_on_addr => $addresses,
+    allow_query    => [],
   }
 }
