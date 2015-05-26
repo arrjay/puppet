@@ -1,0 +1,1 @@
+<%= @keyname -%>. IN KEY 512 3 <%= scope.function_template(["isc_key/str2isc.erb"]) -%> <%= @keydata.slice(0,56) -%> <%= @keydata.slice(57,@keydata.size) %>

@@ -1,0 +1,5 @@
+<%# call this to turn the isc key type into the magic numbers isc wants. -%>
+<% case @keytype
+       when 'HMAC_SHA1'   -%>161<%
+       when 'HMAC_SHA512' -%>165<%
+   end -%>
