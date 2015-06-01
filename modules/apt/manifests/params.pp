@@ -71,8 +71,8 @@ class apt::params {
 
   $update_defaults = {
     'frequency' => 'reluctantly',
-    'timeout'   => undef,
-    'tries'     => undef,
+    'timeout'   => 300,
+    'tries'     => 1,
   }
 
   $proxy_defaults = {
