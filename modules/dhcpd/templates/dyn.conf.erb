@@ -21,13 +21,13 @@ subnet <%= @dhcp_subnet -%> netmask <%= @dhcp_netmask -%> {
   pool {
     on commit {  set ClientIP   = binary-to-ascii(10,8,".",leased-address);
                  set ClientName = pick-first-value(config-option host-name, option host-name, "");
-                 execute( "<%= @updatedns_path -%>","add",ClientIP,ClientName);
+                 execute( "/usr/local/bin/update-dns.sh","add",ClientIP,ClientName);
     }
     on release { set ClientIP   = binary-to-ascii(10,8,".",leased-address);
-                 execute( "<%= @updatedns_path -%>","delete",ClientIP);
+                 execute( "/usr/local/bin/update-dns.sh","delete",ClientIP);
     }
     on expiry {  set ClientIP   = binary-to-ascii(10,8,".",leased-address);
-                 execute( "<%= @updatedns_path -%>","delete",ClientIP);
+                 execute( "/usr/local/bin/update-dns.sh","delete",ClientIP);
     }
     range dynamic-bootp <%= @params['dyn_range_start'] -%> <%= @params['dyn_range_end'] -%>;
   }

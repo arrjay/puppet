@@ -3,6 +3,10 @@ classes:
     - nameserver
 
 dhcpd::template: 'dyn'
+dhcpd::dyn::keyfile: '/usr/local/etc/dyn.produxi.net-dns.'
+dhcpd::dyn::target_ns: '127.0.0.1'
+dhcpd::dyn::domain: 'dyn.produxi.net'
+dhcpd::dyn::reverse_delegation: '64/26.128.16.172.in-addr.arpa.'
 
 nameserver::views:
     self:
@@ -28,6 +32,14 @@ resources:
     isc_key::named:
         /var/named/chroot/etc/dyn.produxi.net.key:
             name: dyn.produxi.net
+    isc_key::private:
+        /usr/local/etc/dyn.produxi.net-dns.private:
+            name: dyn.produxi.net
+            owner: dhcpd
+    isc_key::public:
+        /usr/local/etc/dyn.produxi.net-dns.key:
+            name: dyn.produxi.net
+            owner: dhcpd
     file:
         /var/named/chroot/var/named/data/dyn.produxi.net:
             source: "puppet:///modules/nameserver/dyn.produxi.net-bootstrap"

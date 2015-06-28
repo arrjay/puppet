@@ -54,5 +54,9 @@ class dhcpd (
     }
   }
 
+  if $template == dyn {
+    require dhcpd::dyn
+  }
+
   service { "$svc": enable => true }
 }
