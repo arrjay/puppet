@@ -17,10 +17,12 @@ nameserver::views:
                 - type master
                 - file "data/dyn.produxi.net"
                 - allow-update { key dyn.produxi.net; }
+                - allow-transfer { 172.16.128.30; }
             64/26.128.16.172.in-addr.arpa:
                 - type master
                 - file "data/64-26.128.16.172.in-addr.arpa"
                 - allow-update { key dyn.produxi.net; }
+                - allow-transfer { 172.16.128.30; }
 
 nameserver::addresses:
     - any
