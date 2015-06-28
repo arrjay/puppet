@@ -3,7 +3,7 @@ option domain-name "<%= @dnsdomain -%>";
 option domain-name-servers <%= @ns_string -%>;
 
 default-lease-time <%= @lease_default -%>;
-max-least-time <%= @lease_max -%>;
+max-lease-time <%= @lease_max -%>;
 
 authoritative;
 
