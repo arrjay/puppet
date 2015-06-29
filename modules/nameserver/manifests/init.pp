@@ -15,7 +15,7 @@ class nameserver (
   #  $_views    = $views
   #}
   #if ( empty($includes) ) {
-    $_includes = hiera_array('nameserver::includes')
+    $_includes = hiera_array('nameserver::includes',[])
   #} else {
   #  $_includes = $includes
   #}
