@@ -6,3 +6,27 @@ resolvconf::nameservers:
     - 8.8.8.8
     - 8.8.4.4
 resolvconf::domain: j.hack
+
+nameserver::views:
+    self:
+        zones:
+            produxi.net:
+                - type slave
+                - file "slaves/produxi.net"
+                - masters { 172.16.128.30; }
+            _msdcs.produxi.net:
+                - type slave
+                - file "slaves/_msdcs.produxi.net"
+                - masters { 172.16.128.30; }
+            128.16.172.in-addr.arpa:
+                - type slave
+                - file "slaves/128.16.172.in-addr.arpa"
+                - masters { 172.16.128.30; }
+            64/26.128.16.172.in-addr.arpa:
+                - type slave
+                - file "slaves/64-26.128.16.172.in-addr.arpa"
+                - masters { 172.16.128.36; }
+            dyn.produxi.net:
+                - type slave
+                - file "slaves/dyn.produxi.net"
+                - masters { 172.16.128.36; }
