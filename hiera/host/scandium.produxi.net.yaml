@@ -12,6 +12,7 @@ nameserver::views:
     self:
         match-clients:
             - 172.16.128.0/24
+            - 10.100.252.2
         zones:
             dyn.produxi.net:
                 - type master
