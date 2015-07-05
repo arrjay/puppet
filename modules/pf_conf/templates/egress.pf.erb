@@ -24,6 +24,7 @@ pass in on internet inet proto { tcp, udp } to (internet) port 51413 rdr-to $bt 
 pass in on internet inet proto icmp to (internet) icmp-type echoreq
 
 pass in on home
+pass in on transit inet proto { tcp, udp } from $chaos_nameservers to $nameservers port 53
 pass in on transit inet proto tcp to $puppet port 8140
 pass in on transit inet proto tcp to $mirror port 873
 pass in on transit inet proto tcp to $mirror port 80
