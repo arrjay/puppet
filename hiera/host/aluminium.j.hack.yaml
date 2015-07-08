@@ -1,5 +1,8 @@
 classes:
     - nameserver
+    - dhcpd
+
+dhcpd::template: 'ifgen'
 
 resolvconf::nameservers:
     - 127.0.0.1
@@ -8,6 +11,18 @@ resolvconf::nameservers:
 resolvconf::domain: j.hack
 
 nameserver::views:
+    chaos:
+        match-clients:
+            - 10.100.252.0/24
+        recursion: true
+        zones:
+            '.':
+                - type hint
+                - file "named.ca"
+    produxi:
+        match-clients:
+            - 172.16.128.0/24
+        recursion: false
     self:
         zones:
             produxi.net:
