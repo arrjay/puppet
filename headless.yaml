@@ -1,0 +1,16 @@
+:hierarchy:
+    - host/%{::fqdn}
+    - site/%{::site}
+    - module/%{calling_module}
+    - os/%{::operatingsystem}/%{::operatingsystemmajrelease}
+    - os/%{::operatingsystem}/%{::operatingsystemrelease}
+    - os/%{::operatingsystem}
+    - common
+
+:backends:
+    - yaml
+
+:merge_behavior: deeper
+
+:yaml:
+    :datadir: /opt/puppet/hiera

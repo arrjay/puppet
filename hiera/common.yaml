@@ -1,6 +1,5 @@
 classes:
     - ssh
     - root_authkeys
-    - resolvconf
 
 ssh::storeconfigs_enabled: false
