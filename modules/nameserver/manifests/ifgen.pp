@@ -1,5 +1,8 @@
 class nameserver::ifgen (
-  $zonedir = '/var/named/chroot/var/named'
+  $zonedir = '/var/named/chroot/var/named',
+  $serial,
+  $nameservers,
+  $contact,
 ) {
   # this only handles creating the j.hack zone files and such.
   # you will need to tinker with nameserver view params to load

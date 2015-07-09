@@ -1,3 +1,9 @@
+$TTL 1d
+; NOTE - we ause the fuck out of $ORIGIN to make this portable.
+@ SOA @ <%= @contact.gsub(/@/,'.') -%>. <%= @serial -%> 2d 1d 1w 12h
+<% @nameservers.each do |ns| -%>
+@	NS	<%= ns %>
+<% end -%>
 <% scope.function_hiera_hostlist([]).each do |host|
      hostip = scope.function_hiera_hostip([host])
      if hostip != nil -%>
