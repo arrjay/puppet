@@ -1,13 +1,17 @@
-class dhcpd::ifgen {
-  # because puppet is in love with write-only variables, we invoke concat to do this now.
-
-  # calling these for ifgen to work
-  $_network = hiera_hash("network")
-  $_interfaces = hiera_hash("interface")
+class dhcpd::ifgen (
+  $domain = hiera(resolvconf::domain),
+  $nameservers = hiera(resolvconf::nameservers),
+) {
+  #require dhcpd <- don't actually call this directly from anywhere. ;)
+  $lease_default = $::dhcpd::lease_default
+  $lease_max     = $::dhcpd::lease_max
+  $subnet        = $::dhcpd::subnet
+  $netmask       = $::dhcpd::netmask
+  $gateway       = $::dhcpd::gateway
 
   concat {$dhcpd::cfg:
     owner   => root,
-    group   => 0,  
+    group   => root,  
     notify  => Exec['restart dhcpd'],
   }
 
@@ -74,6 +78,6 @@ class dhcpd::ifgen {
     }
   }
 
-  create_resources('dhcp_host',$_interfaces )
+  #create_resources('dhcp_host',$_interfaces )
   
 }

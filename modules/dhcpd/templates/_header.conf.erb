@@ -1,15 +1,11 @@
-option domain-name "<%= @dnsdomain -%>";
-option domain-name-servers <%= @_network['nameservers'].join(", ") -%>;
+option domain-name "<%= @domain -%>";
+option domain-name-servers <%= @nameservers.join(", ") -%>;
 
-default-lease-time <%= @params['default-lease-time'] -%>;
-max-lease-time <%= @params['max-lease-time'] -%>;
+default-lease-time <%= @lease_default -%>;
+max-lease-time <%= @lease_max -%>;
 
-ddns-update-style <%= @params['ddns-update-style'] -%>;
+ddns-update-style none;
 
-<% if @params['authoritative'] -%>
 authoritative;
-<% else -%>
-not authoritative;
-<% end -%>
 
-log-facility <%= @params['log-facility'] -%>;
+log-facility local7;

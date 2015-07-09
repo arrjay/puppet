@@ -1,7 +1,7 @@
-subnet <%= @_network['subnet'] -%> netmask <%= @_network['netmask'] -%> {
-  option broadcast-address <%= @_network['broadcast'] -%>;
+subnet <%= @subnet -%> netmask <%= @netmask -%> {
+  option subnet-mask <%= @netmask -%>;
 }
 
 group {
   # routeable
-  option routers <%= @_network['gateway'] -%>;
+  option routers <%= @gateway -%>;
