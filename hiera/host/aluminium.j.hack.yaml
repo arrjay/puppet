@@ -7,16 +7,23 @@ dhcpd::template: 'ifgen'
 
 resolvconf::nameservers:
     - 127.0.0.1
-    - 8.8.8.8
-    - 8.8.4.4
 resolvconf::domain: j.hack
 
+nameserver::addresses:
+    - any
+    
 nameserver::views:
     chaos:
         match-clients:
             - 10.100.252.0/24
         recursion: true
         zones:
+            j.hack:
+                - type master
+                - file "j.hack"
+            252.100.10.in-addr.arpa:
+                - type master
+                - file "252.100.10-j.hack"
             '.':
                 - type hint
                 - file "named.ca"
@@ -24,6 +31,13 @@ nameserver::views:
         match-clients:
             - 172.16.128.0/24
         recursion: false
+        zones:
+            chaos.produxi.net:
+                - type master
+                - file "j.hack"
+            252.100.10.in-addr.arpa:
+                - type master
+                - file "252.100.10-chaos.produxi.net"
     self:
         zones:
             produxi.net:
@@ -46,3 +60,12 @@ nameserver::views:
                 - type slave
                 - file "slaves/dyn.produxi.net"
                 - masters { 172.16.128.36; }
+            chaos.produxi.net:
+                - type master
+                - file "j.hack"
+            j.hack:
+                - type master
+                - file "j.hack"
+            252.100.10.in-addr.arpa:
+                - type master
+                - file "252.100.10-j.hack"

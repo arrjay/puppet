@@ -1,4 +1,5 @@
 classes:
+    - resolvconf
     - ssh
     - root_authkeys
 
