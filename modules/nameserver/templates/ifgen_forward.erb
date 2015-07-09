@@ -1,0 +1,6 @@
+<% scope.function_hiera_hostlist([]).each do |host|
+     hostip = scope.function_hiera_hostip([host])
+     if hostip != nil -%>
+<%= host.split('.')[0] -%> A <%= hostip %>
+<%   end
+   end -%>

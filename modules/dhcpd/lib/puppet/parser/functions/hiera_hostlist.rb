@@ -14,7 +14,7 @@ module Puppet::Parser::Functions
     searchdirs.each do |dir|
       files = Dir.glob(dir)
       files.map! {|file| file.sub!(/^.*\/host\//,'') }
-      files.map! {|file| file.sub!(/\.j\.hack\.yaml$/,'') }
+      files.map! {|file| file.sub!(/\.yaml$/,'') }
       hosts.concat(files)
     end
     res = hosts.uniq
