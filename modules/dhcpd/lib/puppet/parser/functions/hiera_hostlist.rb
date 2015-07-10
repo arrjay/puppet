@@ -17,6 +17,6 @@ module Puppet::Parser::Functions
       files.map! {|file| file.sub!(/\.yaml$/,'') }
       hosts.concat(files)
     end
-    res = hosts.uniq
+    res = hosts.uniq.sort
   end
 end
