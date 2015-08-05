@@ -18,37 +18,37 @@ class dhcpd::ifgen (
   concat::fragment{"dhcpd: start":
     target => $dhcpd::cfg,
     content => template("dhcpd/_header.conf.erb"),
-    order => 00,
+    order => '00',
   }
 
   concat::fragment{"dhcpd: SUNW vendor options (jumpstart)":
     target => $dhcpd::cfg,
     content => template("dhcpd/sunw.erb"),
-    order => 05,
+    order => '05',
   }
 
   concat::fragment{"dhcpd:: MacNC vendor options (openfirmware)":
     target => $dhcpd::cfg,
     content => template("dhcpd/macnc.erb"),
-    order => 05,
+    order => '05',
   }
 
   concat::fragment{"dhcpd: subnet/group routeable":
     target => $dhcpd::cfg,
     content => template("dhcpd/ifgen_start.erb"),
-    order => 10,
+    order => '10',
   }
 
   concat::fragment{"dhcpd: end routeable/start non-routeable":
     target => $dhcpd::cfg,
     content => template("dhcpd/ifgen_mid.erb"),
-    order => 50,
+    order => '50',
   }
 
   concat::fragment{"dhcpd: end":
     target => $dhcpd::cfg,
     content => template("dhcpd/ifgen_end.erb"),
-    order => 99,
+    order => '99',
   }
 
   define dhcp_host(
@@ -66,13 +66,13 @@ class dhcpd::ifgen (
     if $routeable == true {
       concat::fragment{"dhcpd: $clientname":
         target => $dhcpd::cfg,
-        order => 20,
+        order => '20',
         content => template("dhcpd/ifgen.erb"),
       }
     } else {
       concat::fragment{"dhcpd: $clientname":
         target => $dhcpd::cfg,
-        order => 70,
+        order => '70',
         content => template("dhcpd/ifgen.erb"),
       }
     }
