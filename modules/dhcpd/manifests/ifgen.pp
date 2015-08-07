@@ -53,7 +53,7 @@ class dhcpd::ifgen (
 
   define dhcp_host(
     $clientname = $title,
-    $ip,
+    $ipaddr,
     $macaddr = undef,
     $desc = undef,
     $routeable = true,
@@ -75,6 +75,17 @@ class dhcpd::ifgen (
         order => '70',
         content => template("dhcpd/ifgen.erb"),
       }
+    }
+  }
+
+  $hosts = hiera_hostlist()
+  $hosts.each |$host| {
+    # only chase dhcpd lookups for things with MACs
+    $mac = hiera_hostmac($host)
+    if $mac != undef {
+      $attrs = hiera_hostdata($host,['macaddr','ipaddr'])
+      $dhcp_host = { $host => $attrs }
+      create_resources('dhcp_host',$dhcp_host)
     }
   }
 

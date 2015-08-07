@@ -1,7 +1,7 @@
 <% if @macaddr -%>
   host <%= @clientname -%> {
     hardware ethernet <%= @macaddr -%>;
-    fixed-address <%= @ip -%>;
+    fixed-address <%= @ipaddr -%>;
 <%   if @bootserver -%>
     next-server <%= @bootserver -%>;
 <%   end -%>
