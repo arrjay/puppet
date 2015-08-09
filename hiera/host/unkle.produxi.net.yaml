@@ -1,0 +1,14 @@
+classes:
+    - ntp
+
+ntp::servers:
+    - ac-ntp1.net.cmu.edu
+    - ntp.theforest.us
+    - ntp-2.vt.edu
+
+ntp::restrict:
+    - default kod nomodify notrap nopeer noquery
+    - '-6 default kod nomodify notrap nopeer noquery'
+    - 127.0.0.1
+    - '-6 ::1'
+    - ENC[PKCS7,MIIBqQYJKoZIhvcNAQcDoIIBmjCCAZYCAQAxggEhMIIBHQIBADAFMAACAQEwDQYJKoZIhvcNAQEBBQAEggEAi9Nx52lgtHlAMqwBgMNA8YWzW6FSB5kvfkMk4NXv8I9teCrCLTlqZeUJlM3oanI/nHKVTr8V3b+M1Lmd4jmcoCfX6r8ByUDkCAkDWSZMJBtzzftiI50Rarr069qU8fzYcr3bi4t6nAG7qVO7Js83Oxwz3hNtTEyFZSBCGB0aNYc2cnmYHxV9M7Ewe4iU+zM302f3ZMI5m8uWYZT7JxJlfmxay5uG4zlcbc0OngYsiZjm+BvqkhhgTN/ZKyJEp/F1fUpO4XKRhUL9QCN3qungKKppa9LuTG7CrceNvRHL0aaNGZyg5GCAAnaWNw+mriNhEdGfWGrLItKBa2bCE8XVmTBsBgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBB0fXBu1e804FbHPYvwtQdEgEAp33jKj9fjkxdhY4j/ukfpTyh5bUyyoTpirUQEI930w7c/I3nZRkWiL9T7Si5KKjq/H6LvBesUmOmxM7+RqPCv]
