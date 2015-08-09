@@ -10,18 +10,26 @@ File {
   owner => $osfamily ? {
     default => 'root',
   }
+}
+File {
   group => $osfamily ? {
     default => 'root',
   }
+}
+File {
   mode => '0644',
 }
 Concat {
   owner => $osfamily ? {
     default => 'root',
   }
+}
+Concat {
   group => $osfamily ? {
     default => 'root',
   }
+}
+Concat {
   mode => '0644',
 }
 
