@@ -47,8 +47,6 @@ class dhcpd (
     require dhcpd::ifgen
   } else {
     file {$cfg:
-      owner   => root,
-      group   => 0,
       content => template("dhcpd/${dhcpd::template}.conf.erb"),
       notify  => Exec['restart dhcpd'],
     }

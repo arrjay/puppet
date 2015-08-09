@@ -10,8 +10,6 @@ class dhcpd::ifgen (
   $gateway       = $::dhcpd::gateway
 
   concat {$dhcpd::cfg:
-    owner   => root,
-    group   => root,  
     notify  => Exec['restart dhcpd'],
   }
 

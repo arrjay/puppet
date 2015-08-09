@@ -5,6 +5,26 @@ Exec {
   }
 }
 
+# provide owner group perm defaults here
+File {
+  owner => $osfamily ? {
+    default => 'root',
+  }
+  group => $osfamily ? {
+    default => 'root',
+  }
+  mode => '0644',
+}
+Concat {
+  owner => $osfamily ? {
+    default => 'root',
+  }
+  group => $osfamily ? {
+    default => 'root',
+  }
+  mode => '0644',
+}
+
 $resources=hiera_hash('resources', {})
 $resources.keys().each |$resourcetype| {
   $resource_entries=$resources[$resourcetype]
