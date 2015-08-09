@@ -6,7 +6,6 @@ class pf_conf (
   file{'/etc/pf.conf':
     ensure	=> present,
     mode	=> '0600',
-    owner	=> 0,
     content	=> template("pf_conf/$source.erb"),
     notify	=> Exec["pfctl -f /etc/pf.conf"],
   }

@@ -11,9 +11,6 @@ class resolvconf (
   $ns_string = join($ns_shuffled, ",")
 
   file {$file:
-    owner	=> root,
-    group	=> 0,
-    mode	=> 0644,
     ensure	=> present,
     content	=> template("resolvconf/resolv.conf.erb"),
   }

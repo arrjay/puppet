@@ -7,9 +7,6 @@ class vmserver (
   #include resolvconf
   package{$packages: ensure => installed}
   file{$dnsmasq_conf:
-    owner	=> root,
-    group	=> 0,
-    mode	=> 0644,
     ensure	=> present,
     content	=> template("vmserver/dnsmasq.conf.erb"),
     notify	=> Exec["service $dnsmasq_svcname restart"],

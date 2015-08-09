@@ -19,31 +19,23 @@ class chaosvpn (
       ensure_packages(['chaosvpn'])
       file{'/etc/tinc/chaos':
         ensure  => directory,
-        owner   => 'root',
-        group   => 0,
         mode    => '0755',
         require => Package['chaosvpn'],
       }
       file{'/etc/tinc/chaos/rsa_key.priv':
         ensure  => present,
-        owner   => 'root',
-        group   => 0,
         mode    => '0700',
         content => $privkey,
         require => File['/etc/tinc/chaos'],
       }
       file{'/etc/tinc/chaosvpn.conf':
         ensure  => present,
-        owner   => 'root',
-        group   => 0,
         mode    => '0744',
         content => template('chaosvpn/chaosvpn.conf.erb'),
         require => Package['chaosvpn'],
       }
       file{'/etc/default/chaosvpn':
         ensure  => present,
-        owner   => 'root',
-        group   => 0,
         mode    => '0744',
         source  => 'puppet:///modules/chaosvpn/chaosvpn.defaults',
       }

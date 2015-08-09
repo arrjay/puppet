@@ -1,7 +1,7 @@
 define isc_key::public (
   $name,
   $path  = $title,
-  $owner = 0,
+  $owner = 'root',
   $group = 'named',
   $mode  = '0640',
 ) {
