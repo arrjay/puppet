@@ -1,6 +1,7 @@
 classes:
     - nameserver::ifgen
     - dhcpd
+    - tftp
 
 dhcpd::template: 'ifgen'
 
