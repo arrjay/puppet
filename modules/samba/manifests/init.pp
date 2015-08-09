@@ -8,9 +8,9 @@ class samba (
   # bits
   case $::osfamily {
     'RedHat': {
-      $config   = '/etc/samba/smb.conf',
-      $packages = [ 'samba' ],
-      $services = [ 'smb' ],
+      $config   = '/etc/samba/smb.conf'
+      $packages = [ 'samba' ]
+      $services = [ 'smb' ]
     }
   }
 
