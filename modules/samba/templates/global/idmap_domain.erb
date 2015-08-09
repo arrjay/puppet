@@ -1,0 +1,6 @@
+<% if @security.downcase == 'ads' -%>
+  ; configure idmap for domain
+  idmap config <%= @workgroup -%> : backend = ad
+  idmap config <%= @workgroup -%> : schema_mode = rfc2037
+  idmap config <%= @workgroup -%> : range = 65536 - 9999999999
+<% end -%>

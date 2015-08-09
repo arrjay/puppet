@@ -1,0 +1,9 @@
+  ; domain configuration
+<% if @realm -%>
+  realm = <%= @realm %>
+<% end -%>
+  security = <%= @secmode %>
+  workgroup = <%= @workgroup %>
+  domain master = no
+  local master = no
+  preferred master = no
