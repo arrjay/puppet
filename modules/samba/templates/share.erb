@@ -1,16 +1,22 @@
 [<%= @share -%>]
   path = <%= @path %>
-<% ['browseable','printable','writeable','public','hide_unreadable'].each do |var|-%>
+<% {'browseable'=>'browseable',
+    'printable'=>'printable',
+    'writeable'=>'writeable',
+    'public'=>'public',
+    'hide_unreadable'=>'hide unreadable'}.each do |var,samba|-%>
 <%   x = scope[var] -%>
 <%   if x -%>
-  <%= var -%> = yes
+  <%= samba -%> = yes
 <%   else -%>
-  <%= var -%> = no
+  <%= samba -%> = no
 <%   end -%>
 <% end -%>
-<% ['description','create_mask','dir_mask'].each do |var|-%>
+<% {'description'=>'comment',
+    'create_mask'=>'create mask',
+    'dir_mask'=>'directory mask'}.each do |var,samba|-%>
 <%   x = scope[var] -%>
-<%   if x -%>
-  <%= var -%> = <%= x %>
+<%   if x != :undef -%>
+  <%= samba -%> = <%= x %>
 <%   end -%>
 <% end -%>

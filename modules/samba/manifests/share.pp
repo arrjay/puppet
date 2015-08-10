@@ -16,7 +16,7 @@ define samba::share(
     fail('you may not have a samba share named global!')
   }
 
-  concat::fragment{"$samba::config: [share:$share]":
+  concat::fragment{"$samba::config: [share] - $share":
     target  => 'smb.conf',
     content => template('samba/share.erb'),
     order   => $samba::share_order,
