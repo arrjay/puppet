@@ -1,6 +1,7 @@
 classes:
     - ntp
     - samba::system_kerb
+    - nginx
 
 ntp::servers:
     - ac-ntp1.net.cmu.edu
@@ -30,3 +31,15 @@ resources:
             create_mask: '0333'
             dir_mask: '0333'
             hide_unreadable: yes
+
+nginx::nginx_vhosts:
+    'unkle':
+        www_root: /var/www/html
+        index_files: []
+nginx::nginx_locations:
+    'sw-archive':
+        location: /sw-archive
+        autoindex: true
+        vhost: unkle
+        location_alias: /datapool/software/archive
+        index_files: []
