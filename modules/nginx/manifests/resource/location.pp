@@ -202,7 +202,7 @@ define nginx::resource::location (
     validate_string($www_root)
   }
   if ($autoindex != undef) {
-    validate_string($autoindex)
+    validate_bool($autoindex)
   }
   validate_array($index_files)
   if ($proxy != undef) {
