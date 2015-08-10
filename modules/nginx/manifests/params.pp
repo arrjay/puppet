@@ -22,7 +22,6 @@ class nginx::params {
       if ($::operatingsystem == 'ubuntu' and $::lsbdistcodename in ['lucid', 'precise', 'trusty'])
       or ($::operatingsystem == 'debian' and $::operatingsystemmajrelease in ['6', '7', '8']) {
         $_module_os_overrides = {
-          'manage_repo' => true,
           'daemon_user' => 'www-data',
         }
       } else {
@@ -41,13 +40,6 @@ class nginx::params {
     'Gentoo': {
       $_module_os_overrides = {
         'package_name' => 'www-servers/nginx',
-      }
-    }
-    'RedHat': {
-      if ($::operatingsystem in ['RedHat', 'CentOS'] and $::operatingsystemmajrelease in ['5', '6', '7']) {
-        $_module_os_overrides = {
-          'manage_repo' => true,
-        }
       }
     }
     'Solaris': {
