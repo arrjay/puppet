@@ -1,0 +1,16 @@
+[<%= @share -%>]
+  path = <%= @path %>
+<% ['browseable','printable','writeable','public','hide_unreadable'].each do |var|-%>
+<%   x = scope[var] -%>
+<%   if x -%>
+  <%= var -%> = yes
+<%   else -%>
+  <%= var -%> = no
+<%   end -%>
+<% end -%>
+<% ['description','create_mask','dir_mask'].each do |var|-%>
+<%   x = scope[var] -%>
+<%   if x -%>
+  <%= var -%> = <%= x %>
+<%   end -%>
+<% end -%>
