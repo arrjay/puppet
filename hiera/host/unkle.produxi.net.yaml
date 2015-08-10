@@ -1,5 +1,6 @@
 classes:
     - ntp
+    - samba::system_kerb
 
 ntp::servers:
     - ac-ntp1.net.cmu.edu
@@ -12,3 +13,20 @@ ntp::restrict:
     - 127.0.0.1
     - '-6 ::1'
     - ENC[PKCS7,MIIBqQYJKoZIhvcNAQcDoIIBmjCCAZYCAQAxggEhMIIBHQIBADAFMAACAQEwDQYJKoZIhvcNAQEBBQAEggEATr3qDij/oF5cOGApg/Im1shIdZLtFtwHRCLEnhFOfL40X16U4HzZbBgcipzdI+OIUdZDSoS/pl9ecFSy/uclvXZ+7hpQc7IoqnFVrTlRJrvaaVKP30zdglnOFa3GFUQ+mhXWFFVCmnadOSO9L2sFpkCOee2rnEgfq5Ul3PO8B9lFHq4VtTKr+VlbVuh/PEKC5v5lnkK5WVVBIGUuQxq9ZJfzobpwSAkSKaZNlHOL76owvTsXIHEiXM9HLGYt4f4M7dVq2FTNpTKZMNKTiOZXM0goHNRn2qJyfFRuZSl4XMWhviFUo6ZpqLPAt/xo54irnNQhTXhKrdJDY25XLPnuFDBsBgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBDpmnmPaSqudD2k46UAw9N/gECF39hv1SXdh5/QvCzwAHH68rhQO6COxFVCbw9v5Eh1z11cKDrEZ5HCKmZnBAq4pPDA2Crg/7bBOrF8O6uJtxpU]
+
+samba::description: ENC[PKCS7,MIIBiQYJKoZIhvcNAQcDoIIBejCCAXYCAQAxggEhMIIBHQIBADAFMAACAQEwDQYJKoZIhvcNAQEBBQAEggEAT0QgrOnV10IKH9u8HSmidBnGFNGozcbttH1uJPa+lOSoOVxH4f7c9DzzidNIVpv5/tZwHdelLANaCuEnLvnpS328MLFegL1K0sxoAdF0GkkmV2XCoIWV++acjJmHPEaKHByuDzhparwgPcMIlV6y9CE5aWLNKDLcI/7gGo+xgOnYwL+o7G6y589RmXHlgTR8t6doRJ6xdG+4ND50G6xZtM3whY+t+EpE6Wxznw3riznE5cguLZRDvdSnM3f5mchqJMFgKgqjbDB1WYnkLTfuzuNWg5fXya2NKmK8TE/R9WfevzX0vY3mEwr+PK/Owa6HoHyoE5a2zRM7d6LCJxpFmzBMBgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBCrXQmseHSMwreWy8ldqv5NgCADJYpzWdytAnKks2do2XksmfqTIF9YlYmjU0mqrmekwQ==]
+
+resources:
+    samba::share:
+        music-staging:
+            path: /datapool/media/INCOMING/music-staging
+            description: 'music staging area'
+            writeable: yes
+            public: yes
+        upload_music:
+            path: /datapool/media/INCOMING/music
+            writeable: yes
+            public: yes
+            create_mask: '0333'
+            dir_mask: '0333'
+            hide_unreadable: yes
