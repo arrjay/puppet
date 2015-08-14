@@ -2,6 +2,16 @@ classes:
     - nameserver::ifgen
     - dhcpd
     - tftp
+    - lvm
+
+lvm::volume_groups:
+    data:
+        physical_volumes:
+            - /dev/sdb
+        logical_volumes:
+            mirrors:
+                size: 10G
+                mountpath: /m
 
 dhcpd::template: 'ifgen'
 
