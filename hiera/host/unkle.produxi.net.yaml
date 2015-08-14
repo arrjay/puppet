@@ -43,3 +43,9 @@ nginx::nginx_locations:
         vhost: unkle
         location_alias: /datapool/software/archive
         index_files: []
+    'mirror':
+        location: /mirror
+        autoindex: true
+        vhost: unkle
+        location_alias: /auxpool/mirror
+        index_files: []
