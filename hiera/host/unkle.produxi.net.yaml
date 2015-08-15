@@ -2,6 +2,7 @@ classes:
     - ntp
     - samba::system_kerb
     - nginx
+    - rsync::server
 
 ntp::servers:
     - ac-ntp1.net.cmu.edu
@@ -31,6 +32,13 @@ resources:
             create_mask: '0333'
             dir_mask: '0333'
             hide_unreadable: yes
+    rsync::server::module:
+        mirror:
+            path: /auxpool/mirror
+            comment: 'Software mirrors'
+        swarchive:
+            path: /datapool/software/archive
+            comment: 'Software archive'
 
 nginx::nginx_vhosts:
     'unkle':
