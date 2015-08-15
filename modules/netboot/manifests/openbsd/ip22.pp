@@ -8,4 +8,9 @@ class netboot::openbsd::ip22 (
     ensure => present,
     source => "$::mirror2::dest/OpenBSD/$version/sgi/bsd.rd.IP22",
   }
+
+  file{"$::tftp::root/bootecoff":
+    ensure => present,
+    source => "$::mirror2::dest/OpenBSD/$version/sgi/bootecoff",
+  }
 }
