@@ -9,9 +9,14 @@ class netboot::netbsd::ip2x (
     file{"${::netboot::work::scratchdir}/netbsd-INSTALL32${kfx}":
       ensure => present,
       source => "$::mirror2::dest/NetBSD/NetBSD-$version/sgimips/binary/kernel/netbsd-INSTALL32${kfx}",
-#      notify => Exec["zcat ${::netboot::work::scratchdir}/netbsd-INSTALL32${kfx} > netbsd-INSTALL32${kfx}"],
     }
     netboot::work::gunzip{"netbsd-INSTALL32${kfx}":}
   }
 
+  exec{"tar --extract --strip-components=3 --file=${::mirror2::dest}/NetBSD/NetBSD-$version/sgimips/binary/sets/base.tgz ./usr/mdec/ip2xboot":
+    command     => "tar --extract --strip-components=3 --file=${::mirror2::dest}/NetBSD/NetBSD-$version/sgimips/binary/sets/base.tgz ./usr/mdec/ip2xboot",
+    cwd         => "$::tftp::root",
+    refreshonly => true,
+    subscribe   => [File["${::netboot::work::scratchdir}/netbsd-INSTALL32_IP2x.gz"],File["${::netboot::work::scratchdir}/netbsd-INSTALL32_IP2x.gz"]],
+  }
 }
