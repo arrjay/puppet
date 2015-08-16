@@ -1,5 +1,5 @@
 class netboot::openbsd::ip22 (
-  $version = hiera('netboot::openbsd::ip22:version'),
+  $version = hiera('netboot::openbsd::ip22::version'),
 ) {
   include mirror2::openbsd::sgi
   include netboot::ip2x_common
