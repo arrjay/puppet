@@ -13,10 +13,4 @@ class netboot::netbsd::ip2x (
     netboot::work::gunzip{"netbsd-INSTALL32${kfx}":}
   }
 
-  exec{"tar --extract --strip-components=3 --file=${::mirror2::dest}/NetBSD/NetBSD-$version/sgimips/binary/sets/base.tgz ./usr/mdec/ip2xboot":
-    command     => "tar --extract --strip-components=3 --file=${::mirror2::dest}/NetBSD/NetBSD-$version/sgimips/binary/sets/base.tgz ./usr/mdec/ip2xboot",
-    cwd         => "$::tftp::root",
-    refreshonly => true,
-    subscribe   => [File["${::netboot::work::scratchdir}/netbsd-INSTALL32_IP2x.gz"],File["${::netboot::work::scratchdir}/netbsd-INSTALL32_IP2x.gz"]],
-  }
 }
