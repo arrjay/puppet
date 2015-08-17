@@ -4,12 +4,19 @@ class netboot::openbsd::ip22 (
   include mirror2::openbsd::sgi
   include netboot::ip2x_common
 
-  file{"$::tftp::root/bsd.rd.IP22":
+  ensure_resource('netboot::openbsd::tftpdir',$version)
+
+  file{"$::tftp::root/obsd-$version/sgi":
+    ensure => directory,
+    mode   => '0755',
+  }
+
+  file{"$::tftp::root/obsd-$version/sgi/bsd.rd.IP22":
     ensure => present,
     source => "$::mirror2::dest/OpenBSD/$version/sgi/bsd.rd.IP22",
   }
 
-  file{"$::tftp::root/bootecoff":
+  file{"$::tftp::root/obsd-$version/sgi/bootecoff":
     ensure => present,
     source => "$::mirror2::dest/OpenBSD/$version/sgi/bootecoff",
   }
