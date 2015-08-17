@@ -19,4 +19,27 @@ class rarpd (
   ensure_packages($packages)
 
   service{$service: enable => true, ensure => running}
+
+  define ethertab(
+    $clientname = $title,
+    $ipaddr,
+    $macaddr,
+  ) {
+    concat::fragment{"ethers: $clientname":
+      target  => 'ethers',
+      order   => '10',
+      content => "$macaddr $ipaddr # $clientname\n",
+    }
+  }
+
+  # we borrow dhcpd's tooling.
+  $hosts = hiera_hostlist()
+  $hosts.each |$host| {
+    $mac = hiera_hostmac($host)
+    if $mac != undef {
+      $attrs = hiera_hostdata($host,['macaddr','ipaddr'])
+      $ethertab = { $host => $attrs }
+      create_resources('ethertab',$ethertab)
+    }
+  }
 }
