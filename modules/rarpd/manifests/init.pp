@@ -1,5 +1,8 @@
 class rarpd (
 ) {
+  # needed for the tftp bootfile path
+  include tftp
+
   case $::osfamily {
     'RedHat': {
       # rhel5 was the last version to ship with rarpd ootb
@@ -7,6 +10,7 @@ class rarpd (
         include rpmrepo::arrjay
         $packages = ['rarpd']
         $service = "rarpd"
+        $sysconf = '/etc/sysconfig/rarpd'
       }
     }
   }
@@ -17,6 +21,13 @@ class rarpd (
   }
 
   ensure_packages($packages)
+
+  if $sysconf {
+    file{"$sysconf":
+      content => "OPTIONS='-b ${::tftp::root}'\n",
+      notify  => Service[$service],
+    }
+  }
 
   service{$service: enable => true, ensure => running}
 
