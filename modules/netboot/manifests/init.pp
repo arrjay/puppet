@@ -6,8 +6,9 @@ class netboot (
   $hosts.each |$host| {
     $tftpsource = hiera_hostbootfile($host)
     $hostip = hiera_hostip($host)
+    $hostsfx = hiera_hostbootsfx($host)
     if $tftpsource != undef {
-      $tftplink = { $hostip => { 'source' => $tftpsource } }
+      $tftplink = { $hostip => { 'source' => $tftpsource, 'suffix' => $hostsfx } }
       create_resources('netboot::tftplink',$tftplink)
     }
   }
