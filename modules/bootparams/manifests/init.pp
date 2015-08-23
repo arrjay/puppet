@@ -6,6 +6,7 @@ class bootparams(
     'RedHat': {
       if versioncmp($::operatingsystemmajrelease, '6') >= 0 {
         include rpmrepo::arrjay
+        include systemd
         $packages = ['bootparamd']
         $service = 'bootparamd'
         $override_unit_file = '/etc/systemd/system/bootparamd.service.d/router.conf'
@@ -23,7 +24,7 @@ class bootparams(
     file{$override_unit_file:
       ensure  => present,
       content => "[Service]\nExecStart=\nExecStart=/usr/sbin/rpc.bootparamd -s $::dhcpd::gateway",
-      notify  => Service[$service],
+      notify  => [Service[$service],Exec['systemctl daemon-reload']],
     }
   }
 

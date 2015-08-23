@@ -3,6 +3,7 @@ class netboot::openbsd::sparc (
 ) {
   include mirror2::openbsd::sparc
   include netboot::sparc_common
+  include bootparams
 
   ensure_resource('netboot::openbsd::tftpdir',$version)
 
