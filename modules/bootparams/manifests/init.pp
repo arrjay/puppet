@@ -28,6 +28,10 @@ class bootparams(
     }
   }
 
+  concat{'bootparams':
+    path => '/etc/bootparams',
+  }
+
   ensure_packages($packages)
 
   service{$service: enable => true, ensure => running}
