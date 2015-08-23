@@ -23,7 +23,7 @@ class bootparams(
     }
     file{$override_unit_file:
       ensure  => present,
-      content => "[Service]\nExecStart=\nExecStart=/usr/sbin/rpc.bootparamd -s $::dhcpd::gateway",
+      content => "[Service]\nExecStart=\nExecStart=/usr/sbin/rpc.bootparamd -s -r $::dhcpd::gateway",
       notify  => [Service[$service],Exec['systemctl daemon-reload']],
     }
   }
