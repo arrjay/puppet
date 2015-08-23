@@ -29,7 +29,8 @@ class bootparams(
   }
 
   concat{'bootparams':
-    path => '/etc/bootparams',
+    path   => '/etc/bootparams',
+    notify => Service[$service],
   }
 
   ensure_packages($packages)
