@@ -17,4 +17,13 @@ class netboot::openbsd::sparc (
     source => "$::mirror2::dest/OpenBSD/$version/sparc/boot.net",
   }
 
+  file{"$::netboot::sparc_common::root_export/obsd-$version":
+    ensure => directory,
+    mode   => '0755',
+  }
+
+  file{"$::netboot::sparc_common::root_export/obsd-$version/bsd":
+    ensure => present,
+    source => "$::mirror2::dest/OpenBSD/$version/sparc/bsd.rd",
+  }
 }

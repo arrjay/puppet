@@ -11,5 +11,10 @@ class netboot (
       $tftplink = { $hostip => { 'source' => $tftpsource, 'suffix' => $hostsfx } }
       create_resources('netboot::tftplink',$tftplink)
     }
+    $bootparams = hiera_hostbootparams($host)
+    if $bootparams != undef {
+      $dbootparams = { $host => { 'params' => $bootparams } }
+      create_resources('netboot::bootparams',$dbootparams)
+    }
   }
 }

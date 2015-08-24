@@ -6,6 +6,7 @@ classes:
     - nginx
     - netboot::openbsd::ip22
     - netboot::netbsd::ip2x
+    - netboot::openbsd::sparc
 
 mirror::openbsd::versions:
     - 5.7
@@ -18,8 +19,9 @@ selinux::mode: enforcing
 mirror2::destination: /m
 mirror2::rsync_source: ENC[PKCS7,MIIBiQYJKoZIhvcNAQcDoIIBejCCAXYCAQAxggEhMIIBHQIBADAFMAACAQEwDQYJKoZIhvcNAQEBBQAEggEAEM0B7tgIVNX30kgV0A3VEU0tM2AassYswHF3vtQ0V+QZ9ukw7Ow96LSORq6jMQqnktCLt5E6SXJSiE5N18HGk/ErYFXD2BAvaKYXDkPdZ1LjqOSzjP6SLAg7cqR97W65hNvyTKtlW+37c5drUG6ja7m2D4/L+4YVWWLGPa/q+0VlqkifiJ/tCYxyF8EBhxqN9s0+hKGtzwLeRQqTwxyFClVU13YmIl2TK3Nvwj45OGzluN0PB3kLNR9SelLsLd2bY5S92De2JQ7mPzaM/zwItuLHB1INaTib3EPwOdjQ5bGJ4dR6TnGtenRceM0sSfNUWzpJ/sR6GLrrl5gUceSuGjBMBgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBACmGGGMTx42HavDpwNT0KlgCALDnLCV808baaoAyMCSzwDYnK6+EV16JtmHXWMoUvsfA==]
 
-netboot::openbsd::ip22::version: 5.7
+netboot::openbsd::ip22::version: '5.7'
 netboot::netbsd::ip2x::version: 5.2.3
+netboot::openbsd::sparc::version: '5.7'
 
 nginx::nginx_vhosts:
     'aluminium':
@@ -41,6 +43,9 @@ lvm::volume_groups:
             mirrors:
                 size: 10G
                 mountpath: /m
+            netboot:
+                size: 4G
+                mountpath: /b
 
 dhcpd::template: 'ifgen'
 
