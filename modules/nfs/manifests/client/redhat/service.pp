@@ -37,18 +37,8 @@ class nfs::client::redhat::service {
 # lint:endignore
 
   if $::nfs::client::redhat::params::osmajor == 6 or $::nfs::client::redhat::params::osmajor == 7 {
-    service {'rpcbind':
-      ensure    => running,
-      enable    => true,
-      hasstatus => true,
-      require   => [Package['rpcbind'], Package['nfs-utils']],
-    }
+    include portmap
   } elsif $::nfs::client::redhat::params::osmajor == 5 {
-    service { 'portmap':
-      ensure    => running,
-      enable    => true,
-      hasstatus => true,
-      require   => [Package['portmap'], Package['nfs-utils']],
-    }
+    include portmap
   }
 }

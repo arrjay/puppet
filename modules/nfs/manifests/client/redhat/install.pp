@@ -11,12 +11,8 @@ class nfs::client::redhat::install {
   }
 
   if $::nfs::client::redhat::params::osmajor == 6 or $::nfs::client::redhat::params::osmajor == 7 {
-    package {'rpcbind':
-      ensure => present,
-    }
+    ensure_packages('rpcbind')
   } elsif $::nfs::client::redhat::params::osmajor == 5 {
-    package { 'portmap':
-      ensure => present,
-    }
+    ensure_packages('portmap')
   }
 }
