@@ -1,13 +1,13 @@
 define netboot::bootparams(
   $params,
-  $host = $title,
+  $hostip = $title,
 ) {
   include bootparams
 
-  $shorthost = inline_template('<%= f = String.new(str=@host) ; h = f.split(".")[0] ; h -%>')
+  #$shorthost = inline_template('<%= f = String.new(str=@host) ; h = f.split(".")[0] ; h -%>')
 
-  concat::fragment{"bootparams - $shorthost":
+  concat::fragment{"bootparams - $hostip":
     target  => 'bootparams',
-    content => "$shorthost $params\n",
+    content => "$hostip $params\n",
   }
 }

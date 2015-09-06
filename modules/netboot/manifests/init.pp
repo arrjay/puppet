@@ -13,7 +13,7 @@ class netboot (
     }
     $bootparams = hiera_hostbootparams($host)
     if $bootparams != undef {
-      $dbootparams = { $host => { 'params' => $bootparams } }
+      $dbootparams = { $hostip => { 'params' => $bootparams } }
       create_resources('netboot::bootparams',$dbootparams)
     }
   }
