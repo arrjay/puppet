@@ -4,7 +4,7 @@ class netboot::sparc_common (
 ) {
   include rarpd
   include netboot
-  include nfs::server
+  include nfs::server::nfs_v2
 
   file{$root_export:
     ensure => directory,
