@@ -1,10 +1,8 @@
 class kvm_hyper::firewalld {
   class {'firewalld::direct':
-    rules => [{
+    passthroughs => [{
       ipv   => 'eb',
-      table => 'filter',
-      chain => 'FORWARD',
-      args  => '--logical-out vmm -j DROP',
+      args  => '-t filter -A FORWARD --logical-out vmm -j DROP',
     }],
   }
 }
