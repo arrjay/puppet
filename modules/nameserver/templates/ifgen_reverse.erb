@@ -4,7 +4,7 @@
 <% end -%>
 <% scope.function_hiera_hostlist([]).each do |host|
      hostip = scope.function_hiera_hostip([host])
-     if hostip != nil -%>
-<%= hostip.split('.')[3] -%> PTR <%= host.split('.')[0] -%>.<%= @revpoint %>
+     if hostip != nil && hostip.start_with?('10.100.252.') -%>
+<%= hostip.split('.')[3] -%> PTR <%= host.split('.')[0] -%>.<%= @revpoint %>.
 <%   end
    end -%>
