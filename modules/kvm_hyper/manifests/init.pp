@@ -4,6 +4,9 @@ class kvm_hyper (
 
   case $::osfamily {
     'RedHat': {
+      if versioncmp($::operatingsystemmajrelease, '7') >= 0 {
+        include kvm_hyper::firewalld
+      }
       ensure_packages(['bridge-utils'])
       $br_deps = [Package['bridge-utils']]
     }
