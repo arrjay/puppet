@@ -21,6 +21,7 @@ class nameserver (
   #}
 
   # delete the non-chroot config on c7 to ensure we don't start non-chrooted named
+  # FIXME: named-chroot setup on c7 is overly helpful and should be shot.
   case $::osfamily {
    'RedHat': {
      if versioncmp($operatingsystemmajrelease,"7") >= 0 {
