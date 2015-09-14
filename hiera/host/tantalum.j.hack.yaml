@@ -38,7 +38,7 @@ nginx::nginx_locations:
 lvm::volume_groups:
     data:
         physical_volumes:
-            - /dev/sdb
+            - /dev/vdb
         logical_volumes:
             mirrors:
                 size: 10G
