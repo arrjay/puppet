@@ -1,6 +1,6 @@
 define netboot::bootparams(
   $params,
-  $hostip = $title,
+  $hostname = $title,
 ) {
   include bootparams
 
@@ -8,6 +8,6 @@ define netboot::bootparams(
 
   concat::fragment{"bootparams - $hostip":
     target  => 'bootparams',
-    content => "$hostip $params\n",
+    content => "$hostname $params\n",
   }
 }
