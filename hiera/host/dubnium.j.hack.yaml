@@ -3,3 +3,9 @@ ipaddr: ENC[PKCS7,MIIBeQYJKoZIhvcNAQcDoIIBajCCAWYCAQAxggEhMIIBHQIBADAFMAACAQEwDQ
 
 classes:
     - kvm_hyper
+    - ntp
+
+ntp::servers:
+    - time.it2.net
+    - ntp3.stsn.net
+    - ntp-1.vt.edu
