@@ -34,4 +34,11 @@ class kvm_hyper (
     require	=> Package['dnsmasq'],
     notify	=> Service['dnsmasq'],
   }
+
+  # install the libvirt-kvm stuffs
+  case $::osfamily {
+    'RedHat' : {
+      ensure_packages(['libvirt','qemu-img','qemu-kvm','libvirt-client','libvirt-daemon'])
+    }
+  }
 }
