@@ -18,6 +18,8 @@ class tftp::config {
         per_source  => '11',
       }
 
+      selinux::boolean{'nis_enabled': ensure => true }
+
       file {'/etc/tftpd.map':
         content => template('tftp/tftpd.map'),
         mode    => '0644',
