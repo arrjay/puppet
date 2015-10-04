@@ -51,6 +51,7 @@ resources:
     firewalld::zone:
         trusted:
             sources: ENC[PKCS7,MIIBeQYJKoZIhvcNAQcDoIIBajCCAWYCAQAxggEhMIIBHQIBADAFMAACAQEwDQYJKoZIhvcNAQEBBQAEggEAq1ETRMxtcHxvyQzrJXnarXuTPS0ToUJHJho4DJQ3hIljlTvShrqI9VPBXzZXxRgDfvBLmxZSO+qvPp61byVhQnGqLI93+T3f3PrFFXyrzZG8JfUw3WbzypibYCdv1/+FA37knXTrJwgpnGWdq337nnm7STJUoeuw4AgrjXzoI/bH4/FJZgjdm9Zt7Joib0iF9o0CLYW3Bo8yQHvye+ew2LL1/zRwhWTHPpy7d2NWeRccZYCZJ66W8lS+4zOVJS1kf3rLhGYBM4cPvf3P+P34lfI0aWw/j1RJfq2LjXfbyTMGN6mrPug8TOTjX+QRxEMc+27ICztmcYV2VqBtAk9Q4TA8BgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBD+iXNKF6VL9yMlCEicO3e0gBDVEHVib8CIT8TymNnKSVc7]
+            interfaces: 'lo'
             target: 'ACCEPT'
 
 dhcpd::template: 'ifgen'
