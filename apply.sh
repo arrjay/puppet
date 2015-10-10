@@ -1,7 +1,7 @@
 #!/bin/sh
 
 PUPPETVER=$(facter -p puppetversion)
-PUPPETARGS=""
+#PUPPETARGS=""
 HIERA_CONFIG=""
 
 if [ -f "./keys/private_key.pkcs7.pem" ] && [ -f "./keys/public_key.pkcs7.pem" ] ; then
