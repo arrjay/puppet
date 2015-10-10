@@ -1,0 +1,19 @@
+:hierarchy:
+    - host/%{::fqdn}
+    - site/%{::site}
+    - module/%{calling_module}
+    - os/%{::operatingsystem}/%{::operatingsystemmajrelease}
+    - os/%{::operatingsystem}/%{::operatingsystemrelease}
+    - os/%{::operatingsystem}
+    - common
+
+:backends:
+    - eyaml
+
+:eyaml:
+    :datadir: '/opt/puppet/hiera'
+    :extension: 'yaml'
+    :pkcs7_private_key: /opt/puppet/keys/private_key.pkcs7.pem
+    :pkcs7_public_key: /opt/puppet/keys/public_key.pkcs7.pem
+
+:merge_behavior: deeper
